@@ -1,2 +1,2 @@
-# RNASeqVisualization
-For visualizing RNA-Seq data (analyzed by the DESeq2 pipeline)
+# Documentation
+SRX2SRR(SRXSheetFilePath, SRXColumnName = "SRX"): convert a column (from an Excel sheet) of accession numbers into a column of corresponding run numbers (printed directly onto the console).
