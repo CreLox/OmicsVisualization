@@ -5,7 +5,7 @@ SRX2SRR <- function(SRXSheetFilePath, SRXColumnName = "SRX") {
   
   SRXSheetContent <- read_excel(SRXSheetFilePath)
   SRXList <- SRXSheetContent[[SRXColumnName]]
-  fprintf("   Run#   \tFormat\n----------\t------\n")
+  fprintf("   Run#   \tFormat\n-----------\t------\n")
   for (i in 1 : length(SRXList)) {
     if (is.na(SRXList[i])) {
     	  fprintf("\n")
@@ -18,8 +18,8 @@ SRX2SRR <- function(SRXSheetFilePath, SRXColumnName = "SRX") {
       SRRNumber <- sub(".*\">SRR", "", RemoveAfterRunNumber)
       fprintf(paste("SRR", SRRNumber, "\t", sep = ""))
       
-      RemoveAfterFormat <- sub("</span>\n</div>\n<div>Construction protocol.*", "", SRXPage)
-      Format <- sub(".*Layout: <span>", "", RemoveAfterFormat)
+      RemoveBeforeFormat <- sub(".*Layout: <span>", "", SRXPage)
+      Format <- sub("</span>\n</div>\n.*", "", RemoveBeforeFormat)
       fprintf(paste(Format, "\n", sep = ""))
     }
   }
