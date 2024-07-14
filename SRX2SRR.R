@@ -5,17 +5,22 @@ SRX2SRR <- function(SRXSheetFilePath, SRXColumnName = "SRX") {
   
   SRXSheetContent <- read_excel(SRXSheetFilePath)
   SRXList <- SRXSheetContent[[SRXColumnName]]
-  fprintf("---List---\n")
+  fprintf("   Run#   \tFormat\n----------\t------\n")
   for (i in 1 : length(SRXList)) {
     if (is.na(SRXList[i])) {
     	  fprintf("\n")
     	}
     	else {
-      url <- paste('https://www.ncbi.nlm.nih.gov/sra/', SRXList[i], sep="")
+      url <- paste('https://www.ncbi.nlm.nih.gov/sra/', SRXList[i], sep = "")
       SRXPage <- read_html(url)
-      RemoveAfter <- sub("</a></td>\n<td align=\"right\">.*", "", SRXPage)
-      SRRNumber <- sub(".*\">SRR","", RemoveAfter)
-      fprintf(paste("SRR", SRRNumber, "\n", sep=""))
+      
+      RemoveAfterRunNumber <- sub("</a></td>\n<td align=\"right\">.*", "", SRXPage)
+      SRRNumber <- sub(".*\">SRR", "", RemoveAfterRunNumber)
+      fprintf(paste("SRR", SRRNumber, "\t", sep = ""))
+      
+      RemoveAfterFormat <- sub("</span>\n</div>\n<div>Construction protocol.*", "", SRXPage)
+      Format <- sub(".*Layout: <span>", "", RemoveAfterFormat)
+      fprintf(paste(Format, "\n", sep = ""))
     }
   }
 }
