@@ -1,9 +1,9 @@
-GOFilter <- function(ExcelDataFilePath, GOList, GOTermColumnName = "GO_id", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj") {
+GOFilter <- function(ExcelDataFilePath, GOList, godir = "~/Desktop/RLibrary/godir-20240617", GOTermColumnName = "GO_id", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj") {
   suppressPackageStartupMessages(library("readxl"))
   
   # Filtering
   Data <- read_excel(ExcelDataFilePath)
-  ChildNodeIDs <- get_unique_child_nodes_batch(GOList, godir = NULL)
+  ChildNodeIDs <- get_unique_child_nodes_batch(GOList, godir = godir)
   isRetained = logical(length = nrow(Data)) # initialize an array of FALSEs
   for (i in 1 : nrow(Data)) {
     if (length(intersect(convert_string_to_go_array(Data[i, GOTermColumnName]), ChildNodeIDs)) != 0) {
@@ -42,7 +42,7 @@ convert_string_to_go_array <- function(string, pattern = "; ") {
 
 # To generate the latest godir, See: https://bioconductor.org/packages/release/bioc/vignettes/GOfuncR/inst/doc/GOfuncR.html#conversion-from-.obo-format
 # Python scripts to convert https://current.geneontology.org/ontology/go-basic.obo into a godir: https://github.com/sgrote/OboToTerm
-get_unique_child_nodes_batch <- function(GOList, godir = "~/Desktop/RLibrary/godir-20240617") {
+get_unique_child_nodes_batch <- function(GOList, godir) {
   suppressPackageStartupMessages(library("GOfuncR"))
   
   # A GO-ID itself is also considered as a child with a distance of 0
