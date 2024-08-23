@@ -4,7 +4,7 @@ EnsemblIDFilter <- function(ExcelDataFilePath, BioMartExportFilePaths, ExcelData
   # Gather all Ensembl IDs that passed the filtering
   PassedEnsemblIDList = c()
   for (i in 1 : length(BioMartExportFilePaths)) {
-  	CurrentBioMartList <- read.table(BioMartExportFilePaths[i], header = TRUE, sep = "\t")
+    CurrentBioMartList <- read.table(BioMartExportFilePaths[i], header = TRUE, sep = "\t")
     PassedEnsemblIDList <- c(PassedEnsemblIDList, CurrentBioMartList[, BioMartExportEnsemblIDColumnName])
   }
   PassedEnsemblIDList <- unique(PassedEnsemblIDList)
