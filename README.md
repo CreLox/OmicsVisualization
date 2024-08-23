@@ -1,6 +1,7 @@
 # Documentation
 
 ## EnsemblIDFilter
+```EnsemblIDFilter(ExcelDataFilePath, BioMartExportFilePaths, ExcelDataFileEnsemblIDColumnName = "ensembl_gene_id", BioMartExportEnsemblIDColumnName, ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")``` filter a [Flaski RNAseq pipeline](https://flaski.age.mpg.de/rnaseq/) output Excel sheet (```ExcelDataFilePath```) based on a list of desired Ensembl IDs compiled from exported Ensembl BioMart TSV files (whose paths are specified in ```BioMartExportFilePaths```). In each of the TSV files, the desired Ensembl IDs are taken from the column named ```BioMartExportEnsemblIDColumnName```.
 
 ## GOFilter
 ```GOFilter(ExcelDataFilePath, GOList, godir, GOTermColumnName = "GO_id", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```: filter a [Flaski RNAseq pipeline](https://flaski.age.mpg.de/rnaseq/) output Excel sheet (```ExcelDataFilePath```) based on the desired GO terms in ```GOList``` [including all child terms (```is_a```, ```regulates```, etc.) defined by ```godir```].
