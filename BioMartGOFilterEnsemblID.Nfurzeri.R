@@ -1,4 +1,4 @@
-BioMartGOFilterEnsemblID.Nfurzeri <- function(GO.CSV, CombineHumanHomology = TRUE, CombineZebrafishHomology = TRUE) {
+BioMartGOFilterEnsemblID.Nfurzeri <- function(GO.CSV, CombineHumanHomology = TRUE, CombineFruitFlyHomology = TRUE, CombineNematodeHomology = TRUE, CombineZebrafishHomology = TRUE) {
   suppressPackageStartupMessages(library("biomaRt"))
   
   KillifishTable <-
@@ -9,7 +9,7 @@ BioMartGOFilterEnsemblID.Nfurzeri <- function(GO.CSV, CombineHumanHomology = TRU
   KillifishSet <- unique(KillifishTable[, "ensembl_gene_id"])
   
   if (CombineHumanHomology) {
-  	HumanHomologyTable <-
+    HumanHomologyTable <-
       getBM(attributes = c("ensembl_gene_id", "external_gene_name",
                            "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
                            "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
@@ -19,8 +19,30 @@ BioMartGOFilterEnsemblID.Nfurzeri <- function(GO.CSV, CombineHumanHomology = TRU
     KillifishSet <- unique(c(KillifishSet, HumanHomologyTable[, "nfurzeri_homolog_ensembl_gene"]))
   }
   
+  if (CombineFruitFlyHomology) {
+    FruitFlyHomologyTable <-
+      getBM(attributes = c("ensembl_gene_id", "external_gene_name",
+                           "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
+                           "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
+            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
+            mart = useEnsembl(biomart = "ensembl", dataset = "dmelanogaster_gene_ensembl"))
+    row.names(FruitFlyHomologyTable) <- NULL
+    KillifishSet <- unique(c(KillifishSet, FruitFlyHomologyTable[, "nfurzeri_homolog_ensembl_gene"]))
+  }
+  
+  if (CombineNematodeHomology) {
+    NematodeHomologyTable <-
+      getBM(attributes = c("ensembl_gene_id", "external_gene_name",
+                           "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
+                           "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
+            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
+            mart = useEnsembl(biomart = "ensembl", dataset = "celegans_gene_ensembl"))
+    row.names(NematodeHomologyTable) <- NULL
+    KillifishSet <- unique(c(KillifishSet, NematodeHomologyTable[, "nfurzeri_homolog_ensembl_gene"]))
+  }
+  
   if (CombineZebrafishHomology) {
-  	ZebrafishHomologyTable <-
+    ZebrafishHomologyTable <-
       getBM(attributes = c("ensembl_gene_id", "external_gene_name",
                            "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
                            "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
