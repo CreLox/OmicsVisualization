@@ -1,4 +1,4 @@
-Volcano.MA <- function(Data, PlotType = "MA", HighlightEnsemblIDs = NA, EnsemblIDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, baseMeanColumnName = "baseMean", AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, Lab = bquote(log[2](Escape/Diapause)), log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5) {
+Volcano.MA <- function(Data, PlotType = "MA", HighlightEnsemblIDs = NA, EnsemblIDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, baseMeanColumnName = "baseMean", AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel = bquote(log[2](Escape/Diapause)), log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5) {
   suppressPackageStartupMessages(library("ggplot2"))
   
   # Categorize each gene based on its log2FoldChange and AdjustedPValue
@@ -45,7 +45,7 @@ Volcano.MA <- function(Data, PlotType = "MA", HighlightEnsemblIDs = NA, EnsemblI
             scale_alpha_manual(values = c("up" = Alpha, "down" = Alpha, "ns" = NSAlpha)) +
             geom_hline(yintercept = -log10(SignificanceThreshold), linetype = "dashed", linewidth = LineWidth) +
             geom_vline(xintercept = c(-abslog2FoldChangeThreshold, abslog2FoldChangeThreshold), linetype = "dashed", linewidth = LineWidth) +
-            xlab(Lab) +
+            xlab(log2FoldChangeLabel) +
             ylab(bquote(-log[10](italic(p)[adj]))) +
             theme_bw() +
             theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major = element_blank()) +
@@ -61,7 +61,7 @@ Volcano.MA <- function(Data, PlotType = "MA", HighlightEnsemblIDs = NA, EnsemblI
             scale_color_manual(values = c("up" = UpColor, "down" = DownColor, "ns" = "black")) + 
             scale_alpha_manual(values = c("up" = Alpha, "down" = Alpha, "ns" = NSAlpha)) +
             geom_hline(yintercept = c(-abslog2FoldChangeThreshold, abslog2FoldChangeThreshold), linetype = "dashed", linewidth = LineWidth) +
-            ylab(Lab) +
+            ylab(log2FoldChangeLabel) +
             xlab(bquote(log[2](base~mean))) +
             theme_bw() +
             theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major = element_blank()) +
