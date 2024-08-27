@@ -8,7 +8,7 @@
 
 - in ```PassedEnsemblIDList``` or
 
-- compiled from exported [Ensembl BioMart](https://www.ensembl.org/biomart/martview) TSV files (whose paths are specified in ```BioMartExportFilePaths```) whose paths are listed in ```BioMartExportFilePaths```, if ```BioMartExportFilePaths``` is not ```NA``` (in each of the TSV files, the desired Ensembl IDs are taken from the column named ```BioMartExportEnsemblIDColumnName```; this overrides the input variable ```PassedEnsemblIDList```).
+- compiled from exported [Ensembl BioMart](https://www.ensembl.org/biomart/martview) TSV files whose paths are specified in ```BioMartExportFilePaths```, if ```BioMartExportFilePaths``` is not ```NA``` (note: this overrides the input variable ```PassedEnsemblIDList```).
 
 ## GOFilter
 ```GOFilter(ExcelDataFilePath, GOList, godir, GOTermColumnName = "GO_id", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```: filter a Flaski RNAseq pipeline output Excel sheet (```ExcelDataFilePath```) based on the desired GO terms in ```GOList``` [including all child terms (```is_a```, ```regulates```, etc.) defined by ```godir```].
