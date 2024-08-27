@@ -1,4 +1,4 @@
-BioMartGOFilterEnsemblID.Nfurzeri <- function(GO.CSV, CombineHumanHomology = TRUE, CombineFruitFlyHomology = TRUE, CombineNematodeHomology = TRUE, CombineZebrafishHomology = TRUE) {
+BioMartGOFilterEnsemblID.Nfurzeri <- function(GO.CSV, CombineFruitFlyHomology = TRUE, CombineHumanHomology = TRUE, CombineNematodeHomology = TRUE, CombineXenopusHomology = TRUE, CombineZebrafishHomology = TRUE) {
   suppressPackageStartupMessages(library("biomaRt"))
   
   KillifishTable <-
@@ -7,17 +7,6 @@ BioMartGOFilterEnsemblID.Nfurzeri <- function(GO.CSV, CombineHumanHomology = TRU
           mart = useEnsembl(biomart = "ensembl", dataset = "nfurzeri_gene_ensembl"))
   row.names(KillifishTable) <- NULL
   KillifishSet <- unique(KillifishTable[, "ensembl_gene_id"])
-  
-  if (CombineHumanHomology) {
-    HumanHomologyTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name",
-                           "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
-                           "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl"))
-    row.names(HumanHomologyTable) <- NULL
-    KillifishSet <- unique(c(KillifishSet, HumanHomologyTable[, "nfurzeri_homolog_ensembl_gene"]))
-  }
   
   if (CombineFruitFlyHomology) {
     FruitFlyHomologyTable <-
@@ -30,6 +19,17 @@ BioMartGOFilterEnsemblID.Nfurzeri <- function(GO.CSV, CombineHumanHomology = TRU
     KillifishSet <- unique(c(KillifishSet, FruitFlyHomologyTable[, "nfurzeri_homolog_ensembl_gene"]))
   }
   
+  if (CombineHumanHomology) {
+    HumanHomologyTable <-
+      getBM(attributes = c("ensembl_gene_id", "external_gene_name",
+                           "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
+                           "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
+            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
+            mart = useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl"))
+    row.names(HumanHomologyTable) <- NULL
+    KillifishSet <- unique(c(KillifishSet, HumanHomologyTable[, "nfurzeri_homolog_ensembl_gene"]))
+  }
+  
   if (CombineNematodeHomology) {
     NematodeHomologyTable <-
       getBM(attributes = c("ensembl_gene_id", "external_gene_name",
@@ -39,6 +39,17 @@ BioMartGOFilterEnsemblID.Nfurzeri <- function(GO.CSV, CombineHumanHomology = TRU
             mart = useEnsembl(biomart = "ensembl", dataset = "celegans_gene_ensembl"))
     row.names(NematodeHomologyTable) <- NULL
     KillifishSet <- unique(c(KillifishSet, NematodeHomologyTable[, "nfurzeri_homolog_ensembl_gene"]))
+  }
+  
+  if (CombineXenopusHomology) {
+    XenopusHomologyTable <-
+      getBM(attributes = c("ensembl_gene_id", "external_gene_name",
+                           "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
+                           "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
+            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
+            mart = useEnsembl(biomart = "ensembl", dataset = "xtropicalis_gene_ensembl"))
+    row.names(XenopusHomologyTable) <- NULL
+    KillifishSet <- unique(c(KillifishSet, XenopusHomologyTable[, "nfurzeri_homolog_ensembl_gene"]))
   }
   
   if (CombineZebrafishHomology) {
