@@ -1,13 +1,15 @@
-EnsemblIDFilter <- function(ExcelDataFilePath, BioMartExportFilePaths, ExcelDataFileEnsemblIDColumnName = "ensembl_gene_id", BioMartExportEnsemblIDColumnName = "Turquoise.killifish.gene.stable.ID", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj") {
+EnsemblIDFilter <- function(ExcelDataFilePath, BioMartExportFilePaths = NA, PassedEnsemblIDList = NA, ExcelDataFileEnsemblIDColumnName = "ensembl_gene_id", BioMartExportEnsemblIDColumnName = "Turquoise.killifish.gene.stable.ID", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj") {
   suppressPackageStartupMessages(library("readxl"))
   
-  # Gather all Ensembl IDs that passed the filtering
-  PassedEnsemblIDList = c()
-  for (i in 1 : length(BioMartExportFilePaths)) {
-    CurrentBioMartList <- read.table(BioMartExportFilePaths[i], header = TRUE, sep = "\t")
-    PassedEnsemblIDList <- c(PassedEnsemblIDList, CurrentBioMartList[, BioMartExportEnsemblIDColumnName])
+  # Optional: gather all Ensembl IDs that passed the filtering (overrides PassedEnsemblIDList if BioMartExportFilePaths != NA)
+  if (!is.na(BioMartExportFilePaths)) {
+    PassedEnsemblIDList = c()
+    for (i in 1 : length(BioMartExportFilePaths)) {
+      CurrentBioMartList <- read.table(BioMartExportFilePaths[i], header = TRUE, sep = "\t")
+      PassedEnsemblIDList <- c(PassedEnsemblIDList, CurrentBioMartList[, BioMartExportEnsemblIDColumnName])
+    }
+    PassedEnsemblIDList <- unique(PassedEnsemblIDList)
   }
-  PassedEnsemblIDList <- unique(PassedEnsemblIDList)
   
   # Filtering
   Data <- read_excel(ExcelDataFilePath)
