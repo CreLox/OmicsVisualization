@@ -20,7 +20,7 @@ Note: Ensembl BioMart provides a built-in functionality to filter genes by GO te
 </p>
 
 ## plotlog2BaseMeanDistribution
-```plotlog2BaseMeanDistribution(ExcelDataFilePath, baseMeanColumnName = "baseMean", BinWidth = 0.1, Bins = NULL)```: plot a histogram of transcription levels to help determine a threshold to filter genes with valid expression and a meaningful fold-change.
+```plotlog2BaseMeanDistribution(ExcelDataFilePath, baseMeanColumnName = "baseMean", BinWidth = 0.1, Bins = NULL)```: plot a histogram of transcription levels to help determine a threshold to filter genes with valid expression and a meaningful fold-change. ```BinWidth``` overrides ```Bins```.
 
 ## SRX2SRR
 ```SRX2SRR(SRXSheetFilePath, SRXColumnName = "SRX")```: batch convert a column (from an Excel sheet ```SRXSheetFilePath```) of accession numbers into corresponding run numbers (printed directly onto the console alongside the sequencing technique employed).
