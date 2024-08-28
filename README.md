@@ -20,7 +20,7 @@ Note: Ensembl BioMart provides a built-in functionality to filter genes by GO te
 </p>
 
 ## plotlog2ReadDistribution
-```plotlog2ReadDistribution(ExcelDataFilePath, DataColumns)```: plot the smoothed empirical distribution function of all normalized reads (each gene in each sample; compiled from columns whose IDs/names are in ```DataColumns```) to help determine a threshold to filter genes with valid expression and a meaningful fold-change.
+```plotlog2ReadDistribution(ExcelDataFilePath, DataColumns)```: plot the smoothed empirical distribution function of all normalized reads (each gene in each sample; compiled from columns whose IDs/names are in ```DataColumns```) to help determine a threshold to filter genes with valid expression and a meaningful fold-change. This step is helpful when picking genes for further functional studies but dispensable if only bioinformatic analyses (like a [gene set enrichment analysis](https://www.pnas.org/doi/10.1073/pnas.0506580102)) are to be done.
 
 ## SRX2SRR
 ```SRX2SRR(SRXSheetFilePath, SRXColumnName = "SRX")```: batch convert a column (from an Excel sheet ```SRXSheetFilePath```) of accession numbers into corresponding run numbers (printed directly onto the console alongside the sequencing technique employed).
