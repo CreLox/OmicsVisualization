@@ -1,7 +1,7 @@
-Volcano.MA <- function(Data, PlotType = "MA", HighlightEnsemblIDs = NA, EnsemblIDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, baseMeanColumnName = "baseMean", AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel = bquote(log[2](Escape/Diapause)), log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5) {
+Volcano.MA <- function(Data, PlotType = "MA", HighlightEnsemblIDs = NA, EnsemblIDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit = 0, log2baseMeanUpperLimit = NA, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel = bquote(log[2](Escape/Diapause)), log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5) {
   suppressPackageStartupMessages(library("ggplot2"))
   
-  # Categorize each gene based on its log2FoldChange and AdjustedPValue
+  # Categorize each gene based on its log2FoldChange and AdjustedPValue and assemble the data frame
   Category = rep("ns", nrow(Data))
   for (i in 1 : nrow(Data)) {
     if ((Data[i, log2FoldChangeColumnName] >= abslog2FoldChangeThreshold) &
@@ -16,24 +16,43 @@ Volcano.MA <- function(Data, PlotType = "MA", HighlightEnsemblIDs = NA, EnsemblI
     }
   }
   negativelog10AdjustedPValue <- -log10(Data[, AdjustedPValueColumnName])
+  log2baseMean <- log2(Data[, baseMeanColumnName])
   colnames(negativelog10AdjustedPValue) <- "negativelog10AdjustedPValue"
-  Data <- cbind(as.data.frame(Data), Category, negativelog10AdjustedPValue)
+  colnames(log2baseMean) <- "log2baseMean"
+  Data <- cbind(as.data.frame(Data), Category, negativelog10AdjustedPValue, log2baseMean)
+  names(Data)[names(Data) == log2FoldChangeColumnName] <- "log2FoldChange"
   
   # Preprocessing
-  names(Data)[names(Data) == log2FoldChangeColumnName] <- "log2FoldChange"
-  names(Data)[names(Data) == baseMeanColumnName] <- "baseMean"
   Data <- Data[!is.na(Data[, AdjustedPValueColumnName]),]
-  for (i in 1 : nrow(Data)) {
-    if (Data[i, "negativelog10AdjustedPValue"] > negativelog10AdjustedPValueLimit) {
-      Data[i, "negativelog10AdjustedPValue"] <- negativelog10AdjustedPValueLimit
+  if (!is.na(negativelog10AdjustedPValueLimit)) {
+    for (i in 1 : nrow(Data)) {
+      if (Data[i, "negativelog10AdjustedPValue"] > negativelog10AdjustedPValueLimit) {
+        Data[i, "negativelog10AdjustedPValue"] <- negativelog10AdjustedPValueLimit
+      }
     }
   }
-  for (i in 1 : nrow(Data)) {
-    if (Data[i, "log2FoldChange"] > abslog2FoldChangeLimit) {
-      Data[i, "log2FoldChange"] <- abslog2FoldChangeLimit
+  if (!is.na(abslog2FoldChangeLimit)) {
+    for (i in 1 : nrow(Data)) {
+      if (Data[i, "log2FoldChange"] > abslog2FoldChangeLimit) {
+        Data[i, "log2FoldChange"] <- abslog2FoldChangeLimit
+      }
+      if (Data[i, "log2FoldChange"] < -abslog2FoldChangeLimit) {
+        Data[i, "log2FoldChange"] <- -abslog2FoldChangeLimit
+      }
     }
-    if (Data[i, "log2FoldChange"] < -abslog2FoldChangeLimit) {
-      Data[i, "log2FoldChange"] <- -abslog2FoldChangeLimit
+  }
+  if (!is.na(log2baseMeanUpperLimit)) {
+    for (i in 1 : nrow(Data)) {
+      if (Data[i, "log2baseMean"] > log2baseMeanUpperLimit) {
+        Data[i, "log2baseMean"] <- log2baseMeanUpperLimit
+      }
+    }
+  }
+  if (!is.na(log2baseMeanLowerLimit)) {
+    for (i in 1 : nrow(Data)) {
+      if (Data[i, "log2baseMean"] < log2baseMeanLowerLimit) {
+        Data[i, "log2baseMean"] <- log2baseMeanLowerLimit
+      }
     }
   }
   
@@ -56,7 +75,7 @@ Volcano.MA <- function(Data, PlotType = "MA", HighlightEnsemblIDs = NA, EnsemblI
   
   # MA plot
   if (PlotType == "MA") {
-    Plot <- ggplot(data = Data, aes(x = log2(baseMean), y = log2FoldChange)) +
+    Plot <- ggplot(data = Data, aes(x = log2baseMean, y = log2FoldChange)) +
             geom_point(aes(color = Category, alpha = Category), stroke = 0) +
             scale_color_manual(values = c("up" = UpColor, "down" = DownColor, "ns" = "black")) + 
             scale_alpha_manual(values = c("up" = Alpha, "down" = Alpha, "ns" = NSAlpha)) +
@@ -66,6 +85,7 @@ Volcano.MA <- function(Data, PlotType = "MA", HighlightEnsemblIDs = NA, EnsemblI
             theme_bw() +
             theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major = element_blank()) +
             coord_cartesian(expand = FALSE, clip = "off") +
+            scale_x_continuous(limits = c(log2baseMeanLowerLimit, log2baseMeanUpperLimit)) +
             scale_y_continuous(breaks = c(seq(from = -abslog2FoldChangeLimit, by = log2FoldChangeTickDistance, to = abslog2FoldChangeLimit), -abslog2FoldChangeThreshold, abslog2FoldChangeThreshold), limits = c(-abslog2FoldChangeLimit, abslog2FoldChangeLimit))
   }
   
