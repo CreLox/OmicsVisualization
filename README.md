@@ -19,11 +19,11 @@ Note: Ensembl BioMart provides a built-in functionality to filter genes by GO te
 <img src="assets/EnsemblBioMartGOFilter.png" width="700">
 </p>
 
-## plotlog2BaseMeanDistribution
-```plotlog2BaseMeanDistribution(ExcelDataFilePath, baseMeanColumnName = "baseMean", BinWidth = 0.1, Bins = NULL)```: plot a histogram of transcription levels to help determine a threshold to filter genes with valid expression and a meaningful fold-change. ```BinWidth``` overrides ```Bins```.
+## plotlog2ReadDistribution
+```plotlog2ReadDistribution(ExcelDataFilePath, DataColumns = NULL)```: plot the smoothed empirical distribution function of all normalized reads (each gene in each sample) to help determine a threshold to filter genes with valid expression and a meaningful fold-change.
 
 ## SRX2SRR
 ```SRX2SRR(SRXSheetFilePath, SRXColumnName = "SRX")```: batch convert a column (from an Excel sheet ```SRXSheetFilePath```) of accession numbers into corresponding run numbers (printed directly onto the console alongside the sequencing technique employed).
 
 ## Volcano.MA
-```Volcano.MA(Data, PlotType, HighlightEnsemblIDs = NA, EnsemblIDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, baseMeanColumnName = "baseMean", AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel, log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5)```: plot a volcano plot (```PlotType = "Volcano"```) or an MA plot (```PlotType = "MA"```) and highlight genes with an Ensembl ID in ```HighlightEnsemblIDs```. Genes beyond limits (defined by ±```abslog2FoldChangeLimit``` and ```negativelog10AdjustedPValueLimit```) will be coerced onto the border.
+```Volcano.MA(Data, PlotType, HighlightEnsemblIDs = NA, EnsemblIDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit, log2baseMeanUpperLimit, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel, log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5)```: plot a volcano plot (```PlotType = "Volcano"```) or an MA plot (```PlotType = "MA"```) and highlight genes with an Ensembl ID in ```HighlightEnsemblIDs```. Points beyond limits (defined by ±```abslog2FoldChangeLimit```, ```log2baseMeanLowerLimit```, ```log2baseMeanUpperLimit```, and ```negativelog10AdjustedPValueLimit```; ignored if ```NA```) will be coerced onto the border.
