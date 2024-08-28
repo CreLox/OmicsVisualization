@@ -1,4 +1,4 @@
-plotlog2ReadDistribution <- function(ExcelDataFilePath, DataColumns = NULL) {
+plotlog2ReadDistribution <- function(ExcelDataFilePath, DataColumns) {
   suppressPackageStartupMessages(library("readxl"))
   suppressPackageStartupMessages(library("ggplot2"))
   
