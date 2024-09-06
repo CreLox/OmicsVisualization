@@ -1,29 +1,43 @@
 # Documentation
 
-## BioMartGOFilter.EnsemblID.Nfurzeri
-```BioMartGOFilter.EnsemblID.Nfurzeri(GO.CSV, CombineFruitFlyHomology = TRUE, CombineHumanHomology = TRUE, CombineNematodeHomology = TRUE, CombineXenopusHomology = TRUE, CombineZebrafishHomology = TRUE)```: use the [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.html) package to download the Ensembl IDs of all *Nothobranchius furzeri* genes with GO term annotations in ```GO.CSV``` [including all child terms (```is_a```, ```regulates```, etc.)]. ```CombineFruitFlyHomology```/```CombineHumanHomology```/```CombineNematodeHomology```/```CombineXenopusHomology```/```CombineZebrafishHomology``` allows complementing the set using the gene homology [to fruit fly (*Drosophila melanogaster*)/human/nematode (*Caenorhabditis elegans*)/tropical clawed frog (*Xenopus tropicalis*)/zebrafish (*Danio rerio*)] information.
+## BioMartGOFilter.Nfurzeri
+```BioMartGOFilter.EnsemblID.Nfurzeri(GO.CSV, CombineFruitFlyHomology = TRUE, CombineHumanHomology = TRUE, CombineNematodeHomology = TRUE, CombineXenopusHomology = TRUE, CombineZebrafishHomology = TRUE)```
+
+```BioMartGOFilter.GOList.Nfurzeri(GO.CSV, CombineFruitFlyHomology = TRUE, CombineHumanHomology = TRUE, CombineNematodeHomology = TRUE, CombineXenopusHomology = TRUE, CombineZebrafishHomology = TRUE)```
+
+Use the [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.html) package to get all *Nothobranchius furzeri* genes with GO term annotations in ```GO.CSV``` [including all child terms (```is_a```, ```regulates```, etc.)]. ```CombineFruitFlyHomology```/```CombineHumanHomology```/```CombineNematodeHomology```/```CombineXenopusHomology```/```CombineZebrafishHomology``` allows complementation using the gene homology [to fruit fly (*Drosophila melanogaster*)/human/nematode (*Caenorhabditis elegans*)/tropical clawed frog (*Xenopus tropicalis*)/zebrafish (*Danio rerio*)] information.
 
 ## EnsemblIDFilter
-```EnsemblIDFilter(ExcelDataFilePath, BioMartExportFilePaths = NA, PassedEnsemblIDList = NA, ExcelDataFileEnsemblIDColumnName = "ensembl_gene_id", BioMartExportEnsemblIDColumnName, ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```: filter a [Flaski RNAseq pipeline](https://flaski.age.mpg.de/rnaseq/) output Excel sheet (```ExcelDataFilePath```) based on a list of desired Ensembl IDs
+```EnsemblIDFilter(ExcelDataFilePath, BioMartExportFilePaths = NA, PassedEnsemblIDList = NA, ExcelDataFileEnsemblIDColumnName = "ensembl_gene_id", BioMartExportEnsemblIDColumnName, ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```
+
+Filter a [Flaski RNAseq pipeline](https://flaski.age.mpg.de/rnaseq/) output Excel sheet (```ExcelDataFilePath```) based on a list of desired Ensembl IDs
 
 - in ```PassedEnsemblIDList``` or
 
 - compiled from exported [Ensembl BioMart](https://www.ensembl.org/biomart/martview) TSV files whose paths are specified in ```BioMartExportFilePaths```, if ```BioMartExportFilePaths``` is not ```NA``` (note: this overrides the input variable ```PassedEnsemblIDList```).
 
 ## GOFilter
-```GOFilter(ExcelDataFilePath, GOList, godir, GOTermColumnName = "GO_id", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```: filter a Flaski RNAseq pipeline output Excel sheet (```ExcelDataFilePath```) based on the desired GO terms in ```GOList``` [including all child terms (```is_a```, ```regulates```, etc.) defined by ```godir```].
+```GOFilter(ExcelDataFilePath, GOList, godir, GOTermColumnName = "GO_id", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```
 
-Note: Ensembl BioMart provides a built-in functionality to filter genes by GO term annotations (see the figure below; all child terms will also be included). This approach is better because a fresh download from Ensembl BioMart will reflect the most up-to-date GO term annotations. See ```BioMartGOFilter.EnsemblID.Nfurzeri``` and ```EnsemblIDFilter```.
+Filter a Flaski RNAseq pipeline output Excel sheet (```ExcelDataFilePath```) based on the desired GO terms in ```GOList``` [including all child terms (```is_a```, ```regulates```, etc.) defined by ```godir```].
+
+Note: Ensembl BioMart provides a built-in functionality to filter genes by GO term annotations (see the figure below; all child terms will also be included). This approach is better because a fresh download from Ensembl BioMart will reflect the most up-to-date GO term annotations. See ```BioMartGOFilter.Nfurzeri``` and ```EnsemblIDFilter```.
 
 <p align="center">
 <img src="assets/EnsemblBioMartGOFilter.png" width="700">
 </p>
 
 ## plotlog2ReadDistribution
-```plotlog2ReadDistribution(ExcelDataFilePath, DataColumns)```: plot the smoothed empirical distribution function of all normalized reads (each gene in each sample; compiled from columns whose IDs/names are in ```DataColumns```) to help determine a threshold to filter genes with valid expression and a meaningful fold-change. This step is helpful when picking genes for further functional studies but dispensable if only bioinformatic analyses (like a [gene set enrichment analysis](https://www.pnas.org/doi/10.1073/pnas.0506580102)) are to be done.
+```plotlog2ReadDistribution(ExcelDataFilePath, DataColumns)```
+
+Plot the smoothed empirical distribution function of all normalized reads (each gene in each sample; compiled from columns whose IDs/names are in ```DataColumns```) to help determine a threshold to filter genes with valid expression and a meaningful fold-change. This step is helpful when picking genes for further functional studies but dispensable if only bioinformatic analyses (like a [gene set enrichment analysis](https://www.pnas.org/doi/10.1073/pnas.0506580102)) are to be done.
 
 ## SRX2SRR
-```SRX2SRR(SRXSheetFilePath, SRXColumnName = "SRX")```: batch convert a column (from an Excel sheet ```SRXSheetFilePath```) of accession numbers into corresponding run numbers (printed directly onto the console alongside the sequencing technique employed).
+```SRX2SRR(SRXSheetFilePath, SRXColumnName = "SRX")```
+
+Batch convert a column (from an Excel sheet ```SRXSheetFilePath```) of accession numbers into corresponding run numbers (printed directly onto the console alongside the sequencing technique employed).
 
 ## Volcano.MA
-```Volcano.MA(Data, PlotType, HighlightEnsemblIDs = NA, EnsemblIDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit, log2baseMeanUpperLimit, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel, log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5)```: plot a volcano plot (```PlotType = "Volcano"```) or an MA plot (```PlotType = "MA"```) and highlight genes with an Ensembl ID in ```HighlightEnsemblIDs```. Points beyond limits (defined by ±```abslog2FoldChangeLimit```, ```log2baseMeanLowerLimit```, ```log2baseMeanUpperLimit```, and ```negativelog10AdjustedPValueLimit```; ignored if ```NA```) will be coerced onto the border.
+```Volcano.MA(Data, PlotType, HighlightEnsemblIDs = NA, EnsemblIDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit, log2baseMeanUpperLimit, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel, log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5)```
+
+Plot a volcano plot (```PlotType = "Volcano"```) or an MA plot (```PlotType = "MA"```) and highlight genes with an Ensembl ID in ```HighlightEnsemblIDs```. Points beyond limits (defined by ±```abslog2FoldChangeLimit```, ```log2baseMeanLowerLimit```, ```log2baseMeanUpperLimit```, and ```negativelog10AdjustedPValueLimit```; ignored if ```NA```) will be coerced onto the border.
