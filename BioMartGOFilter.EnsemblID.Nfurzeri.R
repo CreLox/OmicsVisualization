@@ -1,4 +1,4 @@
-BioMartGOFilterEnsemblID.Nfurzeri <- function(GO.CSV, CombineFruitFlyHomology = TRUE, CombineHumanHomology = TRUE, CombineNematodeHomology = TRUE, CombineXenopusHomology = TRUE, CombineZebrafishHomology = TRUE) {
+BioMartGOFilter.EnsemblID.Nfurzeri <- function(GO.CSV, CombineFruitFlyHomology = TRUE, CombineHumanHomology = TRUE, CombineNematodeHomology = TRUE, CombineXenopusHomology = TRUE, CombineZebrafishHomology = TRUE) {
   suppressPackageStartupMessages(library("biomaRt"))
   biomartCacheClear()
   
