@@ -1,5 +1,5 @@
 FindUniqueGenes.EnsemblID <- function(TargetSpecies = "nfurzeri",
-                                      CheckHomologySpecies = c("drerio", "olatipes", "ssalar")) {
+                                      CheckHomologySpecies = c("drerio", "kmarmoratus", "olatipes", "ssalar")) {
   
   suppressPackageStartupMessages(library("biomaRt"))
   suppressPackageStartupMessages(library("retry"))
