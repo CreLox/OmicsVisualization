@@ -1,21 +1,22 @@
-EnsemblIDFilter <- function(ExcelDataFilePath, BioMartExportFilePaths = NA, PassedEnsemblIDList = NA, ExcelDataFileEnsemblIDColumnName = "ensembl_gene_id", BioMartExportEnsemblIDColumnName = "Turquoise.killifish.gene.stable.ID", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj") {
+EnsemblIDFilter <- function(ExcelDataFilePath, BioMartExportFilePaths = NA, PassedEnsemblIDArray = NA, ExcelDataFileEnsemblIDColumnName = "ensembl_gene_id", BioMartExportEnsemblIDColumnName = "Turquoise.killifish.gene.stable.ID", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj") {
+  
   suppressPackageStartupMessages(library("readxl"))
   
-  # Optional: gather all Ensembl IDs that passed the filtering (overrides PassedEnsemblIDList if BioMartExportFilePaths != NA)
+  # Optional: gather all Ensembl IDs that passed the filtering (overrides PassedEnsemblIDArray if BioMartExportFilePaths != NA)
   if (!is.na(BioMartExportFilePaths)) {
-    PassedEnsemblIDList = c()
+    PassedEnsemblIDArray <- c()
     for (i in 1 : length(BioMartExportFilePaths)) {
-      CurrentBioMartList <- read.table(BioMartExportFilePaths[i], header = TRUE, sep = "\t")
-      PassedEnsemblIDList <- c(PassedEnsemblIDList, CurrentBioMartList[, BioMartExportEnsemblIDColumnName])
+      CurrentBioMartTable <- read.table(BioMartExportFilePaths[i], header = TRUE, sep = "\t")
+      PassedEnsemblIDArray <- c(PassedEnsemblIDArray, CurrentBioMartTable[, BioMartExportEnsemblIDColumnName])
     }
-    PassedEnsemblIDList <- unique(PassedEnsemblIDList)
+    PassedEnsemblIDArray <- unique(PassedEnsemblIDArray)
   }
   
   # Filtering
   Data <- read_excel(ExcelDataFilePath)
-  isRetained = logical(length = nrow(Data)) # initialize an array of FALSEs
+  isRetained <- logical(nrow(Data)) # initialize an array of FALSEs
   for (i in 1 : nrow(Data)) {
-    if (Data[i, ExcelDataFileEnsemblIDColumnName] %in% PassedEnsemblIDList) {
+    if (Data[i, ExcelDataFileEnsemblIDColumnName] %in% PassedEnsemblIDArray) {
       isRetained[i] <- TRUE
     }
   }
