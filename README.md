@@ -8,7 +8,7 @@
 Use the [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.html) package to get all *Nothobranchius furzeri* genes with GO term annotations in ```GO.CSV``` [including all child terms (```is_a```, ```regulates```, etc.)]. ```CombineFruitFlyHomology```/```CombineHumanHomology```/```CombineNematodeHomology```/```CombineXenopusHomology```/```CombineZebrafishHomology``` allows complementation using the gene homology [to fruit fly (*Drosophila melanogaster*)/human/nematode (*Caenorhabditis elegans*)/tropical clawed frog (*Xenopus tropicalis*)/zebrafish (*Danio rerio*)] information.
 
 ## EnsemblID2EntrezAccession
-```EnsemblID2EntrezAccession <- function(EnsemblID)```
+```EnsemblID2EntrezAccession(EnsemblID)```
 
 Converts a single Ensembl ID to its corresponding NCBI Entrez accession using the [rentrez](https://docs.ropensci.org/rentrez/) package. This works better than using biomaRt because the mapping is more complete. And unlike using org.XX.eg.db, this works for all species.
 
