@@ -8,5 +8,10 @@ EnsemblID2EntrezAccession <- function(EnsemblID) {
     entrez_search(db = "gene", term = EnsemblID)
   }, when = "Error", silent = TRUE)
   
-  return(paste("LOC", EntrezSearchResult$ids, sep = ""))
+  if (is.null(unlist(EntrezSearchResult$ids))) {
+    return(NULL)
+  }
+  else {
+    return(paste("LOC", EntrezSearchResult$ids, sep = ""))
+  }
 }
