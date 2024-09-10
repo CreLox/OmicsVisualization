@@ -10,7 +10,7 @@ Use the [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.ht
 ## EnsemblID2EntrezAccession
 ```EnsemblID2EntrezAccession(EnsemblID)```
 
-Converts a single Ensembl ID to its corresponding NCBI Entrez accession using the [rentrez](https://docs.ropensci.org/rentrez/) package. This works better than using biomaRt because the mapping is more complete. And unlike using org.XX.eg.db, this works for all species.
+Converts a single Ensembl ID to its corresponding NCBI Entrez accession using the [rentrez](https://docs.ropensci.org/rentrez/) package. This works better than using biomaRt because the mapping is more complete. And unlike using org.X.eg.db, this works for all species.
 
 ## EnsemblIDFilter
 ```EnsemblIDFilter(ExcelDataFilePath, BioMartExportFilePaths = NA, PassedEnsemblIDArray = NA, ExcelDataFileEnsemblIDColumnName = "ensembl_gene_id", BioMartExportEnsemblIDColumnName, ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```
