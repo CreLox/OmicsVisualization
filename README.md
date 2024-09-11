@@ -7,10 +7,10 @@
 
 Use the [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.html) package to get all *Nothobranchius furzeri* genes with GO term annotations in ```GO.CSV``` [including all child terms (```is_a```, ```regulates```, etc.)]. ```CombineFruitFlyHomology```/```CombineHumanHomology```/```CombineNematodeHomology```/```CombineXenopusHomology```/```CombineZebrafishHomology``` allows complementation using the gene homology [to fruit fly (*Drosophila melanogaster*)/human/nematode (*Caenorhabditis elegans*)/tropical clawed frog (*Xenopus tropicalis*)/zebrafish (*Danio rerio*)] information.
 
-## EnsemblID2EntrezAccession
-```EnsemblID2EntrezAccession(EnsemblID)```
+## EnsemblID2Entrez
+```EnsemblID2Entrez(EnsemblID, Output = "Accession")```
 
-Converts a single Ensembl ID to its corresponding NCBI Entrez accession using the [rentrez](https://docs.ropensci.org/rentrez/) package. This works better than using ```biomaRt``` because the mapping is more complete. And unlike using ```org.X.eg.db```, this works for all species.
+Converts a single Ensembl ID to its corresponding NCBI Entrez accession/ID/description (```Output = c("Accession", "ID", "Description")```) using the [rentrez](https://docs.ropensci.org/rentrez/) package. If the mapping exists, the output will be a character string; otherwise, the output will be ```NULL```. This works better than using ```biomaRt``` because the mapping is more complete. And unlike using ```org.X.eg.db```, this works for all species.
 
 ## EnsemblIDFilter
 ```EnsemblIDFilter(ExcelDataFilePath, BioMartExportFilePaths = NA, PassedEnsemblIDArray = NA, ExcelDataFileEnsemblIDColumnName = "ensembl_gene_id", BioMartExportEnsemblIDColumnName, ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```
