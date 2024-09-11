@@ -1,4 +1,5 @@
-EnsemblID2Entrez <- function(EnsemblID) {
+EnsemblID2Entrez <- function(EnsemblID,
+                             Output = "Accession") {
   
   suppressPackageStartupMessages(library("rentrez"))
   suppressPackageStartupMessages(library("retry"))
@@ -12,6 +13,14 @@ EnsemblID2Entrez <- function(EnsemblID) {
     return(NULL)
   }
   else {
-    return(paste("LOC", EntrezSearchResult$ids, sep = ""))
+    if (Output == "Accession") {
+      return(paste("LOC", EntrezSearchResult$ids, sep = ""))
+    }
+    if (Output == "ID") {
+      return(EntrezSearchResult$ids)
+    }
+    if (Output == "Description") {
+      return(entrez_summary(db = "gene", id = EntrezSearchResult$ids)$description)
+    }
   }
 }
