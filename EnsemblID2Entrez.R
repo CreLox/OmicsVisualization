@@ -10,7 +10,7 @@ EnsemblID2Entrez <- function(EnsemblID,
   }, when = "Error", silent = TRUE)
   
   if (is.null(unlist(EntrezSearchResult$ids))) {
-    return(NULL)
+    return("")
   }
   else {
     if (Output == "Accession") {
