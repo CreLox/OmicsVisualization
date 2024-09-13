@@ -108,7 +108,7 @@ samples.beeswarm <- function(GeneNameRegex, ExcelDataFilePath = "Reichwald2015Re
   XTicks <- ggplot_build(Plot)$layout$panel_params[[1]]$x$breaks
   Plot <- Plot + annotate("segment", x = 0, y = 0, yend = 0, xend = max(XTicks, na.rm = T), colour = "black", linewidth = LineWidth * 2)
   # The line above creates a fake axis but also causes an issue wherein the axis.title.x and the legend may not be centered to this fake axis...
-  if (Standardized != 0) {
+  if ((Standardized == 1) | (Standardized == 2)) {
     Plot <- Plot + xlab("Standardized (per gene) transcription level") + 
       geom_vline(xintercept = 1, linetype = "dashed", linewidth = LineWidth * 0.5, colour = Colours[Standardized])
   }
