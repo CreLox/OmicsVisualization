@@ -4,7 +4,7 @@
 
 Appends a column of NCBI gene descriptions to an Excel sheet with a column (named ```ExcelDataFileEnsemblIDColumnName```) containing Ensembl IDs. Depends on ```EnsemblID2Entrez```.
 
-## BioMartGOFilter.Nfurzeri
+## BioMartGOFilter.*.Nfurzeri
 ```BioMartGOFilter.EnsemblID.Nfurzeri(GO.CSV, CombineFruitFlyHomology = TRUE, CombineHumanHomology = TRUE, CombineNematodeHomology = TRUE, CombineXenopusHomology = TRUE, CombineZebrafishHomology = TRUE)```
 
 ```BioMartGOFilter.GOList.Nfurzeri(GO.CSV, CombineFruitFlyHomology = TRUE, CombineHumanHomology = TRUE, CombineNematodeHomology = TRUE, CombineXenopusHomology = TRUE, CombineZebrafishHomology = TRUE)```
