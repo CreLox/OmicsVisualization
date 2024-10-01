@@ -1,8 +1,10 @@
 BioMartGOFilter.GOList.Nfurzeri <- function(GO.CSV,
                                             CombineFruitFlyHomology = TRUE,
                                             CombineHumanHomology = TRUE,
+                                            CombineMouseHomology = TRUE,
                                             CombineNematodeHomology = TRUE,
                                             CombineXenopusHomology = TRUE,
+                                            CombineYeastHomology = TRUE,
                                             CombineZebrafishHomology = TRUE) {
   
   suppressPackageStartupMessages(library("biomaRt"))
@@ -60,6 +62,27 @@ BioMartGOFilter.GOList.Nfurzeri <- function(GO.CSV,
     KillifishGOList <- TranslateGOList.Nfurzeri(HumanHomologyTable, HumanGOList, KillifishGOList)
   }
   
+  if (CombineMouseHomology) {
+    retry({
+      MouseTable <-
+      getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
+            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
+            mart = useEnsembl(biomart = "ensembl", dataset = "mmusculus_gene_ensembl"))
+    }, when = "Error", silent = TRUE)
+    row.names(MouseTable) <- NULL
+    retry({
+      MouseHomologyTable <-
+      getBM(attributes = c("ensembl_gene_id", "external_gene_name",
+                           "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
+                           "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
+            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
+            mart = useEnsembl(biomart = "ensembl", dataset = "mmusculus_gene_ensembl"))
+    }, when = "Error", silent = TRUE)
+    row.names(MouseHomologyTable) <- NULL
+    MouseGOList <- CompileGOList(MouseTable)
+    KillifishGOList <- TranslateGOList.Nfurzeri(MouseHomologyTable, MouseGOList, KillifishGOList)
+  }
+  
   if (CombineNematodeHomology) {
     retry({
       NematodeTable <-
@@ -100,6 +123,27 @@ BioMartGOFilter.GOList.Nfurzeri <- function(GO.CSV,
     row.names(XenopusHomologyTable) <- NULL
     XenopusGOList <- CompileGOList(XenopusTable)
     KillifishGOList <- TranslateGOList.Nfurzeri(XenopusHomologyTable, XenopusGOList, KillifishGOList)
+  }
+  
+  if (CombineYeastHomology) {
+    retry({
+      YeastTable <-
+      getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
+            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
+            mart = useEnsembl(biomart = "ensembl", dataset = "scerevisiae_gene_ensembl"))
+    }, when = "Error", silent = TRUE)
+    row.names(YeastTable) <- NULL
+    retry({
+      YeastHomologyTable <-
+      getBM(attributes = c("ensembl_gene_id", "external_gene_name",
+                           "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
+                           "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
+            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
+            mart = useEnsembl(biomart = "ensembl", dataset = "scerevisiae_gene_ensembl"))
+    }, when = "Error", silent = TRUE)
+    row.names(YeastHomologyTable) <- NULL
+    YeastGOList <- CompileGOList(YeastTable)
+    KillifishGOList <- TranslateGOList.Nfurzeri(YeastHomologyTable, YeastGOList, KillifishGOList)
   }
   
   if (CombineZebrafishHomology) {
