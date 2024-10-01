@@ -5,7 +5,7 @@
 Appends a column of NCBI gene descriptions to an Excel sheet with a column (named ```ExcelDataFileEnsemblIDColumnName```) containing Ensembl IDs. Depends on ```EnsemblID2Entrez```.
 
 ## BioMartGOFilter.GOList.Nfurzeri
-```BioMartGOFilter.GOList.Nfurzeri(GO.CSV, CombineFruitFlyHomology = TRUE, CombineHumanHomology = TRUE, CombineNematodeHomology = TRUE, CombineXenopusHomology = TRUE, CombineZebrafishHomology = TRUE)```
+```BioMartGOFilter.GOList.Nfurzeri(GO.CSV, CombineFruitFlyHomology = TRUE, CombineHumanHomology = TRUE, CombineMouseHomology = TRUE, CombineNematodeHomology = TRUE, CombineXenopusHomology = TRUE, CombineYeastHomology = TRUE, CombineZebrafishHomology = TRUE)```
 
 Use the [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.html) package to get all *Nothobranchius furzeri* genes with GO term annotations in ```GO.CSV``` [including all child terms (```is_a```, ```regulates```, etc.)]. ```CombineFruitFlyHomology```/```CombineHumanHomology```/```CombineMouseHomology```/```CombineNematodeHomology```/```CombineXenopusHomology```/```CombineYeastHomology```/```CombineZebrafishHomology``` allows complementation using the gene homology [to fruit fly (*Drosophila melanogaster*)/human/mouse (*Mus musculus*)/nematode (*Caenorhabditis elegans*)/frog (*Xenopus tropicalis*)/yeast (*Saccharomyces cerevisiae*)/zebrafish (*Danio rerio*)] information.
 
