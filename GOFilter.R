@@ -4,9 +4,9 @@ GOFilter <- function(ExcelDataFilePath, GOVector, godir = "~/Desktop/RLibrary/go
   # Filtering
   Data <- read_excel(ExcelDataFilePath)
   ChildNodeIDs <- get_unique_child_nodes_batch(GOVector, godir = godir)
-  isRetained = logical(length = nrow(Data)) # initialize an array of FALSEs
+  isRetained = logical(nrow(Data)) # initialize a vector of FALSEs
   for (i in 1 : nrow(Data)) {
-    if (length(intersect(convert_string_to_go_array(Data[i, GOTermColumnName]), ChildNodeIDs)) != 0) {
+    if (length(intersect(convert_string_to_go_vector(Data[i, GOTermColumnName]), ChildNodeIDs)) != 0) {
       isRetained[i] <- TRUE
     }
   }
@@ -32,12 +32,12 @@ GOFilter <- function(ExcelDataFilePath, GOVector, godir = "~/Desktop/RLibrary/go
   return(FilteredData)
 }
 
-convert_string_to_go_array <- function(string, pattern = "; ") {
+convert_string_to_go_vector <- function(string, pattern = "; ") {
   suppressPackageStartupMessages(library("stringr"))
   
-  Array <- unlist(str_split(string, pattern))
+  Vector <- unlist(str_split(string, pattern))
   # Remove empty elements
-  return(Array[nzchar(Array)])
+  return(Vector[nzchar(Vector)])
 }
 
 # To generate the latest godir, See: https://bioconductor.org/packages/release/bioc/vignettes/GOfuncR/inst/doc/GOfuncR.html#conversion-from-.obo-format
