@@ -1,11 +1,11 @@
-BioMartGOFilter.GOList.Nfurzeri <- function(GO.CSV,
-                                            CombineFruitFlyHomology = TRUE,
-                                            CombineHumanHomology = TRUE,
-                                            CombineMouseHomology = TRUE,
-                                            CombineNematodeHomology = TRUE,
-                                            CombineXenopusHomology = TRUE,
-                                            CombineYeastHomology = TRUE,
-                                            CombineZebrafishHomology = TRUE) {
+BioMartGOFilter.Nfurzeri <- function(GO.CSV,
+                                     CombineFruitFlyHomology = TRUE,
+                                     CombineHumanHomology = TRUE,
+                                     CombineMouseHomology = TRUE,
+                                     CombineNematodeHomology = TRUE,
+                                     CombineXenopusHomology = TRUE,
+                                     CombineYeastHomology = TRUE,
+                                     CombineZebrafishHomology = TRUE) {
   
   suppressPackageStartupMessages(library("biomaRt"))
   suppressPackageStartupMessages(library("retry"))
