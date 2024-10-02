@@ -9,6 +9,8 @@ Appends a column of NCBI gene descriptions to an Excel sheet with a column (name
 
 Use the [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.html) package to get all *Nothobranchius furzeri* genes with GO term annotations in ```GO.CSV``` [including all child terms (```is_a```, ```regulates```, etc.)]. ```CombineFruitFlyHomology```/```CombineHumanHomology```/```CombineMouseHomology```/```CombineNematodeHomology```/```CombineXenopusHomology```/```CombineYeastHomology```/```CombineZebrafishHomology``` allows complementation using the gene homology [to fruit fly (*Drosophila melanogaster*)/human/mouse (*Mus musculus*)/nematode (*Caenorhabditis elegans*)/frog (*Xenopus tropicalis*)/yeast (*Saccharomyces cerevisiae*)/zebrafish (*Danio rerio*)] information.
 
+The output is a list in which the name of each element is the Ensembl ID of a *N. furzeri* gene and the content of each element is the GO term annotations of that gene (supplemented with homology information). 
+
 ## EnsemblID2Entrez
 ```EnsemblID2Entrez(EnsemblID, Output = "Accession")```
 
