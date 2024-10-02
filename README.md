@@ -37,7 +37,7 @@ Identifies genes of the ```TargetSpecies``` (returns an array of their Ensembl I
 
 Filters a Flaski RNAseq pipeline output Excel sheet (```ExcelDataFilePath```) based on the desired GO terms in ```GOVector``` [including all child terms (```is_a```, ```regulates```, etc.) defined by ```godir```].
 
-Note: Ensembl BioMart provides a built-in functionality to filter genes by GO term annotations (see the figure below; all child terms will also be included). This approach is better because a fresh download from Ensembl BioMart will reflect the most up-to-date GO term annotations. See ```BioMartGOFilter.GOList.Nfurzeri``` and ```EnsemblIDFilter```.
+Note: Ensembl BioMart provides a built-in functionality to filter genes by GO term annotations (see the figure below; all child terms will also be included), which is better because a fresh download from Ensembl BioMart will reflect the most up-to-date GO term annotations. See ```BioMartGOFilter.GOList.Nfurzeri``` and ```EnsemblIDFilter```.
 
 <p align="center">
 <img src="assets/EnsemblBioMartGOFilter.png" width="700">
