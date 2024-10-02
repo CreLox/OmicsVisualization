@@ -33,9 +33,9 @@ Filters a [Flaski RNAseq pipeline](https://flaski.age.mpg.de/rnaseq/) output Exc
 Identifies genes of the ```TargetSpecies``` (returns an array of their Ensembl IDs) without a homolog in ```CheckHomologySpecies```.
 
 ## GOFilter
-```GOFilter(ExcelDataFilePath, GOList, godir, GOTermColumnName = "GO_id", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```
+```GOFilter(ExcelDataFilePath, GOVector, godir, GOTermColumnName = "GO_id", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```
 
-Filters a Flaski RNAseq pipeline output Excel sheet (```ExcelDataFilePath```) based on the desired GO terms in ```GOList``` [including all child terms (```is_a```, ```regulates```, etc.) defined by ```godir```].
+Filters a Flaski RNAseq pipeline output Excel sheet (```ExcelDataFilePath```) based on the desired GO terms in ```GOVector``` [including all child terms (```is_a```, ```regulates```, etc.) defined by ```godir```].
 
 Note: Ensembl BioMart provides a built-in functionality to filter genes by GO term annotations (see the figure below; all child terms will also be included). This approach is better because a fresh download from Ensembl BioMart will reflect the most up-to-date GO term annotations. See ```BioMartGOFilter.Nfurzeri``` and ```EnsemblIDFilter```.
 
