@@ -14,7 +14,7 @@ The output is a list in which the name of each element is the Ensembl ID of a *N
 ## EnsemblID2Entrez
 ```EnsemblID2Entrez(EnsemblID, Output = "Accession")```
 
-Converts a single Ensembl ID to its corresponding NCBI Entrez accession(s)/ID(s)/description(s) (```Output = c("Accession", "ID", "Description")```) using the [rentrez](https://docs.ropensci.org/rentrez/) package. If the mapping exists, the output will be a string array; otherwise, the output will be ```""```. This works better than using ```biomaRt``` because the mapping is more complete. And unlike using ```org.*.eg.db```, this works for all species.
+Converts a single Ensembl ID to its corresponding NCBI Entrez accession(s)/ID(s)/description(s) (```Output = c("Accession", "ID", "Description")```) using the [rentrez](https://docs.ropensci.org/rentrez/) package. If the mapping exists, the output will be a string; otherwise, the output will be ```""```. This works better than using ```biomaRt``` because the mapping is more complete. And unlike using ```org.*.eg.db```, this works for all species.
 
 Note: the default genome assembly of *Nothobranchius furzeri* on Ensembl is still ```Nfu_20140520``` while NCBI opts for ```UI_Nfuz_MZM_1.0``` as the default. This may cause differences in annotations.
 
@@ -30,7 +30,7 @@ Filters a [Flaski RNAseq pipeline](https://flaski.age.mpg.de/rnaseq/) output Exc
 ## FindUniqueGenes.EnsemblID
 ```FindUniqueGenes.EnsemblID(TargetSpecies, CheckHomologySpecies = c("drerio", "kmarmoratus", "olatipes", "ssalar"))```
 
-Identifies genes of the ```TargetSpecies``` (returns an array of their Ensembl IDs) without a homolog in ```CheckHomologySpecies```.
+Identifies genes of the ```TargetSpecies``` (returns a vector of their Ensembl IDs) without a homolog in ```CheckHomologySpecies```.
 
 ## GOFilter
 ```GOFilter(ExcelDataFilePath, GOVector, godir, GOTermColumnName = "GO_id", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```
