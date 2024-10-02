@@ -4,14 +4,14 @@ SRX2SRR <- function(SRXSheetFilePath, SRXColumnName = "SRX") {
   library("pracma")
   
   SRXSheetContent <- read_excel(SRXSheetFilePath)
-  SRXList <- SRXSheetContent[[SRXColumnName]]
+  SRXVector <- SRXSheetContent[[SRXColumnName]]
   fprintf("   Run#   \tFormat\n-----------\t------\n")
-  for (i in 1 : length(SRXList)) {
-    if (is.na(SRXList[i])) {
+  for (i in 1 : length(SRXVector)) {
+    if (is.na(SRXVector[i])) {
     	  fprintf("\n")
     	}
     	else {
-      url <- paste('https://www.ncbi.nlm.nih.gov/sra/', SRXList[i], sep = "")
+      url <- paste('https://www.ncbi.nlm.nih.gov/sra/', SRXVector[i], sep = "")
       SRXPage <- read_html(url)
       
       RemoveAfterRunNumber <- sub("</a></td>\n<td align=\"right\">.*", "", SRXPage)
