@@ -156,10 +156,10 @@ BioMartGOFilter.GOList.Nfurzeri <- function(GO.CSV,
             mart = useEnsembl(biomart = "ensembl", dataset = "drerio_gene_ensembl"))
     }, when = "Error", silent = TRUE)
     # with_nfurzeri_homolog is currently not a valid filter for dataset = "drerio_gene_ensembl"
-    isRetained = logical(length = nrow(ZebrafishHomologyTable)) # initialize an array of FALSEs
+    isRetained <- logical(nrow(ZebrafishHomologyTable)) # initialize a vector of FALSEs
     for (i in 1 : nrow(ZebrafishHomologyTable)) {
       if (ZebrafishHomologyTable[i, "nfurzeri_homolog_ensembl_gene"] != "") {
-        isRetained[i] = TRUE
+        isRetained[i] <- TRUE
       }
     }
     ZebrafishHomologyTable <- ZebrafishHomologyTable[isRetained,]
