@@ -16,7 +16,7 @@ The output is a list in which the name of each element is the Ensembl ID of a *N
 
 Converts a single Ensembl ID to its corresponding NCBI Entrez accession(s)/ID(s)/description(s) (```Output = c("Accession", "ID", "Description")```) using the [rentrez](https://docs.ropensci.org/rentrez/) package. If the mapping exists, the output will be a string; otherwise, the output will be ```""```. This works better than using ```biomaRt``` because the mapping is more complete. And unlike using ```org.*.eg.db```, this works for all species.
 
-Note: the default genome assembly of *Nothobranchius furzeri* on Ensembl is still ```Nfu_20140520``` while NCBI opts for ```UI_Nfuz_MZM_1.0``` as the default. This may cause differences in annotations.
+Note: the default genome assembly of *Nothobranchius furzeri* on Ensembl is still ```Nfu_20140520``` while NCBI opts for ```UI_Nfuz_MZM_1.0``` as the default. This may cause differences in annotations. The ```Nfu_20140520``` assembly has a slightly higher BUSCO score.
 
 ## EnsemblIDFilter
 ```EnsemblIDFilter(ExcelDataFilePath, BioMartExportFilePaths = NA, PassedEnsemblIDVector = NA, ExcelDataFileEnsemblIDColumnName = "ensembl_gene_id", BioMartExportEnsemblIDColumnName, ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```
