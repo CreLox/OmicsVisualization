@@ -56,7 +56,7 @@ Plots a beeswarm plot of sample reads for gene(s) whose name(s) match the ```Gen
 ## SRX2SRR
 ```SRX2SRR(SRXSheetFilePath, SRXColumnName = "SRX")```
 
-Batch converts a column (from an Excel sheet ```SRXSheetFilePath```) of experiment numbers into corresponding run numbers (printed directly onto the console alongside the sequencing format employed).
+Converts a column (from an Excel sheet ```SRXSheetFilePath```) of experiment numbers into corresponding run numbers (printed directly onto the console alongside the sequencing format employed). Note that this critical sequencing format info is not available in ```SRA_Accessioins.tab``` (which allows batch searching using the corresponding SRP/PRJNA accession number directly) or ```SRA_Run_Members.tab``` (which allows batch searching using the corresponding SRP accession number) on [the FTP site](https://ftp.ncbi.nlm.nih.gov/sra/reports/Metadata/).
 
 Recommended: an alternative way is to use [the SRA Run Selector tool](https://www.ncbi.nlm.nih.gov/Traces/study/) provided by NCBI. We can get an overview of all the project's associated datasets by searching for the corresponding SRP/PRJNA/GSE accession number (see the figure attached below as an example for an overview of all datasets in [Hussein et al., *Developmental Cell*, 2020](https://www.sciencedirect.com/science/article/pii/S1534580719310676)).
 
