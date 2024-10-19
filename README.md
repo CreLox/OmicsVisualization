@@ -28,7 +28,7 @@ Filters a [Flaski RNAseq pipeline](https://flaski.age.mpg.de/rnaseq/) output Exc
 - compiled from exported [Ensembl BioMart](https://www.ensembl.org/biomart/martview) TSV files whose paths are specified in ```BioMartExportFilePaths```, if ```BioMartExportFilePaths``` is not ```NA``` (note: this overrides the input variable ```PassedEnsemblIDVector```).
 
 ## FindUniqueGenes.EnsemblID
-```FindUniqueGenes.EnsemblID(TargetSpecies, CheckHomologySpecies = c("drerio", "kmarmoratus", "olatipes", "ssalar"))```
+```FindUniqueGenes.EnsemblID(TargetSpecies, CheckHomologySpecies = c("drerio", "kmarmoratus"))```
 
 Identifies genes of the ```TargetSpecies``` (returns a vector of their Ensembl IDs) without a homolog in ```CheckHomologySpecies```.
 
