@@ -3,8 +3,6 @@ BioMartGOFilter.Nfurzeri <- function(GO.CSV,
                                      CombineHumanHomology = TRUE,
                                      CombineMouseHomology = TRUE,
                                      CombineNematodeHomology = TRUE,
-                                     CombineXenopusHomology = TRUE,
-                                     CombineYeastHomology = TRUE,
                                      CombineZebrafishHomology = TRUE) {
   
   suppressPackageStartupMessages(library("biomaRt"))
@@ -104,73 +102,23 @@ BioMartGOFilter.Nfurzeri <- function(GO.CSV,
     KillifishGOList <- TranslateGOList.Nfurzeri(NematodeHomologyTable, NematodeGOList, KillifishGOList)
   }
   
-  if (CombineXenopusHomology) {
-    retry({
-      XenopusTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "xtropicalis_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(XenopusTable) <- NULL
-    retry({
-      XenopusHomologyTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name",
-                           "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
-                           "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "xtropicalis_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(XenopusHomologyTable) <- NULL
-    XenopusGOList <- CompileGOList(XenopusTable)
-    KillifishGOList <- TranslateGOList.Nfurzeri(XenopusHomologyTable, XenopusGOList, KillifishGOList)
-  }
-  
-  if (CombineYeastHomology) {
-    retry({
-      YeastTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "scerevisiae_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(YeastTable) <- NULL
-    retry({
-      YeastHomologyTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name",
-                           "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
-                           "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "scerevisiae_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(YeastHomologyTable) <- NULL
-    YeastGOList <- CompileGOList(YeastTable)
-    KillifishGOList <- TranslateGOList.Nfurzeri(YeastHomologyTable, YeastGOList, KillifishGOList)
-  }
-  
   if (CombineZebrafishHomology) {
+    retry({
+      ZebrafishTable <-
+      getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
+            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
+            mart = useEnsembl(biomart = "ensembl", dataset = "drerio_gene_ensembl"))
+    }, when = "Error", silent = TRUE)
+    row.names(ZebrafishTable) <- NULL
     retry({
       ZebrafishHomologyTable <-
       getBM(attributes = c("ensembl_gene_id", "external_gene_name",
                            "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
                            "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
-            filters = "go_parent_term", values = GO.CSV,
+            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
             mart = useEnsembl(biomart = "ensembl", dataset = "drerio_gene_ensembl"))
     }, when = "Error", silent = TRUE)
-    # with_nfurzeri_homolog is currently not a valid filter for dataset = "drerio_gene_ensembl"
-    isRetained <- logical(nrow(ZebrafishHomologyTable)) # initialize a vector of FALSEs
-    for (i in 1 : nrow(ZebrafishHomologyTable)) {
-      if (ZebrafishHomologyTable[i, "nfurzeri_homolog_ensembl_gene"] != "") {
-        isRetained[i] <- TRUE
-      }
-    }
-    ZebrafishHomologyTable <- ZebrafishHomologyTable[isRetained,]
-    FilteredZebrafishEnsemblIDs <- paste(ZebrafishHomologyTable[, "ensembl_gene_id"], collapse = ",")
-    retry({
-      ZebrafishTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
-            filters = "ensembl_gene_id", values = FilteredZebrafishEnsemblIDs,
-            mart = useEnsembl(biomart = "ensembl", dataset = "drerio_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(ZebrafishTable) <- NULL
+    row.names(ZebrafishHomologyTable) <- NULL
     ZebrafishGOList <- CompileGOList(ZebrafishTable)
     KillifishGOList <- TranslateGOList.Nfurzeri(ZebrafishHomologyTable, ZebrafishGOList, KillifishGOList)
   }
