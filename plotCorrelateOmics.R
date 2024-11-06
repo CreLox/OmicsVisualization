@@ -1,6 +1,6 @@
 plotCorrelateOmics <- function(DataMatrix,
                                Alpha = 0.1,
-                               HighlightGeneNameRegex = regex("zgc:92275", ignore_case = TRUE),
+                               HighlightGeneNameRegex = "^rps[1-5]|rps6$|^rps[7-9]|^rpl|^RPS[^6]|^RPL",
                                HighlightAlpha = 1,
                                HighlightColor = "#C40233",
                                HighlightSize = 2.5) {
