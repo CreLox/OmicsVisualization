@@ -1,8 +1,13 @@
 plotCorrelateOmics <- function(DataMatrix,
                                PointSize = 1.5,
                                Alpha = 0.1,
-                               UsePlotly = TRUE) {
+                               UsePlotly = TRUE,
+                               HighlightGeneNameRegex = regex("zgc:92275", ignore_case = TRUE),
+                               HighlightColor = "#C40233",
+                               HighlightSize = 2) {
   
+  suppressPackageStartupMessages(library("stringr"))
+  suppressPackageStartupMessages(library("tidyr"))
   suppressPackageStartupMessages(library(plotly))
   # suppressPackageStartupMessages(library(ggrepel))
 
@@ -16,6 +21,9 @@ plotCorrelateOmics <- function(DataMatrix,
           theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major = element_blank()) +
           coord_fixed(expand = FALSE, clip = "off") # +
           # geom_text_repel(aes(label = GeneName))
+          
+  # Hightlight certain genes
+  Plot <- Plot + geom_point(data = DataMatrix[str_detect(replace_na(unlist(DataMatrix[, "GeneName"], use.names = FALSE), ""), HighlightGeneNameRegex),], color = HighlightColor, stroke = 0, size = HighlightSize)  
   
   if (UsePlotly) {
     ggplotly(Plot)
