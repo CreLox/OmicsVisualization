@@ -1,18 +1,17 @@
 plotCorrelateOmics <- function(DataMatrix,
-                               PointSize = 1.5,
                                Alpha = 0.1,
-                               UsePlotly = TRUE,
                                HighlightGeneNameRegex = regex("zgc:92275", ignore_case = TRUE),
+                               HighlightAlpha = 1,
                                HighlightColor = "#C40233",
-                               HighlightSize = 2) {
+                               HighlightSize = 2.5) {
   
   suppressPackageStartupMessages(library("stringr"))
   suppressPackageStartupMessages(library("tidyr"))
-  suppressPackageStartupMessages(library(plotly))
+  suppressPackageStartupMessages(library("ggplot2"))
   # suppressPackageStartupMessages(library(ggrepel))
 
   Plot <- ggplot(data = DataMatrix, aes(x = logTranscriptomicsBaseMean, y = logProteomicsBaseMean, GeneName = GeneName)) +
-          geom_point(size = PointSize, alpha = Alpha, stroke = 0) +
+          geom_point(alpha = Alpha, stroke = 0) +
           xlim(c(0, NA)) +
           ylim(c(0, NA)) +
           xlab("ln([mRNA] + 1)") +
@@ -23,12 +22,7 @@ plotCorrelateOmics <- function(DataMatrix,
           # geom_text_repel(aes(label = GeneName))
           
   # Hightlight certain genes
-  Plot <- Plot + geom_point(data = DataMatrix[str_detect(replace_na(unlist(DataMatrix[, "GeneName"], use.names = FALSE), ""), HighlightGeneNameRegex),], color = HighlightColor, stroke = 0, size = HighlightSize)  
+  Plot <- Plot + geom_point(data = DataMatrix[str_detect(replace_na(unlist(DataMatrix[, "GeneName"], use.names = FALSE), ""), HighlightGeneNameRegex),], color = HighlightColor, stroke = 0, alpha = HighlightAlpha, size = HighlightSize)  
   
-  if (UsePlotly) {
-    ggplotly(Plot)
-  }
-  else {
-    print(Plot)
-  }
+  return(Plot)
 }
