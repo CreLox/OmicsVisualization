@@ -1,4 +1,4 @@
-volcano.ma <- function(Data, PlotType = "ma", HighlightEnsemblIDs = NA, EnsemblIDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit = 0, log2baseMeanUpperLimit = NA, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel = bquote(log[2](Escape/Diapause)), log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5) {
+volcano.ma <- function(Data, PlotType = "ma", HighlightEnsemblIDs = NA, GeneNameColumnName = "gene_name", EnsemblIDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit = 0, log2baseMeanUpperLimit = NA, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel = bquote(log[2](Escape/Diapause)), log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5) {
   suppressPackageStartupMessages(library("ggplot2"))
   
   # Categorize each gene based on its log2FoldChange and AdjustedPValue and assemble the data frame
@@ -21,6 +21,7 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightEnsemblIDs = NA, EnsemblI
   colnames(log2baseMean) <- "log2baseMean"
   Data <- cbind(as.data.frame(Data), Category, negativelog10AdjustedPValue, log2baseMean)
   names(Data)[names(Data) == log2FoldChangeColumnName] <- "log2FoldChange"
+  names(Data)[names(Data) == GeneNameColumnName] <- "gene_name"
   
   # Preprocessing
   Data <- Data[!is.na(Data[, AdjustedPValueColumnName]),]
@@ -58,7 +59,7 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightEnsemblIDs = NA, EnsemblI
   
   # Volcano plot
   if (PlotType == "volcano") {
-    Plot <- ggplot(data = Data, aes(x = log2FoldChange, y = negativelog10AdjustedPValue)) +
+    Plot <- ggplot(data = Data, aes(x = log2FoldChange, y = negativelog10AdjustedPValue, GeneName = gene_name)) +
             geom_point(aes(color = Category, alpha = Category), stroke = 0) +
             scale_color_manual(values = c("up" = UpColor, "down" = DownColor, "ns" = "black")) + 
             scale_alpha_manual(values = c("up" = Alpha, "down" = Alpha, "ns" = NSAlpha)) +
@@ -75,7 +76,7 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightEnsemblIDs = NA, EnsemblI
   
   # MA plot
   if (PlotType == "ma") {
-    Plot <- ggplot(data = Data, aes(x = log2baseMean, y = log2FoldChange)) +
+    Plot <- ggplot(data = Data, aes(x = log2baseMean, y = log2FoldChange, GeneName = gene_name)) +
             geom_point(aes(color = Category, alpha = Category), stroke = 0) +
             scale_color_manual(values = c("up" = UpColor, "down" = DownColor, "ns" = "black")) + 
             scale_alpha_manual(values = c("up" = Alpha, "down" = Alpha, "ns" = NSAlpha)) +
