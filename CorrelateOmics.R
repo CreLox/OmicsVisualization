@@ -43,8 +43,11 @@ CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
       }
     }
   }
-  
   DataMatrix <- DataMatrix[((!is.na(DataMatrix[, "logProteomicsMean"])) & (!is.na(DataMatrix[, "logTranscriptomicsMean"]))),]
+  Counts <- as.data.frame(table(rownames(DataMatrix)))
+  ToBeRemovedEnsemblIDs <- as.character(Counts[Counts$Freq > 1, 1])
+  DataMatrix <- DataMatrix[!(rownames(DataMatrix) %in% ToBeRemovedEnsemblIDs),]
+  
   return(DataMatrix)
 }
 
