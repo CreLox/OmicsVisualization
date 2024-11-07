@@ -8,7 +8,7 @@ plotCorrelateOmics <- function(DataFrame,
   suppressPackageStartupMessages(library("stringr"))
   suppressPackageStartupMessages(library("tidyr"))
   suppressPackageStartupMessages(library("ggplot2"))
-  # suppressPackageStartupMessages(library(ggrepel))
+  # suppressPackageStartupMessages(library("ggrepel"))
 
   Plot <- ggplot(data = DataFrame, aes(x = logTranscriptomicsMean, y = logProteomicsMean, GeneName = GeneName)) +
           geom_point(alpha = Alpha, stroke = 0) +
