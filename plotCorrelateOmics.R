@@ -10,7 +10,7 @@ plotCorrelateOmics <- function(DataMatrix,
   suppressPackageStartupMessages(library("ggplot2"))
   # suppressPackageStartupMessages(library(ggrepel))
 
-  Plot <- ggplot(data = DataMatrix, aes(x = logTranscriptomicsBaseMean, y = logProteomicsBaseMean, GeneName = GeneName)) +
+  Plot <- ggplot(data = DataMatrix, aes(x = logTranscriptomicsMean, y = logProteomicsMean, GeneName = GeneName)) +
           geom_point(alpha = Alpha, stroke = 0) +
           xlim(c(0, NA)) +
           ylim(c(0, NA)) +
@@ -22,7 +22,11 @@ plotCorrelateOmics <- function(DataMatrix,
           # geom_text_repel(aes(label = GeneName))
           
   # Hightlight certain genes
-  Plot <- Plot + geom_point(data = DataMatrix[str_detect(replace_na(unlist(DataMatrix[, "GeneName"], use.names = FALSE), ""), HighlightGeneNameRegex),], color = HighlightColor, stroke = 0, alpha = HighlightAlpha, size = HighlightSize)  
+  if (!is.na(HighlightGeneNameRegex) & !is.null(HighlightGeneNameRegex) & (HighlightGeneNameRegex != "")) {
+    Plot <- Plot + geom_point(data = DataMatrix[str_detect(replace_na(unlist(DataMatrix[, "GeneName"], use.names = FALSE), ""), HighlightGeneNameRegex),],
+                              color = HighlightColor, stroke = 0, alpha = HighlightAlpha, size = HighlightSize)
+  }
   
+  # cor.test(DataMatrix$logProteomicsMean, DataMatrix$logTranscriptomicsMean, method = c("pearson", "kendall", "spearman"))
   return(Plot)
 }
