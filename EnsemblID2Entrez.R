@@ -26,5 +26,12 @@ EnsemblID2Entrez <- function(EnsemblID,
       }
       return(paste(unique(Result), collapse = "; "))
     }
+    if (Output == "name") {
+      Result <- c()
+      for (ID in EntrezSearchResult$ids) {
+        Result <- c(Result, entrez_summary(db = "gene", id = ID)$name)
+      }
+      return(paste(unique(Result), collapse = "; "))
+    }
   }
 }
