@@ -23,7 +23,7 @@ The output is a list in which the name of each element is the Ensembl ID of a *N
 
 Converts a single Ensembl ID to its corresponding NCBI Entrez accession(s)/ID(s)/description(s)/name(s) using the [rentrez](https://docs.ropensci.org/rentrez/) package. If the mapping exists, the output will be a string; otherwise, the output will be ```""```. This works better than using ```biomaRt``` because the mapping is more complete. And unlike using ```org.*.eg.db```, this works for all species.
 
-Note: the default genome assembly of *Nothobranchius furzeri* on Ensembl is still ```Nfu_20140520``` while NCBI opts for the new ```UI_Nfuz_MZM_1.0``` as the default (the ```UI_Nfuz_MZM_1.0``` assembly has less unknown base pairs and more annotated genes owing to the long-read sequencing method, but the ```Nfu_20140520``` assembly has a slightly higher BUSCO score). This may cause differences in annotations.
+Note: the default genome assembly of *Nothobranchius furzeri* on Ensembl is still ```Nfu_20140520``` while the NCBI opts for the new ```UI_Nfuz_MZM_1.0``` as the default (the ```UI_Nfuz_MZM_1.0``` assembly has less unknown base pairs and more annotated genes owing to the long-read sequencing method, but the ```Nfu_20140520``` assembly has a slightly higher BUSCO score). This may cause differences in annotations.
 
 ## EnsemblIDFilter
 ```EnsemblIDFilter(ExcelDataFilePath, BioMartExportFilePaths = NA, PassedEnsemblIDVector = NA, ExcelDataFileEnsemblIDColumnName = "ensembl_gene_id", BioMartExportEnsemblIDColumnName, ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```
@@ -65,7 +65,7 @@ Plots a beeswarm plot of sample reads for gene(s) whose name(s) match the ```Gen
 
 Converts a column (from an Excel sheet ```SRXSheetFilePath```) of experiment numbers into corresponding run numbers (printed directly onto the console alongside the sequencing format employed). Note that this critical sequencing format info is not available in ```SRA_Accessions.tab``` (which allows batch searching using the corresponding SRP/PRJNA accession number directly) or ```SRA_Run_Members.tab``` (which allows batch searching using the corresponding SRP accession number) on [the FTP site](https://ftp.ncbi.nlm.nih.gov/sra/reports/Metadata/).
 
-**Recommended alternative:** [the SRA Run Selector tool](https://www.ncbi.nlm.nih.gov/Traces/study/) provided by NCBI (→ [tutorial](https://github.com/NCBI-Hackathons/ncbi-cloud-tutorials/blob/master/SRA%20tutorials/tutorial_SRA_run_selector.md)). We can get an overview of all the project's associated datasets by searching for the corresponding SRP/PRJNA/GSE accession number (see the figure attached below as an example for an overview of all datasets in [Hussein et al., *Developmental Cell*, 2020](https://www.sciencedirect.com/science/article/pii/S1534580719310676)).
+**Recommended alternative:** [the SRA Run Selector tool](https://www.ncbi.nlm.nih.gov/Traces/study/) provided by the NCBI (→ [tutorial](https://github.com/NCBI-Hackathons/ncbi-cloud-tutorials/blob/master/SRA%20tutorials/tutorial_SRA_run_selector.md)). We can get an overview of all the project's associated datasets by searching for the corresponding SRP/PRJNA/GSE accession number (see the figure attached below as an example for an overview of all datasets in [Hussein et al., *Developmental Cell*, 2020](https://www.sciencedirect.com/science/article/pii/S1534580719310676)).
 
 <p align="center">
 <img src="assets/SRARunSelector_Example.png" width="700">
