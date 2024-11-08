@@ -22,14 +22,18 @@ EnsemblID2Entrez <- function(EnsemblID,
     if (Output == "Description") {
       Result <- c()
       for (ID in EntrezSearchResult$ids) {
-        Result <- c(Result, entrez_summary(db = "gene", id = ID)$description)
+      	retry({
+          Result <- c(Result, entrez_summary(db = "gene", id = ID)$description)
+        }, when = "Error", silent = TRUE)
       }
       return(paste(unique(Result), collapse = "; "))
     }
     if (Output == "Name") {
       Result <- c()
       for (ID in EntrezSearchResult$ids) {
-        Result <- c(Result, entrez_summary(db = "gene", id = ID)$name)
+      	retry({
+          Result <- c(Result, entrez_summary(db = "gene", id = ID)$name)
+        }, when = "Error", silent = TRUE)
       }
       return(paste(unique(Result), collapse = "; "))
     }
