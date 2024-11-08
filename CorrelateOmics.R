@@ -4,7 +4,8 @@ CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
                            ProteomicsColumnsToCalculateMean = 2 : 5,
                            TranscriptomicsDataFilePath = "Reichwald2015Rerun_group_non_diap_vs_diap.results.xlsx",
                            TranscriptomicsColumnsToCalculateMean = 3 : 7,
-                           dataset = "nfurzeri_gene_ensembl") {
+                           dataset = "nfurzeri_gene_ensembl",
+                           RefreshGeneName = TRUE) {
   
   suppressPackageStartupMessages(library("readxl"))
   suppressPackageStartupMessages(library("retry"))
@@ -47,6 +48,13 @@ CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
   Counts <- as.data.frame(table(rownames(DataMatrix)))
   ToBeRemovedEnsemblIDs <- as.character(Counts[Counts$Freq > 1, 1])
   DataMatrix <- DataMatrix[!(rownames(DataMatrix) %in% ToBeRemovedEnsemblIDs),]
+  
+  if (RefreshGeneName) {
+    EnsemblIDs <- rownames(DataMatrix)
+    for (i in 1 : nrow(DataMatrix)) {
+      DataMatrix[i, GeneNameColumnName] <- EnsemblID2Entrez(EnsemblIDs[i], Output = "Name")
+    }
+  }
   
   return(DataMatrix)
 }
