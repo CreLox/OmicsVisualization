@@ -19,9 +19,9 @@ The output is a list in which the name of each element is the Ensembl ID of a *N
 ```CorrelateOmics``` links proteomics data from ```ProteomicsDataFilePath``` and transcriptomics data from ```TranscriptomicsDataFilePath``` of each gene from the species referred by the BioMart ```dataset```. Only proteins/genes with a one-to-one mapping will be included. The result is a data frame with 5 columns: "logTranscriptomicsMean", "logTranscriptomicsStdev", "logProteomicsMean", "logProteomicsStdev", and (NCBI) "GeneName". The row names of the data frame are the Ensembl IDs. ```plotCorrelateOmics``` can then plot the resulting data frame. To highlight certain genes, specify them by their NCBI gene names using the ```HighlightGeneNameRegex```. The returned [ggplot](https://ggplot2.tidyverse.org/reference/ggplot.html) can be viewed interactively by [plotly](https://plotly.com/r/)::```ggplotly```.
 
 ## EnsemblID2Entrez
-```EnsemblID2Entrez(EnsemblID, Output = "Accession")```
+```EnsemblID2Entrez(EnsemblID, Output = c("Accession", "ID", "Description", "Name"))```
 
-Converts a single Ensembl ID to its corresponding NCBI Entrez accession(s)/ID(s)/description(s) (```Output = c("Accession", "ID", "Description")```) using the [rentrez](https://docs.ropensci.org/rentrez/) package. If the mapping exists, the output will be a string; otherwise, the output will be ```""```. This works better than using ```biomaRt``` because the mapping is more complete. And unlike using ```org.*.eg.db```, this works for all species.
+Converts a single Ensembl ID to its corresponding NCBI Entrez accession(s)/ID(s)/description(s)/name(s) using the [rentrez](https://docs.ropensci.org/rentrez/) package. If the mapping exists, the output will be a string; otherwise, the output will be ```""```. This works better than using ```biomaRt``` because the mapping is more complete. And unlike using ```org.*.eg.db```, this works for all species.
 
 Note: the default genome assembly of *Nothobranchius furzeri* on Ensembl is still ```Nfu_20140520``` while NCBI opts for the new ```UI_Nfuz_MZM_1.0``` as the default (the ```UI_Nfuz_MZM_1.0``` assembly has less unknown base pairs and more annotated genes owing to the long-read sequencing method, but the ```Nfu_20140520``` assembly has a slightly higher BUSCO score). This may cause differences in annotations.
 
