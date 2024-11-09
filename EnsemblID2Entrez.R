@@ -22,7 +22,7 @@ EnsemblID2Entrez <- function(EnsemblID,
     if (Output == "Description") {
       Result <- c()
       for (ID in EntrezSearchResult$ids) {
-      	retry({
+        retry({
           Result <- c(Result, entrez_summary(db = "gene", id = ID)$description)
         }, when = "Error", silent = TRUE)
       }
@@ -31,7 +31,7 @@ EnsemblID2Entrez <- function(EnsemblID,
     if (Output == "Name") {
       Result <- c()
       for (ID in EntrezSearchResult$ids) {
-      	retry({
+        retry({
           Result <- c(Result, entrez_summary(db = "gene", id = ID)$name)
         }, when = "Error", silent = TRUE)
       }
