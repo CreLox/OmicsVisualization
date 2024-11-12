@@ -5,12 +5,12 @@ EnsemblID2Entrez <- function(EnsemblID,
   suppressPackageStartupMessages(library("retry"))
   
   retry({
-  	ConsoleOutput <- capture.output({
-  	                   EntrezSearchResult <- entrez_search(db = "gene", term = EnsemblID)
-  	                 });
-  	if (length(ConsoleOutput) != 0) {
-  	  stop("Error")
-  	}
+    ConsoleOutput <- capture.output({
+                       EntrezSearchResult <- entrez_search(db = "gene", term = EnsemblID)
+                     });
+    if (length(ConsoleOutput) != 0) {
+      stop("Error")
+    }
   }, when = ".*", silent = TRUE)
   
   if (is.null(unlist(EntrezSearchResult$ids))) {
@@ -28,11 +28,11 @@ EnsemblID2Entrez <- function(EnsemblID,
       for (ID in EntrezSearchResult$ids) {
         retry({
           ConsoleOutput <- capture.output({
-  	                         GeneSummary <- entrez_summary(db = "gene", id = ID)
-  	                       });
-  	      if (length(ConsoleOutput) != 0) {
-  	        stop("Error")
-  	      }
+                             GeneSummary <- entrez_summary(db = "gene", id = ID)
+                           });
+          if (length(ConsoleOutput) != 0) {
+            stop("Error")
+          }
         }, when = ".*", silent = TRUE)
         Result <- c(Result, GeneSummary$description)
       }
@@ -43,11 +43,11 @@ EnsemblID2Entrez <- function(EnsemblID,
       for (ID in EntrezSearchResult$ids) {
         retry({
           ConsoleOutput <- capture.output({
-  	                         GeneSummary <- entrez_summary(db = "gene", id = ID)
-  	                       });
-  	      if (length(ConsoleOutput) != 0) {
-  	        stop("Error")
-  	      }
+                             GeneSummary <- entrez_summary(db = "gene", id = ID)
+                           });
+          if (length(ConsoleOutput) != 0) {
+            stop("Error")
+          }
         }, when = ".*", silent = TRUE)
         Result <- c(Result, GeneSummary$name)
       }
