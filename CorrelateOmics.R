@@ -2,9 +2,8 @@ CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
                            UniProtIDColumnName = "Protein IDs",
                            GeneNameColumnName = "Gene name",
                            ProteomicsColumnsToCalculateMean = 2 : 5,
-                           TranscriptomicsDataFilePath = "Reichwald2015Rerun_group_non_diap_vs_diap.results.xlsx",
+                           TranscriptomicsDataFilePath = "Hu2020Rerun_group_non_diap_vs_diap.results.xlsx",
                            TranscriptomicsColumnsToCalculateMean = 3 : 7,
-                           dataset = "nfurzeri_gene_ensembl",
                            RefreshGeneNames = TRUE) {
   
   suppressPackageStartupMessages(library("readxl"))
@@ -22,12 +21,14 @@ CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
   for (i in 1 : nrow(ProteomicsData)) {
     All.UniProtKB.Entries <- c(All.UniProtKB.Entries, strsplit(ProteomicsData[i, UniProtIDColumnName], split = ";")[[1]])
   }
-  retry({
-    Table <-
-    getBM(attributes = c("ensembl_gene_id", "uniprotsptrembl"),
-          filters = "uniprotsptrembl", values = paste(All.UniProtKB.Entries, collapse = ","),
-          mart = useEnsembl(biomart = "ensembl", dataset = dataset))
-  }, when = "Error", silent = TRUE)
+  Table <- UniProtKBAC2EnsemblID(paste(All.UniProtKB.Entries, collapse = ","))
+  # dataset <- "nfurzeri_gene_ensembl"
+  # retry({
+  #   Table <-
+  #   getBM(attributes = c("ensembl_gene_id", "uniprotsptrembl"),
+  #         filters = "uniprotsptrembl", values = paste(All.UniProtKB.Entries, collapse = ","),
+  #         mart = useEnsembl(biomart = "ensembl", dataset = dataset))
+  # }, when = "Error", silent = TRUE)
   
   for (i in 1 : nrow(ProteomicsData)) {
     DataMatrix[i, "logProteomicsMean"] <- Alt.ln(mean(2 ^ (as.numeric(ProteomicsData[i, ProteomicsColumnsToCalculateMean]))))
@@ -62,11 +63,4 @@ CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
 
 Alt.ln <- function(x) {
   return(log(x + 1))
-  # OR:
-  # if (x < 1) {
-  #   return(x - 1)
-  # }
-  # else {
-  #   return(log(x))
-  # }
 }
