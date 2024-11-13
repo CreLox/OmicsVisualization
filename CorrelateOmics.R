@@ -1,5 +1,6 @@
 CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
                            UniProtIDColumnName = "Protein IDs",
+                           To = "Ensembl",
                            GeneNameColumnName = "Gene name",
                            ProteomicsColumnsToCalculateMean = 2 : 5,
                            TranscriptomicsDataFilePath = "Hu2020Rerun_group_non_diap_vs_diap.results.xlsx",
@@ -21,14 +22,7 @@ CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
   for (i in 1 : nrow(ProteomicsData)) {
     All.UniProtKB.Entries <- c(All.UniProtKB.Entries, strsplit(ProteomicsData[i, UniProtIDColumnName], split = ";")[[1]])
   }
-  Table <- UniProtKBAC2EnsemblID(paste(All.UniProtKB.Entries, collapse = ","))
-  # dataset <- "nfurzeri_gene_ensembl"
-  # retry({
-  #   Table <-
-  #   getBM(attributes = c("ensembl_gene_id", "uniprotsptrembl"),
-  #         filters = "uniprotsptrembl", values = paste(All.UniProtKB.Entries, collapse = ","),
-  #         mart = useEnsembl(biomart = "ensembl", dataset = dataset))
-  # }, when = "Error", silent = TRUE)
+  Table <- UniProtKBAC2EnsemblID(paste(All.UniProtKB.Entries, collapse = ","), To = To)
   
   for (i in 1 : nrow(ProteomicsData)) {
     DataMatrix[i, "logProteomicsMean"] <- Alt.ln(mean(2 ^ (as.numeric(ProteomicsData[i, ProteomicsColumnsToCalculateMean]))))
@@ -36,7 +30,7 @@ CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
     DataMatrix[i, "GeneName"] <- ProteomicsData[i, GeneNameColumnName]
     UniProtKB.Entries <- strsplit(ProteomicsData[i, UniProtIDColumnName], split = ";")[[1]]
     EnsemblMapping <- Table[(Table[, "uniprotsptrembl"] %in% UniProtKB.Entries), "ensembl_gene_id"]
-    if (length(unique(EnsemblMapping)) == 1) {
+    if ((length(unique(EnsemblMapping)) == 1) && !is.na(unique(EnsemblMapping)) && (unique(EnsemblMapping) != "")) {
       EnsemblID <- unique(EnsemblMapping)
       rownames(DataMatrix)[i] <- EnsemblID
       if (EnsemblID %in% TranscriptomicsData[, "ensembl_gene_id"]) {
