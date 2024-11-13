@@ -1,10 +1,10 @@
 UniProtKBAC2EnsemblID <- function(UniProtKBAC.CSV,
-                                  Wait = 5) {
+                                  Wait = 5, To = "Ensembl") {
   
   suppressPackageStartupMessages(library("httr"))
   
   Response <- POST("https://rest.uniprot.org/idmapping/run",
-                   body = list(ids = UniProtKBAC.CSV, from = "UniProtKB_AC-ID", to = "Ensembl"),
+                   body = list(ids = UniProtKBAC.CSV, from = "UniProtKB_AC-ID", to = To),
                    encode = "form",
                    accept_json())
   # Id Mapping API is not supported for mapping results with "mapped to" IDs more than 500,000

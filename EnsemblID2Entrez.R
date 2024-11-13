@@ -4,6 +4,9 @@ EnsemblID2Entrez <- function(EnsemblID,
   suppressPackageStartupMessages(library("rentrez"))
   suppressPackageStartupMessages(library("retry"))
   
+  if (is.na(EnsemblID) || is.null(EnsemblID) || (EnsemblID == "") || (length(EnsemblID) == 0)) {
+    return("")
+  }
   retry({
     ConsoleOutput <- capture.output({
                        EntrezSearchResult <- entrez_search(db = "gene", term = EnsemblID)
