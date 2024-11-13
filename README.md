@@ -18,6 +18,24 @@ The output is a list in which the name of each element is the Ensembl ID of a *N
 
 ```CorrelateOmics``` links proteomics data from ```ProteomicsDataFilePath``` and transcriptomics data from ```TranscriptomicsDataFilePath``` of each gene. Only proteins/genes with a one-to-one mapping will be included. If ```RefreshGeneNames``` is set as ```FALSE```, the result is a data frame with 5 columns: "logTranscriptomicsMean", "logTranscriptomicsStdev", "logProteomicsMean", "logProteomicsStdev", and "GeneName" (copied directly from the ```GeneNameColumnName``` column in ```ProteomicsDataFilePath```). If ```RefreshGeneNames``` is set as ```TRUE```, ```EnsemblID2Entrez``` (see below) will be deployed to re-download gene names from the NCBI Gene database, appending an additional ```CurrentEntrezGeneName``` column to the output data frame. The row names of the data frame are the corresponding Ensembl IDs. ```CorrelateOmics``` depends on ```UniProtKBAC2EnsemblID```.
 
+In rare cases when there are too many UniProtKB accession IDs in the proteomics data file, the line that executes the ID conversion step
+
+```R
+Table <- UniProtKBAC2EnsemblID(paste(All.UniProtKB.Entries, collapse = ","))
+```
+
+could be modified as follows to split the job into smaller jobs of ```PackageSize``` entries each.
+
+```R
+Table <- c()
+for (i in 1 : ceiling(length(All.UniProtKB.Entries) / PackageSize)) {
+  Package.UniProtKB.Entries <- All.UniProtKB.Entries[((i - 1) * PackageSize + 1) :
+                                                     min(i * PackageSize, length(All.UniProtKB.Entries))]
+  Package.Table <- UniProtKBAC2EnsemblID(paste(Package.UniProtKB.Entries, collapse = ","))
+  Table <- rbind(Table, Package.Table)
+}
+```
+
 ```plotCorrelateOmics``` can plot the output data frame of ```CorrelateOmics```. To highlight certain genes, specify them by their NCBI gene names using the ```HighlightGeneNameRegex```. The returned [ggplot](https://ggplot2.tidyverse.org/reference/ggplot.html) can be viewed interactively by [plotly](https://plotly.com/r/)::```ggplotly```.
 
 ## EnsemblID2Entrez
