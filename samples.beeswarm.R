@@ -1,4 +1,4 @@
-samples.beeswarm <- function(GeneNameRegex, ExcelDataFilePath = "Reichwald2015Rerun_group_non_diap_vs_diap.results.xlsx", GeneNameColumnName = "gene_name", ColumnOffset = 2, Group1RepNum = 5, Group2RepNum = 5, GroupTags = c("Diapause", "Escape"), Colours = c("black", "red"), Standardized = 1, Breaks = 10, PointSize = 0.75, LineWidth = 0.5, AsteriskSignificance = TRUE, PValueColumnName = "pvalue", PValueDigit = 2) {
+samples.beeswarm <- function(GeneNameRegex = regex("zgc:92275", ignore_case = TRUE), ExcelDataFilePath = "Reichwald2015Rerun_group_non_diap_vs_diap.results.xlsx", GeneNameColumnName = "gene_name", ColumnOffset = 2, Group1RepNum = 5, Group2RepNum = 5, GroupTags = c("Diapause", "Escape"), Colours = c("black", "red"), Standardized = 1, Breaks = 10, PointSize = 0.75, LineWidth = 0.5, AsteriskSignificance = TRUE, PValueColumnName = "pvalue", PValueDigit = 2) {
   
   suppressPackageStartupMessages(library("readxl"))
   suppressPackageStartupMessages(library("stringr"))
@@ -8,7 +8,6 @@ samples.beeswarm <- function(GeneNameRegex, ExcelDataFilePath = "Reichwald2015Re
   suppressPackageStartupMessages(library("ggbeeswarm"))
   
   RawData <- read_excel(ExcelDataFilePath)
-  # Example: GeneNameRegex <- regex(GeneNameStr, ignore_case = T)
   MatchedData <- RawData[str_detect(replace_na(unlist(RawData[, GeneNameColumnName], use.names = FALSE), ""), GeneNameRegex),]
   # Love, Huber, and Anders. "Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2." Genome Biology 15 (2014): 550.
   # The adjusted p-values are calculated according to Benjamini and Hochberg (1995) based on the total number of genes with a valid p-value.
