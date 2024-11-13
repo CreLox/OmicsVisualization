@@ -1,5 +1,6 @@
 UniProtKBAC2EnsemblID <- function(UniProtKBAC.CSV,
-                                  Wait = 5, To = "Ensembl") {
+                                  Wait = 5,
+                                  To = "Ensembl") {
   
   suppressPackageStartupMessages(library("httr"))
   
