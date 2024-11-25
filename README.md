@@ -12,7 +12,7 @@ Use the [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.ht
 The output is a list in which the name of each element is the Ensembl ID of a *N. furzeri* gene and the content of each element is the GO term annotations of that gene (supplemented with homology information). 
 
 ## CorrelateOmics
->```CorrelateOmics(ProteomicsDataFilePath = "LFQ_intensities.xlsx", UniProtIDColumnName = "Protein IDs", To = "Ensembl", GeneNameColumnName = "Gene name", ProteomicsColumnsToCalculateMean, TranscriptomicsDataFilePath, TranscriptomicsColumnsToCalculateMean, RefreshGeneNames = TRUE)```
+>```CorrelateOmics(ProteomicsDataFilePath, UniProtIDColumnName = "Protein IDs", To = "Ensembl", GeneNameColumnName = "Gene name", ProteomicsColumnsToCalculateMean, TranscriptomicsDataFilePath, TranscriptomicsColumnsToCalculateMean, RefreshGeneNames = TRUE)```
 
 >```plotCorrelateOmics(DataFrame, Alpha = 0.1, HighlightGeneNameRegex, HighlightAlpha = 1, HighlightColor = "#C40233", HighlightSize = 2.5)```
 
