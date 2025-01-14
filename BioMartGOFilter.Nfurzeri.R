@@ -9,118 +9,68 @@ BioMartGOFilter.Nfurzeri <- function(GO.CSV,
   suppressPackageStartupMessages(library("retry"))
   biomartCacheClear()
   
+  SpeciesDatasetNameList <- c()
+  if (CombineFruitFlyHomology) {
+    SpeciesDatasetNameList <- c(SpeciesDatasetNameList, "dmelanogaster_gene_ensembl")
+  }
+  if (CombineHumanHomology) {
+    SpeciesDatasetNameList <- c(SpeciesDatasetNameList, "hsapiens_gene_ensembl")
+  }
+  if (CombineMouseHomology) {
+    SpeciesDatasetNameList <- c(SpeciesDatasetNameList, "mmusculus_gene_ensembl")
+  }
+  if (CombineNematodeHomology) {
+    SpeciesDatasetNameList <- c(SpeciesDatasetNameList, "celegans_gene_ensembl")
+  }
+  if (CombineZebrafishHomology) {
+    SpeciesDatasetNameList <- c(SpeciesDatasetNameList, "drerio_gene_ensembl")
+  }
+  
   retry({
-    KillifishTable <-
-    getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
-          filters = "go_parent_term", values = GO.CSV,
-          mart = useEnsembl(biomart = "ensembl", dataset = "nfurzeri_gene_ensembl"))
-  }, when = "Error", silent = TRUE)
+          ConsoleOutput <- capture.output({
+                             KillifishTable <-
+                             getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
+                                   filters = "go_parent_term", values = GO.CSV,
+                                   mart = useEnsembl(biomart = "ensembl", dataset = "nfurzeri_gene_ensembl"))
+                           });
+          if (length(ConsoleOutput) != 0) {
+            stop("Error")
+          }
+        }, when = ".*", silent = TRUE)
   row.names(KillifishTable) <- NULL
   KillifishGOList <- CompileGOList(KillifishTable)
   
-  if (CombineFruitFlyHomology) {
+  for (SpeciesDatasetName in SpeciesDatasetNameList) {
     retry({
-      FruitFlyTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "dmelanogaster_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(FruitFlyTable) <- NULL
+            ConsoleOutput <- capture.output({
+                               ThisSpeciesTable <-
+                               getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
+                                     filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
+                                     mart = useEnsembl(biomart = "ensembl", dataset = SpeciesDatasetName))
+                             });
+            if (length(ConsoleOutput) != 0) {
+              stop("Error")
+            }
+          }, when = ".*", silent = TRUE)
+    row.names(ThisSpeciesTable) <- NULL
+    ThisSpeciesGOList <- CompileGOList(ThisSpeciesTable)
+    
     retry({
-      FruitFlyHomologyTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name",
-                           "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
-                           "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "dmelanogaster_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(FruitFlyHomologyTable) <- NULL
-    FruitFlyGOList <- CompileGOList(FruitFlyTable)
-    KillifishGOList <- TranslateGOList.Nfurzeri(FruitFlyHomologyTable, FruitFlyGOList, KillifishGOList)
-  }
-  
-  if (CombineHumanHomology) {
-    retry({
-      HumanTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(HumanTable) <- NULL
-    retry({
-      HumanHomologyTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name",
-                           "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
-                           "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(HumanHomologyTable) <- NULL
-    HumanGOList <- CompileGOList(HumanTable)
-    KillifishGOList <- TranslateGOList.Nfurzeri(HumanHomologyTable, HumanGOList, KillifishGOList)
-  }
-  
-  if (CombineMouseHomology) {
-    retry({
-      MouseTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "mmusculus_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(MouseTable) <- NULL
-    retry({
-      MouseHomologyTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name",
-                           "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
-                           "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "mmusculus_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(MouseHomologyTable) <- NULL
-    MouseGOList <- CompileGOList(MouseTable)
-    KillifishGOList <- TranslateGOList.Nfurzeri(MouseHomologyTable, MouseGOList, KillifishGOList)
-  }
-  
-  if (CombineNematodeHomology) {
-    retry({
-      NematodeTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "celegans_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(NematodeTable) <- NULL
-    retry({
-      NematodeHomologyTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name",
-                           "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
-                           "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "celegans_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(NematodeHomologyTable) <- NULL
-    NematodeGOList <- CompileGOList(NematodeTable)
-    KillifishGOList <- TranslateGOList.Nfurzeri(NematodeHomologyTable, NematodeGOList, KillifishGOList)
-  }
-  
-  if (CombineZebrafishHomology) {
-    retry({
-      ZebrafishTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "drerio_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(ZebrafishTable) <- NULL
-    retry({
-      ZebrafishHomologyTable <-
-      getBM(attributes = c("ensembl_gene_id", "external_gene_name",
-                           "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
-                           "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
-            filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-            mart = useEnsembl(biomart = "ensembl", dataset = "drerio_gene_ensembl"))
-    }, when = "Error", silent = TRUE)
-    row.names(ZebrafishHomologyTable) <- NULL
-    ZebrafishGOList <- CompileGOList(ZebrafishTable)
-    KillifishGOList <- TranslateGOList.Nfurzeri(ZebrafishHomologyTable, ZebrafishGOList, KillifishGOList)
+            ConsoleOutput <- capture.output({
+                               ThisSpeciesHomologyTable <-
+                               getBM(attributes = c("ensembl_gene_id", "external_gene_name",
+                                                    "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
+                                                    "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
+                                     filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
+                                     mart = useEnsembl(biomart = "ensembl", dataset = SpeciesDatasetName))
+                             });
+            if (length(ConsoleOutput) != 0) {
+              stop("Error")
+            }
+          }, when = ".*", silent = TRUE)
+    row.names(ThisSpeciesHomologyTable) <- NULL
+    
+    KillifishGOList <- TranslateGOList.Nfurzeri(ThisSpeciesHomologyTable, ThisSpeciesGOList, KillifishGOList)
   }
   
   return(KillifishGOList)
@@ -149,8 +99,8 @@ TranslateGOList.Nfurzeri <- function(HomologyTable,
                                      NfurzeriEnsemblIDColumnName = "nfurzeri_homolog_ensembl_gene") {
   
   for (i in 1 : length(OriginalGOList)) {
-    OriginalEnsemblID = names(OriginalGOList)[i]
-    HomologyNfurzeriEnsemblIDs = HomologyTable[(HomologyTable[, OriginalEnsemblIDColumnName] == OriginalEnsemblID),
+    OriginalEnsemblID <- names(OriginalGOList)[i]
+    HomologyNfurzeriEnsemblIDs <- HomologyTable[(HomologyTable[, OriginalEnsemblIDColumnName] == OriginalEnsemblID),
                                                NfurzeriEnsemblIDColumnName]
     for (j in HomologyNfurzeriEnsemblIDs) {
       if (j %in% names(NfurzeriGOList)) {
