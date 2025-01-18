@@ -1,4 +1,4 @@
-volcano.ma <- function(Data, PlotType = "ma", HighlightEnsemblIDs = NA, GeneNameColumnName = "gene_name", EnsemblIDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit = 0, log2baseMeanUpperLimit = NA, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel = bquote(log[2](Escape/Diapause)), log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5) {
+volcano.ma <- function(Data, PlotType = "ma", HighlightIDs = NA, GeneNameColumnName = "gene_name", IDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit = 0, log2baseMeanUpperLimit = NA, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel = bquote(log[2](Escape/Diapause)), log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5) {
   suppressPackageStartupMessages(library("ggplot2"))
   
   # Categorize each gene based on its log2FoldChange and AdjustedPValue and assemble the data frame
@@ -91,7 +91,7 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightEnsemblIDs = NA, GeneName
   }
   
   # Hightlight certain genes
-  Plot <- Plot + geom_point(data = Data[Data[, EnsemblIDColumnName] %in% HighlightEnsemblIDs,], color = HighlightColor, stroke = 0, size = HighlightSize)  
+  Plot <- Plot + geom_point(data = Data[Data[, IDColumnName] %in% HighlightIDs,], color = HighlightColor, stroke = 0, size = HighlightSize)  
   
   return(Plot)
 }
