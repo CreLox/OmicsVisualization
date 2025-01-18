@@ -1,6 +1,7 @@
 volcano.ma <- function(Data, PlotType = "ma", HighlightIDs = NA, GeneNameColumnName = "gene_name", IDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit = 0, log2baseMeanUpperLimit = NA, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel = bquote(log[2](Escape/Diapause)), log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5) {
   suppressPackageStartupMessages(library("ggplot2"))
   
+  Data <- as.data.frame(Data)
   # Categorize each gene based on its log2FoldChange and AdjustedPValue and assemble the data frame
   Category = rep("ns", nrow(Data))
   for (i in 1 : nrow(Data)) {
@@ -16,10 +17,13 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightIDs = NA, GeneNameColumnN
     }
   }
   negativelog10AdjustedPValue <- -log10(Data[, AdjustedPValueColumnName])
-  log2baseMean <- log2(Data[, baseMeanColumnName])
-  colnames(negativelog10AdjustedPValue) <- "negativelog10AdjustedPValue"
-  colnames(log2baseMean) <- "log2baseMean"
-  Data <- cbind(as.data.frame(Data), Category, negativelog10AdjustedPValue, log2baseMean)
+  # colnames(negativelog10AdjustedPValue) <- "negativelog10AdjustedPValue"
+  Data <- cbind(Data, Category, negativelog10AdjustedPValue)
+  if (PlotType == "ma") {
+    log2baseMean <- log2(Data[, baseMeanColumnName])
+    # colnames(log2baseMean) <- "log2baseMean"
+    Data <- cbind(Data, log2baseMean)
+  }
   names(Data)[names(Data) == log2FoldChangeColumnName] <- "log2FoldChange"
   names(Data)[names(Data) == GeneNameColumnName] <- "gene_name"
   
@@ -42,17 +46,19 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightIDs = NA, GeneNameColumnN
       }
     }
   }
-  if (!is.na(log2baseMeanUpperLimit)) {
-    for (i in 1 : nrow(Data)) {
-      if (Data[i, "log2baseMean"] > log2baseMeanUpperLimit) {
-        Data[i, "log2baseMean"] <- log2baseMeanUpperLimit
+  if (PlotType == "ma") {
+    if (!is.na(log2baseMeanUpperLimit)) {
+      for (i in 1 : nrow(Data)) {
+        if (Data[i, "log2baseMean"] > log2baseMeanUpperLimit) {
+          Data[i, "log2baseMean"] <- log2baseMeanUpperLimit
+        }
       }
     }
-  }
-  if (!is.na(log2baseMeanLowerLimit)) {
-    for (i in 1 : nrow(Data)) {
-      if (Data[i, "log2baseMean"] < log2baseMeanLowerLimit) {
-        Data[i, "log2baseMean"] <- log2baseMeanLowerLimit
+    if (!is.na(log2baseMeanLowerLimit)) {
+      for (i in 1 : nrow(Data)) {
+        if (Data[i, "log2baseMean"] < log2baseMeanLowerLimit) {
+          Data[i, "log2baseMean"] <- log2baseMeanLowerLimit
+        }
       }
     }
   }
