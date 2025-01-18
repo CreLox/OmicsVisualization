@@ -17,11 +17,9 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightIDs = NA, GeneNameColumnN
     }
   }
   negativelog10AdjustedPValue <- -log10(Data[, AdjustedPValueColumnName])
-  # colnames(negativelog10AdjustedPValue) <- "negativelog10AdjustedPValue"
   Data <- cbind(Data, Category, negativelog10AdjustedPValue)
   if (PlotType == "ma") {
     log2baseMean <- log2(Data[, baseMeanColumnName])
-    # colnames(log2baseMean) <- "log2baseMean"
     Data <- cbind(Data, log2baseMean)
   }
   names(Data)[names(Data) == log2FoldChangeColumnName] <- "log2FoldChange"
