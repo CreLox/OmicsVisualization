@@ -4,6 +4,7 @@ CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
                            GeneNameColumnName = "Gene name",
                            ProteomicsColumnsToCalculateMean = 2 : 5,
                            TranscriptomicsDataFilePath = "Hu2020Rerun_group_non_diap_vs_diap.results.xlsx",
+                           EnsemblIDColumnName = "ensembl_gene_id",
                            TranscriptomicsColumnsToCalculateMean = 3 : 7,
                            RefreshGeneNames = TRUE) {
   
@@ -16,7 +17,6 @@ CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
   TranscriptomicsData <- as.data.frame(read_xlsx(TranscriptomicsDataFilePath))
   DataMatrix <- as.data.frame(matrix(data = NA, nrow = nrow(ProteomicsData), ncol = 5))
   colnames(DataMatrix) <- c("logTranscriptomicsMean", "logTranscriptomicsStdev", "logProteomicsMean", "logProteomicsStdev", "GeneName")
-  rownames(DataMatrix) <- 1 : nrow(ProteomicsData)
   
   All.UniProtKB.Entries <- c()
   for (i in 1 : nrow(ProteomicsData)) {
@@ -33,9 +33,9 @@ CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
     if ((length(unique(EnsemblMapping)) == 1) && !is.na(unique(EnsemblMapping)) && (unique(EnsemblMapping) != "")) {
       EnsemblID <- unique(EnsemblMapping)
       rownames(DataMatrix)[i] <- EnsemblID
-      if (EnsemblID %in% TranscriptomicsData[, "ensembl_gene_id"]) {
-        DataMatrix[i, "logTranscriptomicsMean"] <- Alt.ln(mean(as.numeric(TranscriptomicsData[(TranscriptomicsData[, "ensembl_gene_id"] == EnsemblID), TranscriptomicsColumnsToCalculateMean])))
-        DataMatrix[i, "logTranscriptomicsStdev"] <- Alt.ln(sd(as.numeric(TranscriptomicsData[(TranscriptomicsData[, "ensembl_gene_id"] == EnsemblID), TranscriptomicsColumnsToCalculateMean])))
+      if (EnsemblID %in% TranscriptomicsData[, EnsemblIDColumnName]) {
+        DataMatrix[i, "logTranscriptomicsMean"] <- Alt.ln(mean(as.numeric(TranscriptomicsData[(TranscriptomicsData[, EnsemblIDColumnName] == EnsemblID), TranscriptomicsColumnsToCalculateMean])))
+        DataMatrix[i, "logTranscriptomicsStdev"] <- Alt.ln(sd(as.numeric(TranscriptomicsData[(TranscriptomicsData[, EnsemblIDColumnName] == EnsemblID), TranscriptomicsColumnsToCalculateMean])))
       }
     }
   }
