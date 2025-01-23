@@ -12,9 +12,13 @@ Use the [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.ht
 The output is a list in which the name of each element is the Ensembl ID of a *N. furzeri* gene and the content of each element is the GO term annotations of that gene (supplemented with homology information). 
 
 ## CorrelateOmics
->```CorrelateOmics(ProteomicsDataFilePath, UniProtIDColumnName = "Protein IDs", To = "Ensembl", GeneNameColumnName = "Gene name", ProteomicsColumnsToCalculateMean, TranscriptomicsDataFilePath, TranscriptomicsColumnsToCalculateMean, RefreshGeneNames = TRUE)```
+>```CorrelateOmics(ProteomicsDataFilePath, UniProtIDColumnName = "Protein IDs", To = "Ensembl", GeneNameColumnName = "Gene name", ProteomicsColumnsToCalculateMean, TranscriptomicsDataFilePath, EnsemblIDColumnName = "ensembl_gene_id", TranscriptomicsColumnsToCalculateMean, RefreshGeneNames = TRUE)```
+
+>```CorrelateOmics.log2FoldChange(ProteomicsDataFilePath, UniProtIDColumnName = "Protein IDs", To = "Ensembl", GeneNameColumnName = "Gene name", Proteomicslog2FoldChangeColumn, TranscriptomicsDataFilePath, EnsemblIDColumnName = "ensembl_gene_id", Transcriptomicslog2FoldChangeColumn, RefreshGeneNames = TRUE)```
 
 >```plotCorrelateOmics(DataFrame, Alpha = 0.1, HighlightGeneNameRegex, HighlightAlpha = 1, HighlightColor = "#C40233", HighlightSize = 2.5)```
+
+>```plotCorrelateOmics.log2FoldChange(DataFrame, Alpha = 0.1, HighlightGeneNameRegex, HighlightAlpha = 1, HighlightColor = "#C40233", HighlightSize = 2.5)```
 
 ```CorrelateOmics``` links proteomics data from ```ProteomicsDataFilePath``` and transcriptomics data from ```TranscriptomicsDataFilePath``` of each gene (only proteins/genes with a one-to-one mapping will be included). If ```RefreshGeneNames``` is set as ```FALSE```, the result is a data frame with 5 columns: "logTranscriptomicsMean", "logTranscriptomicsStdev", "logProteomicsMean", "logProteomicsStdev", and "GeneName" (copied directly from the ```GeneNameColumnName``` column in ```ProteomicsDataFilePath```). If ```RefreshGeneNames``` is set as ```TRUE```, ```EnsemblID2Entrez``` (see below) will be deployed to re-download gene names from the NCBI Gene database, appending an additional ```CurrentEntrezGeneName``` column to the output data frame. The row names of the data frame are the corresponding Ensembl IDs. ```CorrelateOmics``` depends on ```UniProtKBAC2EnsemblID``` and passes the ```To``` input variable solely to ```UniProtKBAC2EnsemblID``` (i.e. ```To``` should be set as "WormBase" instead of the default "Ensembl" when working with *C. elegans* datasets).
 
