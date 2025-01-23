@@ -40,7 +40,7 @@ for (i in 1 : ceiling(length(All.UniProtKB.Entries) / PackageSize)) {
 }
 ```
 
-```plotCorrelateOmics``` can plot the output data frame of ```CorrelateOmics```. To highlight certain genes, specify them by their NCBI gene names using the ```HighlightGeneNameRegex```.
+Subsequently, ```plotCorrelateOmics``` and ```plotCorrelateOmics.log2FoldChange``` can plot the output data frame of ```CorrelateOmics``` and ```CorrelateOmics.log2FoldChange```, respectively. To highlight certain genes, specify them by their NCBI gene names using the ```HighlightGeneNameRegex```.
 
 ## EnsemblID2Entrez
 >```EnsemblID2Entrez(EnsemblID, Output = c("Accession", "ID", "Description", "Name"))```
