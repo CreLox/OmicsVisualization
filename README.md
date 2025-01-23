@@ -101,4 +101,16 @@ Converts a column (from an Excel sheet ```SRXSheetFilePath```) of experiment num
 
 Plots a volcano plot (```PlotType = "volcano"```) or an MA plot (```PlotType = "ma"```) and highlight genes with an ID in ```HighlightIDs```. Points beyond limits (defined by ±```abslog2FoldChangeLimit```, ```log2baseMeanLowerLimit```, ```log2baseMeanUpperLimit```, and ```negativelog10AdjustedPValueLimit```; ignored if ```NA```) will be coerced onto the border.
 
-Note while using [plotly](https://plotly.com/r/)::```ggplotly``` to view and interact with the graph: the axis titles should be adjusted to avoid an error [for the volcano plot, use ```Plot <- Plot + xlab("log2(fold change)") + ylab("-log10(adjusted p)"); ggplotly(Plot)```; for the MA plot, use ```Plot <- Plot + xlab("log2(base mean)") + ylab("log2(fold change)"); ggplotly(Plot)```].
+Note while using [plotly](https://plotly.com/r/)::```ggplotly``` to view and interact with the graph: the axis titles should be adjusted to avoid an error. For the volcano plot, use
+
+```R
+Plot <- Plot + xlab("log2(fold change)") + ylab("-log10(adjusted p)")
+ggplotly(Plot)
+```
+
+For the MA plot, use
+
+```R
+Plot <- Plot + xlab("log2(base mean)") + ylab("log2(fold change)")
+ggplotly(Plot)
+```
