@@ -16,7 +16,7 @@ The output is a list in which the name of each element is the Ensembl ID of a *N
 
 >```plotCorrelateOmics(DataFrame, Alpha = 0.1, HighlightGeneNameRegex, HighlightAlpha = 1, HighlightColor = "#C40233", HighlightSize = 2.5)```
 
-```CorrelateOmics``` links proteomics data from ```ProteomicsDataFilePath``` and transcriptomics data from ```TranscriptomicsDataFilePath``` of each gene. Only proteins/genes with a one-to-one mapping will be included. If ```RefreshGeneNames``` is set as ```FALSE```, the result is a data frame with 5 columns: "logTranscriptomicsMean", "logTranscriptomicsStdev", "logProteomicsMean", "logProteomicsStdev", and "GeneName" (copied directly from the ```GeneNameColumnName``` column in ```ProteomicsDataFilePath```). If ```RefreshGeneNames``` is set as ```TRUE```, ```EnsemblID2Entrez``` (see below) will be deployed to re-download gene names from the NCBI Gene database, appending an additional ```CurrentEntrezGeneName``` column to the output data frame. The row names of the data frame are the corresponding Ensembl IDs. ```CorrelateOmics``` depends on ```UniProtKBAC2EnsemblID``` and passes the ```To``` input variable solely to ```UniProtKBAC2EnsemblID``` (i.e. ```To``` should be set as "WormBase" instead of the default "Ensembl" when working with *C. elegans* datasets).
+```CorrelateOmics``` links proteomics data from ```ProteomicsDataFilePath``` and transcriptomics data from ```TranscriptomicsDataFilePath``` of each gene (only proteins/genes with a one-to-one mapping will be included). If ```RefreshGeneNames``` is set as ```FALSE```, the result is a data frame with 5 columns: "logTranscriptomicsMean", "logTranscriptomicsStdev", "logProteomicsMean", "logProteomicsStdev", and "GeneName" (copied directly from the ```GeneNameColumnName``` column in ```ProteomicsDataFilePath```). If ```RefreshGeneNames``` is set as ```TRUE```, ```EnsemblID2Entrez``` (see below) will be deployed to re-download gene names from the NCBI Gene database, appending an additional ```CurrentEntrezGeneName``` column to the output data frame. The row names of the data frame are the corresponding Ensembl IDs. ```CorrelateOmics``` depends on ```UniProtKBAC2EnsemblID``` and passes the ```To``` input variable solely to ```UniProtKBAC2EnsemblID``` (i.e. ```To``` should be set as "WormBase" instead of the default "Ensembl" when working with *C. elegans* datasets).
 
 In rare cases when there are too many UniProtKB accession IDs in the proteomics data file, the line that executes the ID conversion step
 
@@ -36,7 +36,7 @@ for (i in 1 : ceiling(length(All.UniProtKB.Entries) / PackageSize)) {
 }
 ```
 
-```plotCorrelateOmics``` can plot the output data frame of ```CorrelateOmics```. To highlight certain genes, specify them by their NCBI gene names using the ```HighlightGeneNameRegex```. The returned [ggplot](https://ggplot2.tidyverse.org/reference/ggplot.html) can be viewed interactively by [plotly](https://plotly.com/r/)::```ggplotly```.
+```plotCorrelateOmics``` can plot the output data frame of ```CorrelateOmics```. To highlight certain genes, specify them by their NCBI gene names using the ```HighlightGeneNameRegex```.
 
 ## EnsemblID2Entrez
 >```EnsemblID2Entrez(EnsemblID, Output = c("Accession", "ID", "Description", "Name"))```
@@ -101,4 +101,4 @@ Converts a column (from an Excel sheet ```SRXSheetFilePath```) of experiment num
 
 Plots a volcano plot (```PlotType = "volcano"```) or an MA plot (```PlotType = "ma"```) and highlight genes with an ID in ```HighlightIDs```. Points beyond limits (defined by ±```abslog2FoldChangeLimit```, ```log2baseMeanLowerLimit```, ```log2baseMeanUpperLimit```, and ```negativelog10AdjustedPValueLimit```; ignored if ```NA```) will be coerced onto the border.
 
-Note while using ```ggplotly``` to plot the graph: the axis titles should be adjusted to avoid an error [for the volcano plot, use ```Plot <- Plot + xlab("log2(fold change)") + ylab("-log10(adjusted p)"); ggplotly(Plot)```; for the MA plot, use ```Plot <- Plot + xlab("log2(base mean)") + ylab("log2(fold change)"); ggplotly(Plot)```].
+Note while using [plotly](https://plotly.com/r/)::```ggplotly``` to view and interact with the graph: the axis titles should be adjusted to avoid an error [for the volcano plot, use ```Plot <- Plot + xlab("log2(fold change)") + ylab("-log10(adjusted p)"); ggplotly(Plot)```; for the MA plot, use ```Plot <- Plot + xlab("log2(base mean)") + ylab("log2(fold change)"); ggplotly(Plot)```].
