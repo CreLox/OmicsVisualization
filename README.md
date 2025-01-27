@@ -19,6 +19,7 @@ CC <- BioMartGOFilter.Nfurzeri("GO:0005575")
 MF <- BioMartGOFilter.Nfurzeri("GO:0003674")
 write.gmt(c(BP, CC, MF))
 # file.show("custom.gmt")
+# as.character(openssl::sha1(file("custom.gmt")))
 ```
 
 ## CorrelateOmics
