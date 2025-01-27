@@ -15,7 +15,7 @@ write.gmt <- function(GOList,
       Description <- Term(GOTermList[[GOID]])
     }
     else {
-    	  Description <- "Null"
+      Description <- "Null"
     }
     Line <- paste(GOID, Description, sep = "\t")
     
