@@ -1,4 +1,5 @@
 write.gmt <- function(GOList,
+                      GODescriptionOnly = FALSE,
                       OutputFilePath = "custom.gmt") {
   
   suppressPackageStartupMessages(library("ribiosUtils"))
@@ -19,9 +20,11 @@ write.gmt <- function(GOList,
     }
     Line <- paste(GOID, Description, sep = "\t")
     
-    Elements <- InvertedGOList[[i]]
-    for (j in 1 : length(Elements)) {
-      Line <- paste(Line, Elements[j], sep = "\t")
+    if (!GODescriptionOnly) {
+      Elements <- InvertedGOList[[i]]
+      for (j in 1 : length(Elements)) {
+        Line <- paste(Line, Elements[j], sep = "\t")
+      }
     }
     
     write(Line, file = OutputFilePath, append = TRUE)
