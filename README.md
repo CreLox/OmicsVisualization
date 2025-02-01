@@ -139,3 +139,8 @@ For the MA plot, use
 Plot <- Plot + xlab("log2(base mean)") + ylab("log2(fold change)")
 ggplotly(Plot)
 ```
+
+## write.gmt.KEGG
+> ```write.gmt.KEGG(Species3Letters, BioMartDataset, SpeciesSuffix, DescriptionFilePath = "DescriptionOnly.tsv", GMTFilePath = "KEGG.gmt")```
+
+Writes a .gmt file and a description file for all [KEGG pathways](https://www.genome.jp/kegg/pathway.html) (and the Ensembl IDs of their associated genes) of a species specified by ```Species3Letters``` (e.g. ```"nfu"``` for *N. furzeri*), ```BioMartDataset``` (e.g. ```"nfurzeri_gene_ensembl"``` for *N. furzeri*), and ```SpeciesSuffix``` (e.g. ```" - Nothobranchius furzeri"``` for *N. furzeri*). The conversion of an NCBI Entrez ID to its corresponding Ensembl ID is handled by BioMart and may not be complete.
