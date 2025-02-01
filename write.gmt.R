@@ -7,7 +7,7 @@ write.gmt <- function(GOList,
   GOTermList <- as.list(GOTERM)
   InvertedGOList <- invertList(GOList)
   
-  # if a file of this path already exists, this overwrites it with an empty file
+  # if a file of the specified path already exists, file.create() will overwrite it with an empty file.
   file.create(OutputFilePath)
   
   for (i in 1 : length(InvertedGOList)) {
