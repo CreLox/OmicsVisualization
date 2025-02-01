@@ -2,7 +2,7 @@ write.gmt.KEGG <- function(Species3Letters = "nfu",
                            BioMartDataset = "nfurzeri_gene_ensembl",
                            SpeciesSuffix = " - Nothobranchius furzeri",
                            DescriptionFilePath = "DescriptionOnly.tsv",
-                           GMTFilePath = "custom.gmt") {
+                           GMTFilePath = "KEGG.gmt") {
   
   suppressPackageStartupMessages(library("KEGGREST"))
   suppressPackageStartupMessages(library("biomaRt"))
