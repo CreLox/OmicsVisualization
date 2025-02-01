@@ -55,7 +55,11 @@ for (i in 1 : ceiling(length(All.UniProtKB.Entries) / PackageSize)) {
 
 Subsequently, ```plotCorrelateOmics``` and ```plotCorrelateOmics.log2FoldChange``` can plot the output data frame of ```CorrelateOmics``` and ```CorrelateOmics.log2FoldChange```, respectively. To highlight certain genes, specify them by their NCBI gene names using the ```HighlightGeneNameRegex```.
 
-Note: when encountering extremely small *p*-values (smaller than the machine epsilon $\epsilon = 2^{-52} \approx 2.2 \times 10^{-16}$ of an IEEE-754 double-precision number), ```R``` will report ```p-value < 2.2e-16```.
+Note: when encountering extremely small *p*-values (smaller than the machine epsilon $\epsilon = 2^{-52} \approx 2.2 \times 10^{-16}$ of an IEEE-754 double-precision number), ```R``` will report ```p-value < 2.2e-16```. This notion is also adopted by [WebGestalt](https://www.webgestalt.org/) when computing *p*-values using permutation-based analyses:
+
+$$p := \dfrac{\text{Permutation\\# with more extreme statistics}}{\text{Total permutation\\#}}$$,
+
+wherein if no permutation yields a more extreme statistic, the *p*-value will be (0 according to the formula but) reported as $`{-\text{lg}p} = {-\text{lg}(2^{-52})} \approx 15.65`$ instead.
 
 ## EnsemblID2Entrez
 >```EnsemblID2Entrez(EnsemblID, Output = c("Accession", "ID", "Description", "Name"))```
