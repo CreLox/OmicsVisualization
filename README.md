@@ -101,9 +101,11 @@ Note: Ensembl BioMart provides a built-in functionality to filter genes by GO te
 </p>
 
 ## plotlog2ReadDistribution
->```plotlog2ReadDistribution(ExcelDataFilePath, DataColumns)```
+>```plotlog2ReadDistribution(ExcelDataFilePath, DataColumns) # ln(x) / ln(2), x >= 1```
 
-Plots the smoothed empirical distribution function of all normalized reads (each gene in each sample; compiled from columns whose IDs/names are in ```DataColumns```) to help determine a threshold to filter genes with valid expression and a meaningful fold-change. This step is helpful when picking genes for further functional studies but dispensable if only bioinformatic analyses (like a [gene set enrichment analysis](https://www.pnas.org/doi/10.1073/pnas.0506580102)) are to be done.
+>```plotlnReadDistribution(ExcelDataFilePath, DataColumns) # ln(x + 1)```
+
+Plots the smoothed empirical distribution function of all normalized reads (compiled from columns whose IDs/names are in ```DataColumns```) to help determine a threshold to filter genes with valid expression. This step is helpful when picking genes for further functional studies but dispensable if only bioinformatic analyses (like a [gene set enrichment analysis](https://www.pnas.org/doi/10.1073/pnas.0506580102)) are to be done.
 
 ## samples.beeswarm
 >```samples.beeswarm(GeneNameRegex, ExcelDataFilePath, GeneNameColumnName = "gene_name", ColumnOffset = 2, Group1RepNum, Group2RepNum, GroupTags, Colours = c("black", "red"), Standardized = 1, Breaks = 10, PointSize = 0.75, LineWidth = 0.5, AsteriskSignificance = TRUE, PValueColumnName = "pvalue", PValueDigit = 2)```
