@@ -100,7 +100,7 @@ Note: Ensembl BioMart provides a built-in functionality to filter genes by GO te
 <img src="assets/EnsemblBioMartGOFilter.png" width="700">
 </p>
 
-## plotlog2ReadDistribution
+## plotlogReadDistribution
 >```plotlog2ReadDistribution(ExcelDataFilePath, DataColumns) # ln(x) / ln(2), x >= 1```
 
 >```plotlnReadDistribution(ExcelDataFilePath, DataColumns) # ln(x + 1)```
