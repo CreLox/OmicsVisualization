@@ -1,4 +1,9 @@
 # Documentation
+## AppendEnsemblIDColumn
+>```AppendEnsemblIDColumn(ProteomicsDataFilePath, OutputDataFilePath = "Out.xlsx", UniProtIDColumnName = "Protein IDs", To = "Ensembl")```
+
+Appends a column of Ensembl ID(s) to an Excel sheet with a column (named ```UniProtIDColumnName```) containing UniProt accession numbers. ```To``` should be set as "WormBase" instead of the default "Ensembl" when working with *C. elegans* datasets.
+
 ## AppendNCBIGeneDescriptionColumn
 >```AppendNCBIGeneDescriptionColumn(ExcelDataFilePath, ExcelDataFileEnsemblIDColumnName = "ensembl_gene_id")```
 
