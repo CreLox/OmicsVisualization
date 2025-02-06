@@ -2,12 +2,12 @@
 ## AppendEnsemblIDColumn
 >```AppendEnsemblIDColumn(ProteomicsDataFilePath, OutputDataFilePath, UniProtIDColumnName = "Protein IDs", To = "Ensembl")```
 
-Appends a column of Ensembl ID(s) to an Excel sheet with a column (named ```UniProtIDColumnName```) containing UniProtKB accession IDs. Depends on ```UniProtKBAC2EnsemblID``` (```To``` should be set as "WormBase" instead of the default "Ensembl" when working with *C. elegans* datasets).
+Appends a column of Ensembl IDs to the right of an Excel sheet with a column (named ```UniProtIDColumnName```) containing UniProtKB accession IDs. Depends on ```UniProtKBAC2EnsemblID``` (```To``` should be set as "WormBase" instead of the default "Ensembl" when working with *C. elegans* datasets).
 
 ## AppendNCBIGeneDescriptionColumn
 >```AppendNCBIGeneDescriptionColumn(ExcelDataFilePath, ExcelDataFileEnsemblIDColumnName = "ensembl_gene_id")```
 
-Appends a column of NCBI gene descriptions to an Excel sheet with a column (named ```ExcelDataFileEnsemblIDColumnName```) containing Ensembl IDs. Depends on ```EnsemblID2Entrez```.
+Appends a column of NCBI gene descriptions to the right of an Excel sheet with a column (named ```ExcelDataFileEnsemblIDColumnName```) containing Ensembl IDs. Depends on ```EnsemblID2Entrez```.
 
 ## BioMartGOFilter.*Nfurzeri*
 >```BioMartGOFilter.Nfurzeri(GO.CSV, CombineFruitFlyHomology = TRUE, CombineHumanHomology = TRUE, CombineMouseHomology = TRUE, CombineNematodeHomology = TRUE, CombineZebrafishHomology = TRUE)```
