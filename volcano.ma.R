@@ -4,8 +4,8 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightIDs = NA, GeneNameColumnN
   # Initialization
   Data <- as.data.frame(Data)
   names(Data)[names(Data) == log2FoldChangeColumnName] <- "log2FoldChange"
-  Data[, "log2FoldChange"] <- as.numeric(Data[, "log2FoldChange"])
   names(Data)[names(Data) == GeneNameColumnName] <- "gene_name"
+  Data[, "log2FoldChange"] <- as.numeric(Data[, "log2FoldChange"])
   if (Invertlog2FoldChange) {
     Data[, "log2FoldChange"] <- -Data[, "log2FoldChange"]
   }
