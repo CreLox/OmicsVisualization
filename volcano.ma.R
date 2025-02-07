@@ -12,17 +12,17 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightIDs = NA, GeneNameColumnN
   Data[, AdjustedPValueColumnName] <- as.numeric(Data[, AdjustedPValueColumnName])
   
   # Categorize each gene based on its log2FoldChange and AdjustedPValue and assemble the data frame
-  Category = rep("ns", nrow(Data))
+  Category <- rep("ns", nrow(Data))
   for (i in 1 : nrow(Data)) {
     if ((Data[i, "log2FoldChange"] >= abslog2FoldChangeThreshold) &
         (!is.na(Data[i, AdjustedPValueColumnName])) &
         (Data[i, AdjustedPValueColumnName] < SignificanceThreshold)) {
-      Category[i] = "up"
+      Category[i] <- "up"
     }
     if ((Data[i, "log2FoldChange"] <= -abslog2FoldChangeThreshold) &
         (!is.na(Data[i, AdjustedPValueColumnName])) &
         (Data[i, AdjustedPValueColumnName] < SignificanceThreshold)) {
-      Category[i] = "down"
+      Category[i] <- "down"
     }
   }
   negativelog10AdjustedPValue <- -log10(Data[, AdjustedPValueColumnName])
