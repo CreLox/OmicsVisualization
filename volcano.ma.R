@@ -4,10 +4,12 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightIDs = NA, GeneNameColumnN
   # Initialization
   Data <- as.data.frame(Data)
   names(Data)[names(Data) == log2FoldChangeColumnName] <- "log2FoldChange"
+  Data[, "log2FoldChange"] <- as.numeric(Data[, "log2FoldChange"])
   names(Data)[names(Data) == GeneNameColumnName] <- "gene_name"
   if (Invertlog2FoldChange) {
     Data[, "log2FoldChange"] <- -Data[, "log2FoldChange"]
   }
+  Data[, AdjustedPValueColumnName] <- as.numeric(Data[, AdjustedPValueColumnName])
   
   # Categorize each gene based on its log2FoldChange and AdjustedPValue and assemble the data frame
   Category = rep("ns", nrow(Data))
@@ -26,7 +28,7 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightIDs = NA, GeneNameColumnN
   negativelog10AdjustedPValue <- -log10(Data[, AdjustedPValueColumnName])
   Data <- cbind(Data, Category, negativelog10AdjustedPValue)
   if (PlotType == "ma") {
-    log2baseMean <- log2(Data[, baseMeanColumnName])
+    log2baseMean <- log2(as.numeric(Data[, baseMeanColumnName]))
     Data <- cbind(Data, log2baseMean)
   }
   
