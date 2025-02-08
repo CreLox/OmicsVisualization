@@ -87,7 +87,7 @@ Filters a [Flaski RNAseq pipeline](https://flaski.age.mpg.de/rnaseq/) output Exc
 ## FindUniqueGenes.EnsemblID
 >```FindUniqueGenes.EnsemblID(TargetSpecies, CheckHomologySpecies = c("drerio", "kmarmoratus"))```
 
-Identifies genes of the ```TargetSpecies``` (returns a vector of their Ensembl IDs) without a homolog in ```CheckHomologySpecies```. Note: diapause III, but not diapause II, can be observed in the life history of mangrove rivulus *Kryptolebias marmoratus*.
+Identifies genes of the ```TargetSpecies``` (returns a vector of their Ensembl IDs) without a homolog in ```CheckHomologySpecies```. Note: diapause III (delayed hatching), but no diapause II, can be observed in the life history of mangrove rivulus *Kryptolebias marmoratus*.
 
 ## GOFilter
 >```GOFilter(ExcelDataFilePath, GOVector, godir, GOTermColumnName = "GO_id", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```
