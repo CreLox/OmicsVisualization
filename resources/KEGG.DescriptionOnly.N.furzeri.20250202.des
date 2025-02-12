@@ -1,0 +1,179 @@
+nfu00010	Glycolysis / Gluconeogenesis
+nfu00020	Citrate cycle (TCA cycle)
+nfu00030	Pentose phosphate pathway
+nfu00040	Pentose and glucuronate interconversions
+nfu00051	Fructose and mannose metabolism
+nfu00052	Galactose metabolism
+nfu00053	Ascorbate and aldarate metabolism
+nfu00061	Fatty acid biosynthesis
+nfu00062	Fatty acid elongation
+nfu00071	Fatty acid degradation
+nfu00100	Steroid biosynthesis
+nfu00120	Primary bile acid biosynthesis
+nfu00130	Ubiquinone and other terpenoid-quinone biosynthesis
+nfu00140	Steroid hormone biosynthesis
+nfu00190	Oxidative phosphorylation
+nfu00220	Arginine biosynthesis
+nfu00230	Purine metabolism
+nfu00232	Caffeine metabolism
+nfu00240	Pyrimidine metabolism
+nfu00250	Alanine, aspartate and glutamate metabolism
+nfu00260	Glycine, serine and threonine metabolism
+nfu00270	Cysteine and methionine metabolism
+nfu00280	Valine, leucine and isoleucine degradation
+nfu00290	Valine, leucine and isoleucine biosynthesis
+nfu00310	Lysine degradation
+nfu00330	Arginine and proline metabolism
+nfu00340	Histidine metabolism
+nfu00350	Tyrosine metabolism
+nfu00360	Phenylalanine metabolism
+nfu00380	Tryptophan metabolism
+nfu00400	Phenylalanine, tyrosine and tryptophan biosynthesis
+nfu00410	beta-Alanine metabolism
+nfu00430	Taurine and hypotaurine metabolism
+nfu00440	Phosphonate and phosphinate metabolism
+nfu00450	Selenocompound metabolism
+nfu00470	D-Amino acid metabolism
+nfu00480	Glutathione metabolism
+nfu00500	Starch and sucrose metabolism
+nfu00510	N-Glycan biosynthesis
+nfu00511	Other glycan degradation
+nfu00512	Mucin type O-glycan biosynthesis
+nfu00513	Various types of N-glycan biosynthesis
+nfu00514	Other types of O-glycan biosynthesis
+nfu00515	Mannose type O-glycan biosynthesis
+nfu00520	Amino sugar and nucleotide sugar metabolism
+nfu00524	Neomycin, kanamycin and gentamicin biosynthesis
+nfu00531	Glycosaminoglycan degradation
+nfu00532	Glycosaminoglycan biosynthesis - chondroitin sulfate / dermatan sulfate
+nfu00533	Glycosaminoglycan biosynthesis - keratan sulfate
+nfu00534	Glycosaminoglycan biosynthesis - heparan sulfate / heparin
+nfu00561	Glycerolipid metabolism
+nfu00562	Inositol phosphate metabolism
+nfu00563	Glycosylphosphatidylinositol (GPI)-anchor biosynthesis
+nfu00564	Glycerophospholipid metabolism
+nfu00565	Ether lipid metabolism
+nfu00590	Arachidonic acid metabolism
+nfu00591	Linoleic acid metabolism
+nfu00592	alpha-Linolenic acid metabolism
+nfu00600	Sphingolipid metabolism
+nfu00601	Glycosphingolipid biosynthesis - lacto and neolacto series
+nfu00603	Glycosphingolipid biosynthesis - globo and isoglobo series
+nfu00604	Glycosphingolipid biosynthesis - ganglio series
+nfu00620	Pyruvate metabolism
+nfu00630	Glyoxylate and dicarboxylate metabolism
+nfu00640	Propanoate metabolism
+nfu00650	Butanoate metabolism
+nfu00670	One carbon pool by folate
+nfu00730	Thiamine metabolism
+nfu00740	Riboflavin metabolism
+nfu00750	Vitamin B6 metabolism
+nfu00760	Nicotinate and nicotinamide metabolism
+nfu00770	Pantothenate and CoA biosynthesis
+nfu00780	Biotin metabolism
+nfu00785	Lipoic acid metabolism
+nfu00790	Folate biosynthesis
+nfu00830	Retinol metabolism
+nfu00860	Porphyrin metabolism
+nfu00900	Terpenoid backbone biosynthesis
+nfu00910	Nitrogen metabolism
+nfu00920	Sulfur metabolism
+nfu00970	Aminoacyl-tRNA biosynthesis
+nfu00980	Metabolism of xenobiotics by cytochrome P450
+nfu00982	Drug metabolism - cytochrome P450
+nfu00983	Drug metabolism - other enzymes
+nfu01040	Biosynthesis of unsaturated fatty acids
+nfu02010	ABC transporters
+nfu03008	Ribosome biogenesis in eukaryotes
+nfu03010	Ribosome
+nfu03013	Nucleocytoplasmic transport
+nfu03015	mRNA surveillance pathway
+nfu03018	RNA degradation
+nfu03020	RNA polymerase
+nfu03022	Basal transcription factors
+nfu03030	DNA replication
+nfu03040	Spliceosome
+nfu03050	Proteasome
+nfu03060	Protein export
+nfu03082	ATP-dependent chromatin remodeling
+nfu03083	Polycomb repressive complex
+nfu03250	Viral life cycle - HIV-1
+nfu03260	Virion - Human immunodeficiency virus
+nfu03264	Virion - Flavivirus and Alphavirus
+nfu03265	Virion - Ebolavirus, Lyssavirus and Morbillivirus
+nfu03266	Virion - Herpesvirus
+nfu03267	Virion - Adenovirus
+nfu03271	Virion - Rotavirus
+nfu03272	Virion - Hepatitis viruses
+nfu03273	Virion - Lassa virus and SFTS virus
+nfu03320	PPAR signaling pathway
+nfu03410	Base excision repair
+nfu03420	Nucleotide excision repair
+nfu03430	Mismatch repair
+nfu03440	Homologous recombination
+nfu03450	Non-homologous end-joining
+nfu03460	Fanconi anemia pathway
+nfu04010	MAPK signaling pathway
+nfu04012	ErbB signaling pathway
+nfu04020	Calcium signaling pathway
+nfu04060	Cytokine-cytokine receptor interaction
+nfu04068	FoxO signaling pathway
+nfu04070	Phosphatidylinositol signaling system
+nfu04080	Neuroactive ligand-receptor interaction
+nfu04081	Hormone signaling
+nfu04110	Cell cycle
+nfu04114	Oocyte meiosis
+nfu04115	p53 signaling pathway
+nfu04120	Ubiquitin mediated proteolysis
+nfu04122	Sulfur relay system
+nfu04130	SNARE interactions in vesicular transport
+nfu04136	Autophagy - other
+nfu04137	Mitophagy - animal
+nfu04140	Autophagy - animal
+nfu04141	Protein processing in endoplasmic reticulum
+nfu04142	Lysosome
+nfu04144	Endocytosis
+nfu04145	Phagosome
+nfu04146	Peroxisome
+nfu04148	Efferocytosis
+nfu04150	mTOR signaling pathway
+nfu04210	Apoptosis
+nfu04216	Ferroptosis
+nfu04217	Necroptosis
+nfu04218	Cellular senescence
+nfu04260	Cardiac muscle contraction
+nfu04261	Adrenergic signaling in cardiomyocytes
+nfu04270	Vascular smooth muscle contraction
+nfu04310	Wnt signaling pathway
+nfu04330	Notch signaling pathway
+nfu04340	Hedgehog signaling pathway
+nfu04350	TGF-beta signaling pathway
+nfu04370	VEGF signaling pathway
+nfu04371	Apelin signaling pathway
+nfu04510	Focal adhesion
+nfu04512	ECM-receptor interaction
+nfu04514	Cell adhesion molecules
+nfu04520	Adherens junction
+nfu04530	Tight junction
+nfu04540	Gap junction
+nfu04620	Toll-like receptor signaling pathway
+nfu04621	NOD-like receptor signaling pathway
+nfu04622	RIG-I-like receptor signaling pathway
+nfu04623	Cytosolic DNA-sensing pathway
+nfu04625	C-type lectin receptor signaling pathway
+nfu04672	Intestinal immune network for IgA production
+nfu04744	Phototransduction
+nfu04810	Regulation of actin cytoskeleton
+nfu04814	Motor proteins
+nfu04820	Cytoskeleton in muscle cells
+nfu04910	Insulin signaling pathway
+nfu04912	GnRH signaling pathway
+nfu04914	Progesterone-mediated oocyte maturation
+nfu04916	Melanogenesis
+nfu04920	Adipocytokine signaling pathway
+nfu04977	Vitamin digestion and absorption
+nfu04980	Cobalamin transport and metabolism
+nfu04981	Folate transport and metabolism
+nfu05100	Bacterial invasion of epithelial cells
+nfu05132	Salmonella infection
+nfu05168	Herpes simplex virus 1 infection
