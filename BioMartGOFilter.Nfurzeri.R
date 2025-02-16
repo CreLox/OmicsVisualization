@@ -81,6 +81,10 @@ CompileGOList <- function(BioMartExportGOTable,
                           EnsemblIDColumnName = "ensembl_gene_id",
                           GOColumnName = "go_id") {
   
+  if (nrow(BioMartExportGOTable) == 0) {
+    return(ExistingGOList)
+  }
+  
   for (i in 1 : nrow(BioMartExportGOTable)) {
     if (BioMartExportGOTable[i, EnsemblIDColumnName] %in% names(ExistingGOList)) {
       ExistingGOList[[BioMartExportGOTable[i, EnsemblIDColumnName]]] <- unique(c(ExistingGOList[[BioMartExportGOTable[i, EnsemblIDColumnName]]], BioMartExportGOTable[i, GOColumnName]))
@@ -89,7 +93,6 @@ CompileGOList <- function(BioMartExportGOTable,
       ExistingGOList[[BioMartExportGOTable[i, EnsemblIDColumnName]]] <- BioMartExportGOTable[i, GOColumnName]
     }
   }
-  
   return(ExistingGOList)
 }
 
