@@ -84,6 +84,11 @@ Filters a [Flaski RNAseq pipeline](https://flaski.age.mpg.de/rnaseq/) output Exc
 
 - compiled from exported [Ensembl BioMart](https://www.ensembl.org/biomart/martview) TSV files whose paths are specified in ```BioMartExportFilePaths```, if ```BioMartExportFilePaths``` is not ```NA``` (note: this overrides the input variable ```PassedEnsemblIDVector```).
 
+## FlaskiRenormalization
+>```FlaskiRenormalization(Folder = getwd())```
+
+Renormalize all samples contained in all .xlsx Flaski output data files in ```Folder``` based on DESeq2's "median of ratios".
+
 ## FindUniqueGenes.EnsemblID
 >```FindUniqueGenes.EnsemblID(TargetSpecies, CheckHomologySpecies = c("drerio", "kmarmoratus"))```
 
