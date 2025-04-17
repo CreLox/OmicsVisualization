@@ -14,7 +14,7 @@ Appends a column of NCBI gene descriptions to the right of an Excel sheet with a
 
 > ```write.gmt(GOList, GODescriptionOnly = FALSE, OutputFilePath = "custom.gmt")```
 
-Use the [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.html) package to get all *Nothobranchius furzeri* genes with GO term annotations in ```GO.CSV``` [including all child terms (```is_a```, ```regulates```, etc.)]. ```CombineFruitFlyHomology```/```CombineHumanHomology```/```CombineMouseHomology```/```CombineNematodeHomology```/```CombineZebrafishHomology``` allows complementation using the gene homology [to fly (*Drosophila melanogaster*)/human/mouse (*Mus musculus*)/nematode (*Caenorhabditis elegans*)/zebrafish (*Danio rerio*)] information. Note that this only works for Ensembl 113 (released on October 18th, 2024) or later.
+Use the [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.html) package to get all *Nothobranchius furzeri* genes with GO term annotations in ```GO.CSV``` [including all ```is_a``` child terms (**even though ```regulates``` terms are also child terms technically, they are not included in BioMart**)]. ```CombineFruitFlyHomology```/```CombineHumanHomology```/```CombineMouseHomology```/```CombineNematodeHomology```/```CombineZebrafishHomology``` allows complementation using the gene homology [to fly (*Drosophila melanogaster*)/human/mouse (*Mus musculus*)/nematode (*Caenorhabditis elegans*)/zebrafish (*Danio rerio*)] information. Note that this only works for Ensembl 113 (released on October 18th, 2024) or later.
 
 The output is a list in which the name of each element is the Ensembl ID of a *N. furzeri* gene and the content of each element is the GO term annotations of that gene (supplemented with homology information). This list can then be converted into a .gmt file (for the gene set enrichment analysis) with ```write.gmt```. For example, the following script generates a .gmt file of all GO term annotations of all *N. furzeri* genes:
 
@@ -97,7 +97,7 @@ Identifies genes of the ```TargetSpecies``` (returns a vector of their Ensembl I
 ## GOFilter
 >```GOFilter(ExcelDataFilePath, GOVector, godir, GOTermColumnName = "GO_id", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```
 
-Filters a Flaski RNAseq pipeline output Excel sheet (```ExcelDataFilePath```) based on the desired GO terms in ```GOVector``` [including all child terms (```is_a```, ```regulates```, etc.) defined by ```godir```].
+Filters a Flaski RNAseq pipeline output Excel sheet (```ExcelDataFilePath```) based on the desired GO terms in ```GOVector``` [including all ```is_a``` child terms defined by ```godir```].
 
 Note: Ensembl BioMart provides a built-in functionality to filter genes by GO term annotations (see the figure below; all child terms will also be included), which is better because a fresh download from Ensembl BioMart will reflect the most up-to-date GO term annotations. See ```BioMartGOFilter.Nfurzeri``` and ```EnsemblIDFilter```.
 
