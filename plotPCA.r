@@ -1,9 +1,9 @@
 plotPCA <- function(OmicsExcelDataFilePath = "LFQ_intensities_Temperature.xlsx",
                     SampleColumns = 2 : 29,
                     GroupTags = c(rep("DII (arrested at 24 °C)", 6), rep("DII (persistent at 28.5 °C)", 11), rep("Development resumption", 11)),
+                    FillColorPalette = c("#FFD300", "#FFFFFF", "#0087BD"),
                     PointSize = 2.5,
                     ExpandRatio = 0.1,
-                    FillColorPalette = c("#FFD300", "#FFFFFF", "#0087BD"),
                     HideAxis = TRUE) {
 
   suppressPackageStartupMessages(library("readxl"))
