@@ -15,8 +15,8 @@ plotCorrelateOmics <- function(DataFrame,
             geom_point(alpha = Alpha, stroke = 0) +
             xlim(c(0, NA)) +
             ylim(c(0, NA)) +
-            xlab("ln([mRNA] + 1)") +
-            ylab("ln([protein] + 1)") +
+            xlab("log2([mRNA] + 1)") +
+            ylab("log2([protein] + 1)") +
             theme_bw() +
             theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major = element_blank()) +
             coord_fixed(expand = FALSE, clip = "off")
@@ -26,8 +26,8 @@ plotCorrelateOmics <- function(DataFrame,
             geom_point(alpha = Alpha, stroke = 0) +
             xlim(c(0, NA)) +
             ylim(c(0, NA)) +
-            xlab("ln([mRNA] + 1)") +
-            ylab("ln([protein] + 1)") +
+            xlab("log2([mRNA] + 1)") +
+            ylab("log2([protein] + 1)") +
             theme_bw() +
             theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major = element_blank()) +
             coord_fixed(expand = FALSE, clip = "off") # +

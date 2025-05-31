@@ -25,8 +25,8 @@ CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
   Table <- UniProtKBAC2EnsemblID(paste(All.UniProtKB.Entries, collapse = ","), To = To)
   
   for (i in 1 : nrow(ProteomicsData)) {
-    DataMatrix[i, "logProteomicsMean"] <- Alt.ln(mean(2 ^ (as.numeric(ProteomicsData[i, ProteomicsColumnsToCalculateMean]))))
-    DataMatrix[i, "logProteomicsStdev"] <- Alt.ln(sd(2 ^ (as.numeric(ProteomicsData[i, ProteomicsColumnsToCalculateMean]))))
+    DataMatrix[i, "logProteomicsMean"] <- Alt.log(mean(2 ^ (as.numeric(ProteomicsData[i, ProteomicsColumnsToCalculateMean]))))
+    DataMatrix[i, "logProteomicsStdev"] <- Alt.log(sd(2 ^ (as.numeric(ProteomicsData[i, ProteomicsColumnsToCalculateMean]))))
     DataMatrix[i, "GeneName"] <- ProteomicsData[i, GeneNameColumnName]
     UniProtKB.Entries <- strsplit(ProteomicsData[i, UniProtIDColumnName], split = ";")[[1]]
     EnsemblMapping <- Table[(Table[, "uniprotsptrembl"] %in% UniProtKB.Entries), "ensembl_gene_id"]
@@ -34,8 +34,8 @@ CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
       EnsemblID <- unique(EnsemblMapping)
       rownames(DataMatrix)[i] <- EnsemblID
       if (EnsemblID %in% TranscriptomicsData[, EnsemblIDColumnName]) {
-        DataMatrix[i, "logTranscriptomicsMean"] <- Alt.ln(mean(as.numeric(TranscriptomicsData[(TranscriptomicsData[, EnsemblIDColumnName] == EnsemblID), TranscriptomicsColumnsToCalculateMean])))
-        DataMatrix[i, "logTranscriptomicsStdev"] <- Alt.ln(sd(as.numeric(TranscriptomicsData[(TranscriptomicsData[, EnsemblIDColumnName] == EnsemblID), TranscriptomicsColumnsToCalculateMean])))
+        DataMatrix[i, "logTranscriptomicsMean"] <- Alt.log(mean(as.numeric(TranscriptomicsData[(TranscriptomicsData[, EnsemblIDColumnName] == EnsemblID), TranscriptomicsColumnsToCalculateMean])))
+        DataMatrix[i, "logTranscriptomicsStdev"] <- Alt.log(sd(as.numeric(TranscriptomicsData[(TranscriptomicsData[, EnsemblIDColumnName] == EnsemblID), TranscriptomicsColumnsToCalculateMean])))
       }
     }
   }
@@ -55,6 +55,6 @@ CorrelateOmics <- function(ProteomicsDataFilePath = "LFQ_intensities.xlsx",
   return(DataMatrix)
 }
 
-Alt.ln <- function(x) {
-  return(log(x + 1))
+Alt.log <- function(x) {
+  return(log2(x + 1))
 }
