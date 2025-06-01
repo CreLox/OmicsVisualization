@@ -1,6 +1,6 @@
 BatchConvert2Entrez <- function(EnsemblID.Xsv,
-                                X = ";",
-                                Output = "Name") {
+                                X = "\n",
+                                Output = "Description") {
   
   AllEnsemblIDs <- unlist(strsplit(EnsemblID.Xsv, split = X))
   
