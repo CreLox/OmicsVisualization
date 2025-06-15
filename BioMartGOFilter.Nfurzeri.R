@@ -1,6 +1,7 @@
 BioMartGOFilter.Nfurzeri <- function(GO.CSV,
                                      CombineFruitFlyHomology = TRUE,
                                      CombineHumanHomology = TRUE,
+                                     CombineMedakaHomology = TRUE,
                                      CombineMouseHomology = TRUE,
                                      CombineNematodeHomology = TRUE,
                                      CombineZebrafishHomology = TRUE) {
@@ -15,6 +16,9 @@ BioMartGOFilter.Nfurzeri <- function(GO.CSV,
   }
   if (CombineHumanHomology) {
     SpeciesDatasetNameList <- c(SpeciesDatasetNameList, "hsapiens_gene_ensembl")
+  }
+  if (CombineMedakaHomology) {
+    SpeciesDatasetNameList <- c(SpeciesDatasetNameList, "olatipes_gene_ensembl")
   }
   if (CombineMouseHomology) {
     SpeciesDatasetNameList <- c(SpeciesDatasetNameList, "mmusculus_gene_ensembl")
