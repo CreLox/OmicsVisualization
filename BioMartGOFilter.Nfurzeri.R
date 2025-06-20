@@ -1,9 +1,10 @@
 BioMartGOFilter.Nfurzeri <- function(GO.CSV,
-                                     CombineFruitFlyHomology = TRUE,
+                                     CombineFruitFlyHomology = FALSE,
                                      CombineHumanHomology = TRUE,
                                      CombineMedakaHomology = TRUE,
                                      CombineMouseHomology = TRUE,
-                                     CombineNematodeHomology = TRUE,
+                                     CombineNematodeHomology = FALSE,
+                                     CombineXenopusHomology = TRUE,
                                      CombineZebrafishHomology = TRUE) {
   
   suppressPackageStartupMessages(library("biomaRt"))
@@ -25,6 +26,9 @@ BioMartGOFilter.Nfurzeri <- function(GO.CSV,
   }
   if (CombineNematodeHomology) {
     SpeciesDatasetNameList <- c(SpeciesDatasetNameList, "celegans_gene_ensembl")
+  }
+  if (CombineXenopusHomology) {
+    SpeciesDatasetNameList <- c(SpeciesDatasetNameList, "xtropicalis_gene_ensembl")
   }
   if (CombineZebrafishHomology) {
     SpeciesDatasetNameList <- c(SpeciesDatasetNameList, "drerio_gene_ensembl")
