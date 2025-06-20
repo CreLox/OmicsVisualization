@@ -1,10 +1,14 @@
-volcano.ma <- function(Data, PlotType = "ma", HighlightIDs = NA, GeneNameColumnName = "gene_name", IDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", Invertlog2FoldChange = FALSE, abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit = 0, log2baseMeanUpperLimit = NA, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel = bquote(log[2](Exit/DII)), log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5) {
+volcano.ma <- function(Data, PlotType = "ma", HighlightGeneNameRegex = NA, HighlightIDs = NA, GeneNameColumnName = "gene_name", IDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", Invertlog2FoldChange = FALSE, abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit = 0, log2baseMeanUpperLimit = NA, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel = bquote(log[2](Exit/DII)), log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5) {
+  
+  suppressPackageStartupMessages(library("stringr"))
+  suppressPackageStartupMessages(library("tidyr"))
   suppressPackageStartupMessages(library("ggplot2"))
   
   # Initialization
   Data <- as.data.frame(Data)
   names(Data)[names(Data) == log2FoldChangeColumnName] <- "log2FoldChange"
   names(Data)[names(Data) == GeneNameColumnName] <- "gene_name"
+  names(Data)[names(Data) == IDColumnName] <- "id"
   Data[, "log2FoldChange"] <- as.numeric(Data[, "log2FoldChange"])
   if (Invertlog2FoldChange) {
     Data[, "log2FoldChange"] <- -Data[, "log2FoldChange"]
@@ -70,7 +74,7 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightIDs = NA, GeneNameColumnN
   
   # Volcano plot
   if (PlotType == "volcano") {
-    Plot <- ggplot(data = Data, aes(x = log2FoldChange, y = negativelog10AdjustedPValue, GeneName = gene_name)) +
+    Plot <- ggplot(data = Data, aes(x = log2FoldChange, y = negativelog10AdjustedPValue, GeneName = gene_name, ID = id)) +
             geom_point(aes(color = Category, alpha = Category), stroke = 0) +
             scale_color_manual(values = c("up" = UpColor, "down" = DownColor, "ns" = "black")) + 
             scale_alpha_manual(values = c("up" = Alpha, "down" = Alpha, "ns" = NSAlpha)) +
@@ -87,7 +91,7 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightIDs = NA, GeneNameColumnN
   
   # MA plot
   if (PlotType == "ma") {
-    Plot <- ggplot(data = Data, aes(x = log2baseMean, y = log2FoldChange, GeneName = gene_name)) +
+    Plot <- ggplot(data = Data, aes(x = log2baseMean, y = log2FoldChange, GeneName = gene_name, ID = id)) +
             geom_point(aes(color = Category, alpha = Category), stroke = 0) +
             scale_color_manual(values = c("up" = UpColor, "down" = DownColor, "ns" = "black")) + 
             scale_alpha_manual(values = c("up" = Alpha, "down" = Alpha, "ns" = NSAlpha)) +
@@ -102,7 +106,12 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightIDs = NA, GeneNameColumnN
   }
   
   # Hightlight certain genes
-  Plot <- Plot + geom_point(data = Data[Data[, IDColumnName] %in% HighlightIDs,], color = HighlightColor, stroke = 0, size = HighlightSize)  
+  if (!is.na(HighlightGeneNameRegex) & !is.null(HighlightGeneNameRegex) & (HighlightGeneNameRegex != "")) {
+    Plot <- Plot + geom_point(data = Data[(Data[, "id"] %in% HighlightIDs) | str_detect(replace_na(unlist(Data[, "gene_name"], use.names = FALSE), ""), HighlightGeneNameRegex),], color = HighlightColor, stroke = 0, size = HighlightSize)
+  }
+  else {
+    Plot <- Plot + geom_point(data = Data[Data[, "id"] %in% HighlightIDs,], color = HighlightColor, stroke = 0, size = HighlightSize)
+  }
   
   return(Plot)
 }
