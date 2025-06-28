@@ -12,7 +12,9 @@ Appends a column of NCBI gene descriptions to the right of an Excel sheet with a
 ## BioMartGOFilter.*Nfurzeri*
 >```BioMartGOFilter.Nfurzeri(GO.CSV, CombineFruitFlyHomology = FALSE, CombineHumanHomology = TRUE, CombineMedakaHomology = TRUE, CombineMouseHomology = TRUE, CombineNematodeHomology = FALSE, CombineXenopusHomology = TRUE, CombineZebrafishHomology = TRUE)```
 
-> ```write.gmt(GOList, GODescriptionOnly = FALSE, OutputFilePath = "custom.gmt")```
+>```merge.sets(set.a, set.b, exception.set)```
+
+>```write.gmt(GOList, GODescriptionOnly = FALSE, OutputFilePath = "custom.gmt")```
 
 Use the [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.html) package to get all *Nothobranchius furzeri* genes with GO term annotations in ```GO.CSV``` [note: (1) a term that ```regulates``` a BP is not considered as a child term of that BP in BioMart; (2) a protein ```located_in``` a protein complex (CC) is not necessary an integral ```part_of``` that protein complex (for example, [MTG1](https://www.uniprot.org/uniprotkb/Q9BT17/entry) is located in the [mitochondrial ribosome](https://www.ebi.ac.uk/QuickGO/term/GO:0005761), but it is not a mitochondrial ribosomal protein like [CHCHD1/MRPS37](https://www.uniprot.org/uniprotkb/Q96BP2/entry); see [this link](https://wiki.geneontology.org/Located_in#What_not_to_capture_with_the_has_input_relation) and [this link](https://wiki.geneontology.org/Part_of_relation#Relating_Gene_Products_to_Protein-containing_Complexes)); (3) watch out for historical misannotations and misleading names like [KGD4](https://www.uniprot.org/uniprotkb/P82909/entry)]. ```CombineFruitFlyHomology```/```CombineHumanHomology```/```CombineMouseHomology```/```CombineMedakaHomology```/```CombineNematodeHomology```/```CombineZebrafishHomology``` allows complementation using the gene homology [to fly (*Drosophila melanogaster*)/human/medaka (*Oryzias latipes*)/mouse (*Mus musculus*)/nematode (*Caenorhabditis elegans*)/Xenopus (*Xenopus tropicalis*)/zebrafish (*Danio rerio*)] information. Note that this only works for Ensembl 113 (released on October 18th, 2024) or later. To include other available species, check out ```resources/EnsemblGenes[version#].txt```. 
 
@@ -26,6 +28,8 @@ write.gmt(c(BP, CC, MF))
 # file.show("custom.gmt")
 # as.character(openssl::sha1(file("custom.gmt")))
 ```
+
+Use ```merge.sets``` for data curation. Given ```set.a```$= A$, ```set.b```$= B$, and ```exception.set```$= E$, we have ```merge.sets(A, B, E)```$=(A \cup B)\backslash E$.
 
 ## CorrelateOmics
 >```CorrelateOmics(ProteomicsDataFilePath, UniProtIDColumnName = "Protein IDs", To = "Ensembl", GeneNameColumnName = "Gene name", ProteomicsColumnsToCalculateMean, TranscriptomicsDataFilePath, EnsemblIDColumnName = "ensembl_gene_id", TranscriptomicsColumnsToCalculateMean, RefreshGeneNames = TRUE)```
