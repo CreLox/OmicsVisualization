@@ -12,7 +12,7 @@ Appends a column of NCBI gene descriptions to the right of an Excel sheet with a
 ## BioMartGOFilter.*Nfurzeri*
 >```BioMartGOFilter.Nfurzeri(GO.CSV, CombineFruitFlyHomology = FALSE, CombineHumanHomology = TRUE, CombineMedakaHomology = TRUE, CombineMouseHomology = TRUE, CombineNematodeHomology = FALSE, CombineXenopusHomology = TRUE, CombineZebrafishHomology = TRUE)```
 
->```merge.sets(set.a, set.b, exception.set)```
+>```merge.sets(set.a, set.b = c(), exception.set = c())```
 
 >```write.gmt(GOList, GODescriptionOnly = FALSE, OutputFilePath = "custom.gmt")```
 
