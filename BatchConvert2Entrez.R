@@ -2,7 +2,12 @@ BatchConvert2Entrez <- function(EnsemblID.Xsv,
                                 X = "\n",
                                 Output = "Description") {
   
-  AllEnsemblIDs <- unlist(strsplit(EnsemblID.Xsv, split = X))
+  if (is.null(X) || is.na(X) || (X == "")) {
+    AllEnsemblIDs <- EnsemblID.Xsv
+  }
+  else {
+    AllEnsemblIDs <- unlist(strsplit(EnsemblID.Xsv, split = X))
+  }
   
   Out <- c()
   for (i in 1 : length(AllEnsemblIDs)) {
