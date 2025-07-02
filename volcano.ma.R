@@ -1,4 +1,4 @@
-volcano.ma <- function(Data, PlotType = "ma", HighlightGeneNameRegex = NA, HighlightIDs = NA, GeneNameColumnName = "gene_name", IDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", Invertlog2FoldChange = FALSE, abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit = 0, log2baseMeanUpperLimit = NA, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, LineWidth = 0.25, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel = bquote(log[2](Exit/DII)), log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5) {
+volcano.ma <- function(Data, PlotType = "ma", HighlightGeneNameRegex = NA, HighlightIDs = NA, GeneNameColumnName = "gene_name", IDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", Invertlog2FoldChange = FALSE, abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit = 0, log2baseMeanUpperLimit = NA, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, LineWidth = 0.25, Stroke = 0.1, Shape = 21, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5, log2FoldChangeLabel = bquote(log[2](Exit/DII)), log2FoldChangeTickDistance = 1, log10AdjustedPValueTickDistance = 5) {
   
   suppressPackageStartupMessages(library("stringr"))
   suppressPackageStartupMessages(library("tidyr"))
@@ -75,8 +75,8 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightGeneNameRegex = NA, Highl
   # Volcano plot
   if (PlotType == "volcano") {
     Plot <- ggplot(data = Data, aes(x = log2FoldChange, y = negativelog10AdjustedPValue, GeneName = gene_name, ID = id)) +
-            geom_point(aes(color = Category, alpha = Category), stroke = 0) +
-            scale_color_manual(values = c("up" = UpColor, "down" = DownColor, "ns" = "black")) + 
+            geom_point(aes(fill = Category, alpha = Category), stroke = Stroke, shape = Shape) +
+            scale_fill_manual(values = c("up" = UpColor, "down" = DownColor, "ns" = "black")) + 
             scale_alpha_manual(values = c("up" = Alpha, "down" = Alpha, "ns" = NSAlpha)) +
             geom_hline(yintercept = -log10(SignificanceThreshold), linetype = "dashed", linewidth = LineWidth) +
             geom_vline(xintercept = c(-abslog2FoldChangeThreshold, abslog2FoldChangeThreshold), linetype = "dashed", linewidth = LineWidth) +
@@ -92,8 +92,8 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightGeneNameRegex = NA, Highl
   # MA plot
   if (PlotType == "ma") {
     Plot <- ggplot(data = Data, aes(x = log2baseMean, y = log2FoldChange, GeneName = gene_name, ID = id)) +
-            geom_point(aes(color = Category, alpha = Category), stroke = 0) +
-            scale_color_manual(values = c("up" = UpColor, "down" = DownColor, "ns" = "black")) + 
+            geom_point(aes(fill = Category, alpha = Category), stroke = Stroke, shape = Shape) +
+            scale_fill_manual(values = c("up" = UpColor, "down" = DownColor, "ns" = "black")) + 
             scale_alpha_manual(values = c("up" = Alpha, "down" = Alpha, "ns" = NSAlpha)) +
             geom_hline(yintercept = c(-abslog2FoldChangeThreshold, abslog2FoldChangeThreshold), linetype = "dashed", linewidth = LineWidth) +
             ylab(log2FoldChangeLabel) +
@@ -107,10 +107,10 @@ volcano.ma <- function(Data, PlotType = "ma", HighlightGeneNameRegex = NA, Highl
   
   # Hightlight certain genes
   if (!is.na(HighlightGeneNameRegex) & !is.null(HighlightGeneNameRegex) & (HighlightGeneNameRegex != "")) {
-    Plot <- Plot + geom_point(data = Data[(Data[, "id"] %in% HighlightIDs) | str_detect(replace_na(unlist(Data[, "gene_name"], use.names = FALSE), ""), HighlightGeneNameRegex),], color = HighlightColor, stroke = 0, size = HighlightSize)
+    Plot <- Plot + geom_point(data = Data[(Data[, "id"] %in% HighlightIDs) | str_detect(replace_na(unlist(Data[, "gene_name"], use.names = FALSE), ""), HighlightGeneNameRegex),], fill = HighlightColor, stroke = Stroke, shape = Shape, size = HighlightSize)
   }
   else {
-    Plot <- Plot + geom_point(data = Data[Data[, "id"] %in% HighlightIDs,], color = HighlightColor, stroke = 0, size = HighlightSize)
+    Plot <- Plot + geom_point(data = Data[Data[, "id"] %in% HighlightIDs,], fill = HighlightColor, stroke = Stroke, shape = Shape, size = HighlightSize)
   }
   
   return(Plot)
