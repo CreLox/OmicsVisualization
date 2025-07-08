@@ -123,7 +123,7 @@ Plots the smoothed empirical distribution function of all normalized reads (comp
 ## plotPCA
 >```plotPCA(OmicsExcelDataFilePath, SampleColumns, GroupTags, FillColorPalette, PointSize = 2.5, ExpandRatio = 0.1, HideAxis = TRUE)```
 
-Normalization of each dimension (centered so that the mean$= 0$ and scaled so that the variance$= 1$) is by default (see [this](https://stats.stackexchange.com/q/189902)).
+Normalization of each dimension (centered so that the mean $\mu= 0$ and scaled so that the variance $\sigma^2= 1$) is by default (see [this](https://stats.stackexchange.com/q/189902)).
 
 ## samples.beeswarm
 >```samples.beeswarm(GeneNameRegex, ExcelDataFilePath, GeneNameColumnName = "gene_name", ColumnOffset = 2, Group1RepNum, Group2RepNum, GroupTags, Colours = c("black", "red"), Standardized = 1, Breaks = 10, PointSize = 0.75, LineWidth = 0.5, AsteriskSignificance = TRUE, PValueColumnName = "pvalue", PValueDigit = 2)```
