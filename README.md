@@ -128,7 +128,7 @@ Normalization of each dimension (centered so that the mean $\mu= 0$ and scaled s
 ## samples.beeswarm
 >```samples.beeswarm(GeneNameRegex, ExcelDataFilePath, GeneNameColumnName = "gene_name", ColumnOffset = 2, Group1RepNum, Group2RepNum, GroupTags, Colours = c("black", "red"), Standardized = 1, Breaks = 10, PointSize = 0.75, LineWidth = 0.5, AsteriskSignificance = TRUE, PValueColumnName = "pvalue", PValueDigit = 2)```
 
-Plots a beeswarm plot of sample reads of gene(s) whose name(s) match the ```GeneNameRegex```. If ```Standardized == 1``` (or ```Standardized ==  2```), the sample reads of each gene will be standardized by the mean of sample reads of group 1 (or 2) of each gene; otherwise, no standardization will be performed. The plot is automatically saved as a time-tagged ```.png``` file in the working directory.
+Plots a beeswarm plot of sample reads of gene(s) whose name(s) match the ```GeneNameRegex```. If ```Standardized = 1``` (or ```Standardized =  2```), the sample reads of each gene will be standardized by the mean of sample reads of group 1 (or 2) of each gene; otherwise, no standardization will be performed. The plot is automatically saved as a time-tagged figure in the working directory.
 
 ## SRX2SRR
 >```SRX2SRR(SRXSheetFilePath, SRXColumnName = "SRX")```
