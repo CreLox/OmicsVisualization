@@ -144,7 +144,7 @@ Converts a column (from an Excel sheet ```SRXSheetFilePath```) of experiment num
 ## UniProtKBAC2EnsemblID
 >```UniProtKBAC2EnsemblID(UniProtKBAC.CSV, Wait = 5, To = "Ensembl")```
 
-```UniProtKBAC2EnsemblID``` utilizes the UniProt REST API (which is more complete than ```biomaRt```) to convert UniProtKB accession IDs in ```UniProtKBAC.CSV``` into the Ensembl IDs of corresponding genes (note: since Ensembl inherits the WormBase IDs for *C. elegans* genes, ```To``` should be set as ```"WormBase"``` instead of the default ```"Ensembl"``` when converting *C. elegans* genes). Once a job is submitted, the status will be inquired every ```Wait``` seconds until the job is finished. The downloaded output is then parsed into a matrix with two columns named ```uniprotsptrembl``` and ```ensembl_gene_id``` (consistent with BioMart). Each row corresponds to a mapping. If a protein/peptide is mapped to more than one Ensembl gene ID, multiple rows will share the same UniProtKB accession ID in column 1 but possess different Ensembl IDs in column 2.
+```UniProtKBAC2EnsemblID``` utilizes UniProt's REST API (which is more complete than ```biomaRt```) to convert UniProtKB accession IDs in ```UniProtKBAC.CSV``` into the Ensembl IDs of corresponding genes (note: since Ensembl inherits the WormBase IDs for *C. elegans* genes, ```To``` should be set as ```"WormBase"``` instead of the default ```"Ensembl"``` when converting *C. elegans'* genes). Once a job is submitted, the status will be inquired every ```Wait``` seconds until the job is finished. The downloaded output is then parsed into a matrix with two columns named ```uniprotsptrembl``` and ```ensembl_gene_id``` (consistent with BioMart). Each row corresponds to a mapping. If a protein/peptide is mapped to more than one Ensembl gene ID, multiple rows will share the same UniProtKB accession ID in column 1 but possess different Ensembl IDs in column 2.
 
 ## volcano.ma
 >```volcano.ma(Data, PlotType = "ma", HighlightGeneNameRegex = NA, HighlightIDs = NA, GeneNameColumnName = "gene_name", IDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", Invertlog2FoldChange = FALSE, abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, log2FoldChangeLabel, log2FoldChangeTickDistance = 1, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit = 0, log2baseMeanUpperLimit = NA, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, log10AdjustedPValueTickDistance = 5, LineWidth = 0.25, Stroke = 0.1, Shape = 21, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5)```
@@ -164,6 +164,12 @@ For the MA plot, use
 Plot <- Plot + xlab("log2(base mean)") + ylab("log2(fold change)")
 ggplotly(Plot)
 ```
+## write.gmt.EC
+> ```write.gmt.EC(ECIndexFilePath, organism_id, To = "Ensembl", AppendGODescription = FALSE, LowCountThreshold = 5, IgnoreLevel = c(0), GMTFilePath)```
+
+Writes a .gmt file for enzyme classifications (EC) listed in the description file ```ECIndexFilePath``` of a species specified by ```organism_id``` (e.g. ```"105023"``` for *N. furzeri*). This function is based on UniProt's database search. Conversion of UniProt's accession IDs to corresponding Ensembl IDs is also handled by UniProt's REST API (depending on ```UniProtKBAC2EnsemblID```: ```To``` should be set as ```"WormBase"``` instead of the default ```"Ensembl"``` when converting *C. elegans'* genes). ECs with less than ```LowCountThreshold``` of entries will not be written into the .gmt file (which will also be filtered out in GSEA anyway).
+
+It is not particularly informative to look at very broad categories like "EC 1: oxidoreductases". Therefore, we can set  ```IgnoreLevel``` properly to ignore general levels of classifications.
 
 ## write.gmt.KEGG
 > ```write.gmt.KEGG(Species3Letters, BioMartDataset, SpeciesSuffix, DescriptionFilePath = "DescriptionOnly.tsv", GMTFilePath = "KEGG.gmt")```
