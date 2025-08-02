@@ -167,7 +167,7 @@ ggplotly(Plot)
 ## write.gmt.EC
 > ```write.gmt.EC(ECIndexFilePath, organism_id, To = "Ensembl", AppendGODescription = FALSE, LowCountThreshold = 5, IgnoreLevel = c(0), GMTFilePath)```
 
-Writes a .gmt file for enzyme classifications (EC) listed in the description file ```ECIndexFilePath``` of a species specified by ```organism_id``` (e.g., ```"105023"``` for *N. furzeri*). This function is based on UniProt's database search. Conversion of UniProt's accession IDs to corresponding Ensembl IDs is also handled by UniProt's REST API (depending on ```UniProtKBAC2EnsemblID```: ```To``` should be set as ```"WormBase"``` instead of the default ```"Ensembl"``` when converting *C. elegans'* genes). ECs with fewer than ```LowCountThreshold``` entries will not be written into the .gmt file (which will also be filtered out in GSEA anyway).
+Writes a .gmt file for enzyme classifications (EC) listed in the description file ```ECIndexFilePath``` of a species specified by ```organism_id``` (e.g., ```"105023"``` for *N. furzeri*). This function is based on UniProt's database search. Conversion of UniProt's accession IDs to corresponding Ensembl IDs is also handled by UniProt's REST API (depending on ```UniProtKBAC2EnsemblID```: ```To``` should be set as ```"WormBase"``` instead of the default ```"Ensembl"``` when converting *C. elegans'* genes). ECs with fewer than ```LowCountThreshold``` entries will not be written into the .gmt file (which will also be filtered out in the downstream GSEA anyway).
 
 It is not particularly informative to look at extremely broad categories like "EC 1: oxidoreductases". Therefore, we can set  ```IgnoreLevel``` properly to ignore general levels of classifications.
 
