@@ -169,7 +169,7 @@ ggplotly(Plot)
 
 Writes a .gmt file for [IUBMB enzyme classifications](https://www.enzyme-database.org/) (EC) listed in the description file ```ECIndexFilePath``` of a species specified by ```organism_id``` (e.g., ```"105023"``` for *N. furzeri*). This function is based on UniProt's database search. Conversion of UniProt's accession IDs to corresponding Ensembl IDs is also handled by UniProt's REST API (depending on ```UniProtKBAC2EnsemblID```: ```To``` should be set as ```"WormBase"``` instead of the default ```"Ensembl"``` when converting *C. elegans'* genes). ECs with fewer than ```LowCountThreshold``` entries will not be written into the .gmt file (which will also be filtered out in the downstream GSEA anyway).
 
-It is not particularly informative to look at extremely broad categories like "EC 1: oxidoreductases". Therefore, we can set  ```IgnoreLevel``` properly to ignore these top levels of classifications.
+Usually, it is not particularly informative to look at extremely broad categories like "EC 1: oxidoreductases". Therefore, we can set  ```IgnoreLevel``` properly to ignore these top levels of classifications.
 
 ## write.gmt.KEGG
 > ```write.gmt.KEGG(Species3Letters, BioMartDataset, SpeciesSuffix, DescriptionFilePath = "DescriptionOnly.tsv", GMTFilePath = "KEGG.gmt")```
