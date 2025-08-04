@@ -3,7 +3,7 @@ write.gmt.EC <- function(ECIndexFilePath = "EC.20250802.des",
                          To = "Ensembl",
                          AppendGODescription = FALSE,
                          LowCountThreshold = 5,
-                         IgnoreLevel = c(0), # Example: "EC1": lv 0, "EC1.14": lv 1, "EC1.14.11": lv 2
+                         IgnoreLevel = c(0, 1), # Example: "EC1": lv 0, "EC1.14": lv 1, "EC1.14.11": lv 2
                          GMTFilePath = "EC.N.furzeri.gmt") {
   
   suppressPackageStartupMessages(library("stringr"))
