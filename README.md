@@ -171,7 +171,7 @@ Writes a .gmt file for [IUBMB Enzyme Commission (EC) numbers](https://www.enzyme
 
 Usually, it is not particularly informative to look at extremely broad categories like "EC 1: oxidoreductases". Therefore, we can set  ```IgnoreLevel``` properly to ignore these top levels of classifications.
 
-For comprehensive mappings of EC to GO (MF), see [this](https://current.geneontology.org/ontology/external2go/ec2go).
+For comprehensive mapping of EC to GO (MF), see [this](https://current.geneontology.org/ontology/external2go/ec2go).
 
 ## write.gmt.KEGG
 > ```write.gmt.KEGG(Species3Letters, BioMartDataset, SpeciesSuffix, DescriptionFilePath = "DescriptionOnly.tsv", GMTFilePath = "KEGG.gmt")```
