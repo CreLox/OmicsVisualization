@@ -165,7 +165,7 @@ Plot <- Plot + xlab("log2(base mean)") + ylab("log2(fold change)")
 ggplotly(Plot)
 ```
 ## write.gmt.EC
-> ```write.gmt.EC(ECIndexFilePath, organism_id, To = "Ensembl", AppendGODescription = FALSE, LowCountThreshold = 5, IgnoreLevel = c(0, 1), GMTFilePath)```
+> ```write.gmt.EC(ECIndexFilePath, organism_id, To = "Ensembl", AppendDescription = FALSE, LowCountThreshold = 5, IgnoreLevel = c(0, 1), GMTFilePath)```
 
 Writes a .gmt file for [IUBMB Enzyme Commission (EC) numbers](https://www.enzyme-database.org/) listed in the description file ```ECIndexFilePath``` of a species specified by ```organism_id``` (e.g., ```"105023"``` for *N. furzeri*, ```"6239"``` for *C. elegans*). This function is based on UniProt's database search. Conversion of UniProt's accession IDs to corresponding Ensembl IDs is also handled by UniProt's REST API (depending on ```UniProtKBAC2EnsemblID```: ```To``` should be set as ```"WormBase"``` instead of the default ```"Ensembl"``` when converting *C. elegans'* genes). ECs with fewer than ```LowCountThreshold``` entries will not be written into the .gmt file (which will also be filtered out in the downstream GSEA anyway).
 
