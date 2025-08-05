@@ -147,7 +147,7 @@ Converts a column (from an Excel sheet ```SRXSheetFilePath```) of experiment num
 ```UniProtKBAC2EnsemblID``` utilizes UniProt's REST API (which is more complete than ```biomaRt```) to convert UniProtKB accession IDs in ```UniProtKBAC.CSV``` into the Ensembl IDs of corresponding genes (note: since Ensembl inherits the WormBase IDs for *C. elegans* genes, ```To``` should be set as ```"WormBase"``` instead of the default ```"Ensembl"``` when converting *C. elegans'* genes). Once a job is submitted, the status will be inquired every ```Wait``` seconds until the job is finished. The downloaded output is then parsed into a matrix with two columns named ```uniprotsptrembl``` and ```ensembl_gene_id``` (consistent with BioMart). Each row corresponds to a mapping. If a protein/peptide is mapped to more than one Ensembl gene ID, multiple rows will share the same UniProtKB accession ID in column 1 but possess different Ensembl IDs in column 2.
 
 ## UniProtGOFilter
->```UniProtGOFilter(GO, organism_id, To = "Ensembl")
+>```UniProtGOFilter(GO, organism_id, To = "Ensembl")```
 
 See also ```BioMartGOFilter.Nfurzeri```. ```UniProtGOFilter``` finds Ensembl IDs of genes belonging to the GO term ```GO``` of a species specified by ```organism_id``` (e.g., ```"105023"``` for *N. furzeri*, ```"6239"``` for *C. elegans*). This function is based on UniProt's database search. Conversion of UniProt's accession IDs to corresponding Ensembl IDs is also handled by UniProt's REST API (depending on ```UniProtKBAC2EnsemblID```: ```To``` should be set as ```"WormBase"``` instead of the default ```"Ensembl"``` when converting *C. elegans'* genes).
 
