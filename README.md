@@ -173,7 +173,7 @@ ggplotly(Plot)
 ## who
 > ```who()```
 
-Utility function with the same functionality as MATLAB's ```who``` function.
+Utility function with the same functionality as MATLAB's ```who``` function (lists in alphabetical order the names of all variables in the current environment).
 
 ## write.gmt.EC
 > ```write.gmt.EC(ECIndexFilePath, organism_id, To = "Ensembl", AppendDescription = FALSE, LowCountThreshold = 5, IgnoreLevel = c(0, 1), GMTFilePath)```
