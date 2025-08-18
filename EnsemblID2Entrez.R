@@ -7,6 +7,10 @@ EnsemblID2Entrez <- function(EnsemblID,
   if (identical(EnsemblID, NA) || identical(EnsemblID, "") || (length(EnsemblID) == 0)) {
     return("")
   }
+  if (length(EnsemblID) > 1) {
+    return(BatchConvert2Entrez(EnsemblID, Output = Output))
+  }
+  
   retry({
     ConsoleOutput <- capture.output({
                        EntrezSearchResult <- entrez_search(db = "gene", term = EnsemblID)
