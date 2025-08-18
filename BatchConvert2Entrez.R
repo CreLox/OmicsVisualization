@@ -1,8 +1,8 @@
 BatchConvert2Entrez <- function(EnsemblID.Xsv,
-                                X = "\n",
+                                X = "",
                                 Output = "Description") {
   
-  if (is.null(X) || is.na(X) || (X == "")) {
+  if ((length(X) == 0) || identical(X, NA) || identical(X, "")) {
     AllEnsemblIDs <- EnsemblID.Xsv
   }
   else {
