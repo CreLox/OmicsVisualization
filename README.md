@@ -77,7 +77,7 @@ wherein if no permutation yields a more extreme statistic, $`{-\text{lg}p}`$ wil
 ## EnsemblID2Entrez
 >```EnsemblID2Entrez(EnsemblID, Output = c("Accession", "ID", "Description", "Name"))```
 
->```BatchConvert2Entrez(EnsemblID.Xsv, X = "\n", Output)```
+>```BatchConvert2Entrez(EnsemblID.Xsv, X = "", Output)```
 
 ```EnsemblID2Entrez``` converts a single Ensembl ID to its corresponding NCBI Entrez accession(s)/ID(s)/description(s)/name(s) using the [rentrez](https://docs.ropensci.org/rentrez/) package. ```BatchConvert2Entrez``` batch converts a string (```EnsemblID.Xsv```) of Ensembl IDs delimited by ```X```. Use ```X = ""``` if ```EnsemblID.Xsv``` is already a set of individual Ensembl IDs. If the mapping does not exist, the output will be ```""```. This works better than using ```biomaRt``` because the mapping is more complete. And unlike using ```org.*.eg.db```, this works for all species.
 
