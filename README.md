@@ -74,6 +74,11 @@ $$p := \dfrac{\text{Permutation\# with more extreme statistics}}{\text{Total per
 
 wherein if no permutation yields a more extreme statistic, $`{-\text{lg}p}`$ will be ($+\infty$ according to the formula but) reported as $`{-\text{lg}(2^{-52})} \approx 15.65`$ instead.
 
+## custom.gmt.GSEA
+>```custom.gmt.GSEA(custom.gmt, custom.des, project.name, LFQ.quantification.xlsx, ID.colname = "Ensembl_id", log2FC.colname)```
+
+Performs GSEA using customized gene sets (stored in ```custom.gmt```) along with a description file (```custom.des```) for the gene sets. Uses [WebGestalt](https://www.webgestalt.org/)'s implementation.
+
 ## EnsemblID2Entrez
 >```EnsemblID2Entrez(EnsemblID, Output = c("Accession", "ID", "Description", "Name"))```
 
