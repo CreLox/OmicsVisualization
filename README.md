@@ -77,7 +77,7 @@ wherein if no permutation yields a more extreme statistic, $`{-\text{lg}p}`$ wil
 ## custom.gmt.GSEA
 >```custom.gmt.GSEA(custom.gmt, custom.des, project.name, LFQ.quantification.xlsx, ID.colname = "Ensembl_id", log2FC.colname)```
 
-Performs GSEA using customized gene sets (stored in ```custom.gmt```) along with a description file (```custom.des```) for the gene sets. Uses [WebGestalt](https://www.webgestalt.org/)'s implementation.
+Performs a gene set enrichment analysis (GSEA) using customized gene sets (stored in ```custom.gmt```) along with a description file (```custom.des```) for the gene sets. Uses [WebGestalt](https://www.webgestalt.org/)'s implementation.
 
 ## EnsemblID2Entrez
 >```EnsemblID2Entrez(EnsemblID, Output = c("Accession", "ID", "Description", "Name"))```
