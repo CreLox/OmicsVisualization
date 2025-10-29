@@ -148,6 +148,15 @@ Converts a column (from an Excel sheet ```SRXSheetFilePath```) of experiment num
 <img src="assets/SRARunSelector_Example.png" width="700">
 </p>
 
+## transcript.level.zebrafish.dev.stage
+>```transcript.level.zebrafish.dev.stage(EnsemblID, DataFilePath = "zf-stages.GRCz11.e111.all-counts.csv", ..., PointSize, LineWidth, ErrorBarWidth, DataPointColor, YAxisTitle)```
+
+Plot the transcription level of a gene (specified by ```EmsemblID```) throughout the time course of zebrafish development. Requires the [data file](https://figshare.com/ndownloader/files/46453495) containing normalized counts, which originated from [White et al., 2017](https://elifesciences.org/articles/30860). An example plot of _myl7_ (_cmlc2_) is shown below.
+
+<p align="center">
+<img src="assets/cmlc2_zebrafish.png" width="700">
+</p>
+
 ## UniProtGOFilter
 >```UniProtGOFilter(GO, organism_id, To = "Ensembl")```
 
