@@ -1,12 +1,15 @@
 # Documentation
   * [AppendEnsemblIDColumn](#appendensemblidcolumn)
   * [AppendNCBIGeneDescriptionColumn](#appendncbigenedescriptioncolumn)
+  * [BatchConvert2Entrez](#ensemblid2entrez)
   * [BioMartGOFilter.*Nfurzeri*](#biomartgofilternfurzeri)
   * [CorrelateOmics](#correlateomics)
   * [custom.gmt.GSEA](#customgmtgsea)
   * [EnsemblID2Entrez](#ensemblid2entrez)
   * [EnsemblIDFilter](#ensemblidfilter)
   * [FlaskiRenormalization](#flaskirenormalization)
+  * [merge.sets](#biomartgofilternfurzeri)
+  * [plotCorrelateOmics](#correlateomics)
   * [plotlogReadDistribution](#plotlogreaddistribution)
   * [plotPCA](#plotpca)
   * [samples.beeswarm](#samplesbeeswarm)
@@ -15,6 +18,7 @@
   * [UniProtKBAC2EnsemblID](#uniprotkbac2ensemblid)
   * [volcano.ma](#volcanoma)
   * [who](#who)
+  * [write.gmt](#biomartgofilternfurzeri))
   * [write.gmt.EC](#writegmtec)
   * [write.gmt.KEGG](#writegmtkegg)
 
