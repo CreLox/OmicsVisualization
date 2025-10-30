@@ -123,7 +123,7 @@ Filters a [Flaski RNAseq pipeline](https://flaski.age.mpg.de/rnaseq/) output Exc
 
 Renormalize all samples contained in all .xlsx Flaski output data files in ```Folder``` based on DESeq2's "median of ratios".
 
-## FindUniqueGenes.EnsemblID
+## FindUniqueGenes.EnsemblID (obsolete)
 >```FindUniqueGenes.EnsemblID(TargetSpecies, CheckHomologySpecies = c("drerio", "kmarmoratus"))```
 
 Identifies genes of the ```TargetSpecies``` (returns a vector of their Ensembl IDs) without a homolog in ```CheckHomologySpecies```. Note: diapause III (delayed hatching), but no diapause II, can be observed in the life history of mangrove rivulus *Kryptolebias marmoratus*.
@@ -156,7 +156,7 @@ Normalization of each dimension (centered so that the mean $\mu= 0$ and scaled s
 
 Plots a beeswarm plot of sample reads of gene(s) whose name(s) match the ```GeneNameRegex```. If ```Standardized = 1``` (or ```Standardized =  2```), the sample reads of each gene will be standardized by the mean of sample reads of group 1 (or 2) of each gene; otherwise, no standardization will be performed. The plot is automatically saved as a time-tagged figure in the working directory.
 
-## SRX2SRR
+## SRX2SRR (obsolete)
 >```SRX2SRR(SRXSheetFilePath, SRXColumnName = "SRX")```
 
 Converts a column (from an Excel sheet ```SRXSheetFilePath```) of experiment numbers into corresponding run numbers (printed directly onto the console alongside the sequencing format employed). Note that this critical sequencing format info is not available in ```SRA_Accessions.tab``` (which allows batch searching using the corresponding SRP/PRJNA accession number directly) or ```SRA_Run_Members.tab``` (which allows batch searching using the corresponding SRP accession number) on [the FTP site](https://ftp.ncbi.nlm.nih.gov/sra/reports/Metadata/).
