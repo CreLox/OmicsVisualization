@@ -174,7 +174,7 @@ Converts a column (from an Excel sheet ```SRXSheetFilePath```) of experiment num
 ## transcript.level.zebrafish.dev.stage
 >```transcript.level.zebrafish.dev.stage(EnsemblID, DataFilePath = "zf-stages.GRCz11.e111.all-counts.csv", ..., PointSize, LineWidth, ErrorBarWidth, DataPointColor, YAxisTitle)```
 
-Plots the transcription level of a gene (specified by ```EmsemblID```) throughout the time course of zebrafish development. Requires the [data file](https://figshare.com/ndownloader/files/46453495) containing normalized counts reanalyzed from [White et al., 2017](https://elifesciences.org/articles/30860) (similar to [Yang et al., 2013](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0064058) and [Mathavan et al.,2005](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.0010029)). An example plot of _myl7_ (_cmlc2_) is shown below.
+Plots the transcription level of a gene (specified by ```EmsemblID```) throughout the time course of zebrafish development. Requires the [data file](https://figshare.com/ndownloader/files/46453495) containing normalized counts reanalyzed from [White et al., 2017](https://elifesciences.org/articles/30860) (similar to [Yang et al., 2013](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0064058) and [Mathavan et al., 2005](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.0010029)). An example plot of _myl7_ (_cmlc2_) is shown below.
 
 <p align="center">
 <img src="assets/cmlc2_zebrafish.png" width="700">
