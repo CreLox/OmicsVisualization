@@ -18,7 +18,7 @@
   * [UniProtKBAC2EnsemblID](#uniprotkbac2ensemblid)
   * [volcano.ma](#volcanoma)
   * [who](#who)
-  * [write.gmt](#biomartgofilternfurzeri))
+  * [write.gmt](#biomartgofilternfurzeri)
   * [write.gmt.EC](#writegmtec)
   * [write.gmt.KEGG](#writegmtkegg)
 
