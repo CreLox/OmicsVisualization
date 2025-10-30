@@ -10,7 +10,7 @@
   * [FlaskiRenormalization](#flaskirenormalization)
   * [merge.sets](#biomartgofilternfurzeri)
   * [plotCorrelateOmics](#correlateomics)
-  * [plotlogReadDistribution](#plotlogreaddistribution)
+  * [plotlog2ReadDistribution](#plotlog2readdistribution)
   * [plotPCA](#plotpca)
   * [samples.beeswarm](#samplesbeeswarm)
   * [transcript.level.zebrafish.dev.stage](#transcriptlevelzebrafishdevstage)
@@ -143,10 +143,10 @@ Note: Ensembl BioMart provides a built-in functionality to filter genes by GO te
 <img src="assets/EnsemblBioMartGOFilter.png" width="700">
 </p>
 
-## plotlogReadDistribution
+## plotlog2ReadDistribution
 >```plotlog2ReadDistribution(ExcelDataFilePath, DataColumns) # ln(x) / ln(2), x >= 1```
 
->```plotlnReadDistribution(ExcelDataFilePath, DataColumns) # ln(x + 1)```
+>```plotlnReadDistribution(ExcelDataFilePath, DataColumns) # ln(x + 1), obsolete```
 
 Plots the smoothed empirical distribution function of all normalized reads (compiled from columns whose IDs/names are in ```DataColumns```) to help determine a threshold to filter genes with valid expression. This step is helpful when picking genes for further functional studies but dispensable if only bioinformatic analyses (like a [gene set enrichment analysis](https://www.pnas.org/doi/10.1073/pnas.0506580102)) are to be done.
 
