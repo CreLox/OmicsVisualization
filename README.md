@@ -10,6 +10,7 @@
   * [FlaskiRenormalization](#flaskirenormalization)
   * [get.Ontology](#getontology)
   * [merge.sets](#biomartgofilternfurzeri)
+  * [merge.two.lists](#mergetwolists)
   * [plotCorrelateOmics](#correlateomics)
   * [plotlog2ReadDistribution](#plotlog2readdistribution)
   * [plotPCA](#plotpca)
@@ -148,6 +149,11 @@ Note: Ensembl BioMart provides a built-in functionality to filter genes by GO te
 <p align="center">
 <img src="assets/EnsemblBioMartGOFilter.png" width="700">
 </p>
+
+## merge.two.lists
+>```merge.two.lists(x, y)```
+
+Utility function which merges two lists(```x``` and ```y```). Components with the same name in the two lists will be merged into a single component with the same name in the resulting merged list, while unique components in each of the two lists will be inherited directly by the resulting merged list.
 
 ## plotlog2ReadDistribution
 >```plotlog2ReadDistribution(ExcelDataFilePath, DataColumns) # ln(x) / ln(2), x >= 1```
