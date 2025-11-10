@@ -136,7 +136,7 @@ Identifies genes of the ```TargetSpecies``` (returns a vector of their Ensembl I
 ## get.Ontology
 >```get.Ontology(URL = "https://current.geneontology.org/ontology/go-basic.obo", TempFilePath = "go-basic.obo")```
 
-A wrapper of the ```get_ontology``` function from the [ontologyIndex](https://cran.r-project.org/web/packages/ontologyIndex/index.html) package, which always builds the ontology from [the latest official go-basic file](https://current.geneontology.org/ontology/go-basic.obo).
+A wrapper of the ```get_ontology``` function from the [ontologyIndex](https://cran.r-project.org/web/packages/ontologyIndex/index.html) package, which always builds the ontology from [the latest official go-basic file](https://geneontology.org/docs/download-ontology/). Only "is_a" and "part_of" are considered as child–ancestor relationships, but not any of the ```regulates``` relationships.
 
 ## GOFilter (obsolete)
 >```GOFilter(ExcelDataFilePath, GOVector, godir, GOTermColumnName = "GO_id", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```
