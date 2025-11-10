@@ -8,6 +8,7 @@
   * [EnsemblID2Entrez](#ensemblid2entrez)
   * [EnsemblIDFilter](#ensemblidfilter)
   * [FlaskiRenormalization](#flaskirenormalization)
+  * [get.Ontology](#getontology)
   * [merge.sets](#biomartgofilternfurzeri)
   * [plotCorrelateOmics](#correlateomics)
   * [plotlog2ReadDistribution](#plotlog2readdistribution)
@@ -131,6 +132,11 @@ Renormalize all samples contained in all .xlsx Flaski output data files in ```Fo
 >```FindUniqueGenes.EnsemblID(TargetSpecies, CheckHomologySpecies = c("drerio", "kmarmoratus"))```
 
 Identifies genes of the ```TargetSpecies``` (returns a vector of their Ensembl IDs) without a homolog in ```CheckHomologySpecies```. Note: diapause III (delayed hatching), but no diapause II, can be observed in the life history of mangrove rivulus *Kryptolebias marmoratus*.
+
+## get.Ontology
+>```get.Ontology(URL = "https://current.geneontology.org/ontology/go-basic.obo", TempFilePath = "go-basic.obo")```
+
+A wrapper of the ```get_ontology``` function from the [ontologyIndex](https://cran.r-project.org/web/packages/ontologyIndex/index.html) package, which always builds the ontology from [the latest official go-basic file](https://current.geneontology.org/ontology/go-basic.obo).
 
 ## GOFilter (obsolete)
 >```GOFilter(ExcelDataFilePath, GOVector, godir, GOTermColumnName = "GO_id", ReAdjustPValues = TRUE, PValueColumnName = "pvalue", AdjustedPValueColumnName = "padj")```
