@@ -1,6 +1,13 @@
 merge.two.lists <- function(x, y) {
   merged.list <- list()
   
+  if (length(x) == 0) {
+    return(y)
+  }
+  if (length(y) == 0) {
+    return(x)
+  }
+  
   for (i in 1 : length(x)) {
     if (names(x[i]) %in% names(y)) {
       idx <- which(names(y) == names(x[i]))
