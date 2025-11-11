@@ -51,7 +51,7 @@ The output is a list in which the name of each element is the Ensembl ID of a *N
 BP <- BioMartGOFilter.Nfurzeri("GO:0008150", IncludeChildren = TRUE)
 CC <- BioMartGOFilter.Nfurzeri("GO:0005575", IncludeChildren = TRUE)
 MF <- BioMartGOFilter.Nfurzeri("GO:0003674", IncludeChildren = TRUE)
-write.gmt(c(BP, CC, MF))
+InvertedGOList <- write.gmt(c(BP, CC, MF))
 # file.show("custom.gmt")
 # as.character(openssl::sha1(file("custom.gmt")))
 ```
