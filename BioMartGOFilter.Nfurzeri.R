@@ -1,4 +1,5 @@
 BioMartGOFilter.Nfurzeri <- function(GO.CSV,
+                                     IncludeChildren = FALSE,
                                      CombineFruitFlyHomology = FALSE,
                                      CombineHumanHomology = TRUE,
                                      CombineMedakaHomology = TRUE,
@@ -9,8 +10,20 @@ BioMartGOFilter.Nfurzeri <- function(GO.CSV,
   
   suppressPackageStartupMessages(library("biomaRt"))
   suppressPackageStartupMessages(library("retry"))
+  suppressPackageStartupMessages(library("ontologyIndex"))
   biomartCacheClear()
   
+  if (IncludeChildren) {
+    Ontology <- get.Ontology()
+    GO.Vector <- unlist(strsplit(GO.CSV, split = ","))
+    GO.Vector.Complemented <- c()
+    for (i in 1 : length(GO.Vector)) {
+      GO.Vector.Complemented <- c(GO.Vector.Complemented,
+                                  get_descendants(Ontology, GO.Vector[i], exclude_roots = FALSE))
+    }
+    GO.CSV <- paste0(unique(GO.Vector.Complemented), collapse = ",")
+  }
+    
   SpeciesDatasetNameList <- c()
   if (CombineFruitFlyHomology) {
     SpeciesDatasetNameList <- c(SpeciesDatasetNameList, "dmelanogaster_gene_ensembl")
