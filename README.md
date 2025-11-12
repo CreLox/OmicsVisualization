@@ -35,11 +35,11 @@ Appends a column of Ensembl IDs to the right of an Excel sheet with a column (na
 Appends a column of NCBI gene descriptions to the right of an Excel sheet with a column (named ```ExcelDataFileEnsemblIDColumnName```) containing Ensembl IDs. Depends on ```EnsemblID2Entrez```.
 
 ## BioMartGOFilter.*Nfurzeri*
->```BioMartGOFilter.Nfurzeri(GO.CSV, IncludeChildren = FALSE, CombineFruitFlyHomology = FALSE, CombineHumanHomology = TRUE, CombineMedakaHomology = TRUE, CombineMouseHomology = TRUE, CombineNematodeHomology = FALSE, CombineXenopusHomology = TRUE, CombineZebrafishHomology = TRUE)```
+>```BioMartGOFilter.Nfurzeri(GO.CSV, IncludeChildren = TRUE, CombineFruitFlyHomology = FALSE, CombineHumanHomology = TRUE, CombineMedakaHomology = TRUE, CombineMouseHomology = TRUE, CombineNematodeHomology = FALSE, CombineXenopusHomology = TRUE, CombineZebrafishHomology = TRUE)```
 
 >```merge.sets(set.a, set.b = c(), exception.set = c())```
 
->```write.gmt(GOList, GODescriptionOnly = FALSE, OutputFilePath = "custom.gmt", min.Size = 10, max.Size = 4000, PropagateAnnotationsToAncestor = TRUE)```
+>```write.gmt(GOList, GODescriptionOnly = FALSE, OutputFilePath = "custom.gmt", min.Size = 1, max.Size = 99999999, PropagateAnnotationsToAncestor = TRUE)```
 
 **See also** ```UniProtGOFilter```. ```BioMartGOFilter.Nfurzeri``` uses the [biomaRt](https://bioconductor.org/packages/release/bioc/html/biomaRt.html) package to get all *Nothobranchius furzeri* genes with GO term annotations in ```GO.CSV``` [note: (0) the issue of the query number limit of the BioMart API is [handled automatically](https://www.biostars.org/p/249739/) by ```biomaRt::getBM```; (1) a term that ```regulates``` a BP is not considered as a child term of that BP; (2) a protein ```located_in``` a protein complex (CC) is not necessary an integral ```part_of``` that protein complex (for example, [MTG1](https://www.uniprot.org/uniprotkb/Q9BT17/entry) is located in the [mitochondrial ribosome](https://www.ebi.ac.uk/QuickGO/term/GO:0005761), but it is not a mitochondrial ribosomal protein like [CHCHD1/MRPS37](https://www.uniprot.org/uniprotkb/Q96BP2/entry); see [this link](https://wiki.geneontology.org/Located_in#What_not_to_capture_with_the_has_input_relation) and [this link](https://wiki.geneontology.org/Part_of_relation#Relating_Gene_Products_to_Protein-containing_Complexes); the [Complex Portal](https://www.ebi.ac.uk/complexportal/home) is a good resource); (3) watch out for historical misannotations like [*rplp0-golga7*](https://www.ensembl.org/Nothobranchius_furzeri/Gene/Summary?db=core;g=ENSNFUG00015011674;r=sgr10:40066571-40071331) (two separate genes with non-overlapping coding sequences sharing the same Ensembl ID) and misleading names like [MRPS36/KGD4](https://www.uniprot.org/uniprotkb/P82909/entry) (which was found to not be a mitochondiral ribosomal protein) and [NDUFA4](https://www.uniprot.org/uniprotkb/O00483/entry) (which was found to be part of the respiratory complex IV rather than the respiratory complex I); (4) watch out for fusion genes like [*UBA52*](https://www.uniprot.org/uniprotkb/P62987/entry), [*RPS27A*](https://www.uniprot.org/uniprotkb/P62979/entry), and [*FAU*](https://www.uniprot.org/uniprotkb/P62861/entry), which code for ubiquitin-eL40, ubiquitin-eS31/S27a, and ubiquitin-like FUBI-eS30, respectively].
 
@@ -48,9 +48,9 @@ Appends a column of NCBI gene descriptions to the right of an Excel sheet with a
 The output is a list in which the name of each element is the Ensembl ID of a *N. furzeri* gene and the content of each element is the GO term annotations of that gene (supplemented with homology information). This list can then be converted into a .gmt file (for the gene set enrichment analysis) with ```write.gmt```. For example, the following script generates a .gmt file of all GO term annotations of all *N. furzeri* genes:
 
 ```R
-BP <- BioMartGOFilter.Nfurzeri("GO:0008150", IncludeChildren = TRUE)
-CC <- BioMartGOFilter.Nfurzeri("GO:0005575", IncludeChildren = TRUE)
-MF <- BioMartGOFilter.Nfurzeri("GO:0003674", IncludeChildren = TRUE)
+BP <- BioMartGOFilter.Nfurzeri("GO:0008150")
+CC <- BioMartGOFilter.Nfurzeri("GO:0005575")
+MF <- BioMartGOFilter.Nfurzeri("GO:0003674")
 InvertedGOList <- write.gmt(c(BP, CC, MF))
 # file.show("custom.gmt")
 # as.character(openssl::sha1(file("custom.gmt")))
