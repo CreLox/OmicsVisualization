@@ -1,5 +1,5 @@
 BioMartGOFilter.Nfurzeri <- function(GO.CSV,
-                                     IncludeChildren = FALSE,
+                                     IncludeChildren = TRUE,
                                      CombineFruitFlyHomology = FALSE,
                                      CombineHumanHomology = TRUE,
                                      CombineMedakaHomology = TRUE,

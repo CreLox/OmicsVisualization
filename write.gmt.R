@@ -1,8 +1,8 @@
 write.gmt <- function(GOList,
                       GODescriptionOnly = FALSE,
                       OutputFilePath = "custom.gmt",
-                      min.Size = 10,
-                      max.Size = 4000,
+                      min.Size = 1,
+                      max.Size = 99999999,
                       PropagateAnnotationsToAncestor = TRUE) {
   
   suppressPackageStartupMessages(library("ribiosUtils"))
