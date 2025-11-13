@@ -304,10 +304,7 @@ GO:0005891	voltage-gated calcium channel complex
 GO:0005892	acetylcholine-gated channel complex
 GO:0005893	interleukin-2 receptor complex
 GO:0005895	interleukin-5 receptor complex
-GO:0005896	interleukin-6 receptor complex
-GO:0005898	interleukin-13 receptor complex
 GO:0005899	insulin receptor complex
-GO:0005900	oncostatin-M receptor complex
 GO:0005901	caveola
 GO:0005902	microvillus
 GO:0005903	brush border
@@ -414,7 +411,6 @@ GO:0016604	nuclear body
 GO:0016607	nuclear speck
 GO:0016914	follicle-stimulating hormone complex
 GO:0016935	glycine-gated chloride channel complex
-GO:0016938	kinesin I complex
 GO:0016939	kinesin II complex
 GO:0016942	insulin-like growth factor binding protein complex
 GO:0017053	transcription repressor complex
@@ -1302,7 +1298,6 @@ GO:0097457	hippocampal mossy fiber
 GO:0097462	Lewy neurite
 GO:0097470	ribbon synapse
 GO:0097471	mossy fiber rosette
-GO:0097486	multivesicular body lumen
 GO:0097487	multivesicular body, internal vesicle
 GO:0097489	multivesicular body, internal vesicle lumen
 GO:0097504	Gemini of coiled bodies
@@ -1564,9 +1559,6 @@ GO:1990629	phospholamban complex
 GO:1990630	IRE1-RACK1-PP2A complex
 GO:1990635	proximal dendrite
 GO:1990647	C/EBP complex
-GO:1990660	calprotectin complex
-GO:1990661	S100A8 complex
-GO:1990662	S100A9 complex
 GO:1990664	Nkx-2.5 complex
 GO:1990665	AnxA2-p11 complex
 GO:1990666	PCSK9-LDLR complex
@@ -1581,7 +1573,6 @@ GO:1990711	beta-catenin-ICAT complex
 GO:1990712	HFE-transferrin receptor complex
 GO:1990713	survivin complex
 GO:1990716	axonemal central apparatus
-GO:1990718	axonemal central pair projection
 GO:1990722	DAPK1-calmodulin complex
 GO:1990723	cytoplasmic periphery of the nuclear pore complex
 GO:1990724	galectin complex
