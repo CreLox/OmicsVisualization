@@ -120,12 +120,15 @@ CompileGOList <- function(BioMartExportGOTable,
 TranslateGOList.Nfurzeri <- function(HomologyTable,
                                      OriginalGOList, NfurzeriGOList = list(),
                                      OriginalEnsemblIDColumnName = "ensembl_gene_id",
+                                     OrthologyTypeColumnName = "nfurzeri_homolog_orthology_type",
+                                     SafeOrthologyTypes = c("ortholog_one2one"),
                                      NfurzeriEnsemblIDColumnName = "nfurzeri_homolog_ensembl_gene") {
   
   for (i in 1 : length(OriginalGOList)) {
     OriginalEnsemblID <- names(OriginalGOList)[i]
-    HomologyNfurzeriEnsemblIDs <- HomologyTable[(HomologyTable[, OriginalEnsemblIDColumnName] == OriginalEnsemblID),
-                                               NfurzeriEnsemblIDColumnName]
+    HomologyNfurzeriEnsemblIDs <- HomologyTable[(HomologyTable[, OriginalEnsemblIDColumnName] == OriginalEnsemblID) &
+                                                (HomologyTable[, OrthologyTypeColumnName] %in% SafeOrthologyTypes),
+                                                NfurzeriEnsemblIDColumnName]
     for (j in HomologyNfurzeriEnsemblIDs) {
       if (j %in% names(NfurzeriGOList)) {
         NfurzeriGOList[[j]] <- unique(c(NfurzeriGOList[[j]], OriginalGOList[[OriginalEnsemblID]]))
