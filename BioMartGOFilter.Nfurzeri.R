@@ -121,7 +121,7 @@ TranslateGOList.Nfurzeri <- function(HomologyTable,
                                      OriginalGOList, NfurzeriGOList = list(),
                                      OriginalEnsemblIDColumnName = "ensembl_gene_id",
                                      OrthologyTypeColumnName = "nfurzeri_homolog_orthology_type",
-                                     SafeOrthologyTypes = c("ortholog_one2one"),
+                                     SafeOrthologyTypes = c("ortholog_one2one", "ortholog_one2many"),
                                      NfurzeriEnsemblIDColumnName = "nfurzeri_homolog_ensembl_gene") {
   
   for (i in 1 : length(OriginalGOList)) {
