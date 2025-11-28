@@ -2,10 +2,10 @@ BioMartGOFilter.Nfurzeri <- function(GO.CSV,
                                      IncludeChildren = TRUE,
                                      CombineFruitFlyHomology = FALSE,
                                      CombineHumanHomology = TRUE,
-                                     CombineMedakaHomology = TRUE,
+                                     CombineMedakaHomology = FALSE,
                                      CombineMouseHomology = TRUE,
                                      CombineNematodeHomology = FALSE,
-                                     CombineXenopusHomology = TRUE,
+                                     CombineXenopusHomology = FALSE,
                                      CombineZebrafishHomology = TRUE) {
   
   suppressPackageStartupMessages(library("biomaRt"))
@@ -121,13 +121,16 @@ TranslateGOList.Nfurzeri <- function(HomologyTable,
                                      OriginalGOList, NfurzeriGOList = list(),
                                      OriginalEnsemblIDColumnName = "ensembl_gene_id",
                                      OrthologyTypeColumnName = "nfurzeri_homolog_orthology_type",
+                                     OrthologyConfidenceColumnName = "nfurzeri_homolog_orthology_confidence",
+                                     AllowedOrthologyConfidenceCodes = c("0", "1"),
                                      SafeOrthologyTypes = c("ortholog_one2one", "ortholog_one2many"),
                                      NfurzeriEnsemblIDColumnName = "nfurzeri_homolog_ensembl_gene") {
   
   for (i in 1 : length(OriginalGOList)) {
     OriginalEnsemblID <- names(OriginalGOList)[i]
     HomologyNfurzeriEnsemblIDs <- HomologyTable[(HomologyTable[, OriginalEnsemblIDColumnName] == OriginalEnsemblID) &
-                                                (HomologyTable[, OrthologyTypeColumnName] %in% SafeOrthologyTypes),
+                                                (HomologyTable[, OrthologyTypeColumnName] %in% SafeOrthologyTypes) &
+                                                (HomologyTable[, OrthologyConfidenceColumnName] %in% AllowedOrthologyConfidenceCodes),
                                                 NfurzeriEnsemblIDColumnName]
     for (j in HomologyNfurzeriEnsemblIDs) {
       if (j %in% names(NfurzeriGOList)) {
