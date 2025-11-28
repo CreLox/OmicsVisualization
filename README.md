@@ -35,7 +35,7 @@ Appends a column of Ensembl IDs to the right of an Excel sheet with a column (na
 Appends a column of NCBI gene descriptions to the right of an Excel sheet with a column (named ```ExcelDataFileEnsemblIDColumnName```) containing Ensembl IDs. Depends on ```EnsemblID2Entrez```.
 
 ## BioMartGOFilter.*Nfurzeri*
->```BioMartGOFilter.Nfurzeri(GO.CSV, IncludeChildren = TRUE, CombineFruitFlyHomology = FALSE, CombineHumanHomology = TRUE, CombineMedakaHomology = TRUE, CombineMouseHomology = TRUE, CombineNematodeHomology = FALSE, CombineXenopusHomology = TRUE, CombineZebrafishHomology = TRUE)```
+>```BioMartGOFilter.Nfurzeri(GO.CSV, IncludeChildren = TRUE, CombineFruitFlyHomology = FALSE, CombineHumanHomology = TRUE, CombineMedakaHomology = FALSE, CombineMouseHomology = TRUE, CombineNematodeHomology = FALSE, CombineXenopusHomology = FALSE, CombineZebrafishHomology = TRUE)```
 
 >```merge.sets(set.a, set.b = c(), exception.set = c())```
 
