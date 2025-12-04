@@ -3,7 +3,10 @@ custom.gmt.GSEA <- function(custom.gmt,
                             project.name = "Exit_vs_DIIpersistent",
                             LFQ.quantification.xlsx = "LFQ_quantification_Temperature2.xlsx",
                             ID.colname = "Ensembl_id",
-                            log2FC.colname = "logFC Induced_exit / Diapause_II_persistent") {
+                            log2FC.colname = "logFC Induced_exit / Diapause_II_persistent",
+                            minNum = 10,
+                            maxNum = 500,
+                            perNum = 1000) {
   
   library(WebGestaltR)
   library(readxl)
@@ -19,5 +22,8 @@ custom.gmt.GSEA <- function(custom.gmt,
               enrichDatabaseType = "genesymbol",
               enrichDatabaseDescriptionFile = custom.des,
               saveRawGseaResult = TRUE,
-              projectName = project.name)
+              projectName = project.name,
+              minNum = minNum,
+              maxNum = maxNum,
+              perNum = perNum)
 }
