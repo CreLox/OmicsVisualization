@@ -1,10 +1,10 @@
-CompileGOList.FromQuickGOAnnotations <- function(ExportTSVFilePath,
+CompileGOList.FromQuickGOAnnotations <- function(ExportedTSVFilePath,
                                                  ExistingGOList = list(),
                                                  UniProtKBACColumnName = "GENE.PRODUCT.ID",
                                                  To = "Ensembl",
                                                  GOColumnName = "GO.TERM") {
   
-  QuickGOAnnotationsTable <- read.table(ExportTSVFilePath, header = TRUE, sep = "\t", na.strings = "", quote = "")
+  QuickGOAnnotationsTable <- read.table(ExportedTSVFilePath, header = TRUE, sep = "\t", na.strings = "", quote = "")
   if (nrow(QuickGOAnnotationsTable) == 0) {
     return(ExistingGOList)
   }
