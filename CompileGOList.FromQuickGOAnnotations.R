@@ -9,7 +9,7 @@ CompileGOList.FromQuickGOAnnotations <- function(ExportedTSVFilePath,
     return(ExistingGOList)
   }
   
-  MappingTable <- UniProtKBAC2EnsemblID(paste0(QuickGOAnnotationsTable[, UniProtKBACColumnName], collapse = ","), To = To)
+  MappingTable <- UniProtKBAC2EnsemblID(paste0(unique(QuickGOAnnotationsTable[, UniProtKBACColumnName]), collapse = ","), To = To)
   QuickGOAnnotationsTable[, "EnsemblID"] <- rep(NA, nrow(QuickGOAnnotationsTable))
   for (i in 1 : nrow(QuickGOAnnotationsTable)) {
     UniProtKBAC <- QuickGOAnnotationsTable[i, UniProtKBACColumnName]
