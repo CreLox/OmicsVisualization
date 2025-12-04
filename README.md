@@ -3,6 +3,7 @@
   * [AppendNCBIGeneDescriptionColumn](#appendncbigenedescriptioncolumn)
   * [BatchConvert2Entrez](#ensemblid2entrez)
   * [BioMartGOFilter.*Nfurzeri*](#biomartgofilternfurzeri)
+  * [CompileGOList.FromQuickGOAnnotations](#biomartgofilternfurzeri)
   * [CorrelateOmics](#correlateomics)
   * [custom.gmt.GSEA](#customgmtgsea)
   * [EnsemblID2Entrez](#ensemblid2entrez)
@@ -36,6 +37,8 @@ Appends a column of NCBI gene descriptions to the right of an Excel sheet with a
 
 ## BioMartGOFilter.*Nfurzeri*
 >```BioMartGOFilter.Nfurzeri(GO.CSV, IncludeChildren = TRUE, CombineFruitFlyHomology = FALSE, CombineHumanHomology = TRUE, CombineMedakaHomology = FALSE, CombineMouseHomology = TRUE, CombineNematodeHomology = FALSE, CombineXenopusHomology = FALSE, CombineZebrafishHomology = TRUE)```
+
+>```CompileGOList.FromQuickGOAnnotations(ExportTSVFilePath, ExistingGOList = list(), UniProtKBACColumnName = "GENE.PRODUCT.ID", To = "Ensembl", GOColumnName = "GO.TERM")```
 
 >```merge.sets(set.a, set.b = c(), exception.set = c())```
 
