@@ -104,9 +104,9 @@ $$p := \dfrac{\text{Permutation\# with more extreme statistics}}{\text{Total per
 wherein if no permutation yields a more extreme statistic, ${-\log_{10}{p}}$ will be ($+\infty$ according to the formula but) reported as ${-\log_{10}{(2^{-52})}} \approx 15.65$ instead.
 
 ## custom.gmt.GSEA
->```custom.gmt.GSEA(custom.gmt, custom.des, project.name, LFQ.quantification.xlsx, ID.colname = "Ensembl_id", log2FC.colname)```
+>```custom.gmt.GSEA(custom.gmt, custom.des, project.name, LFQ.quantification.xlsx, ID.colname = "Ensembl_id", log2FC.colname, minNum = 10, maxNum = 500, perNum = 1000)```
 
-Performs a gene set enrichment analysis (GSEA) using customized gene sets (defined in ```custom.gmt```) along with a description file (```custom.des```) explaining the gene sets. Uses [WebGestalt](https://www.webgestalt.org/)'s implementation and the input of a pre-ranked list (with ranking metric $= \log_2{(\text{FC})}$ ) extracted from ```LFQ.quantification.xlsx```.
+Performs a gene set enrichment analysis (GSEA) using customized gene sets (defined in ```custom.gmt```) along with a description file (```custom.des```) explaining the gene sets. Uses [WebGestalt](https://www.webgestalt.org/)'s implementation and the input of a pre-ranked list (with ranking metric $= \log_2{(\text{FC})}$ ) extracted from ```LFQ.quantification.xlsx```. See the [help page](https://cran.r-project.org/web/packages/WebGestaltR/refman/WebGestaltR.html#WebGestaltR) of WebGestaltR for explanations of parameters ```minNum```, ```maxNum```, and ```perNum```.
 
 The other commonly used ranking metric is $\mathop{\text{sgn}}(\log{(\text{FC})}) \cdot (-\log_{10}{p_\text{raw}})$, which is NOT adopted here.
 
