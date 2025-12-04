@@ -38,7 +38,7 @@ Appends a column of NCBI gene descriptions to the right of an Excel sheet with a
 ## BioMartGOFilter.*Nfurzeri*
 >```BioMartGOFilter.Nfurzeri(GO.CSV, IncludeChildren = TRUE, CombineFruitFlyHomology = FALSE, CombineHumanHomology = TRUE, CombineMedakaHomology = FALSE, CombineMouseHomology = TRUE, CombineNematodeHomology = FALSE, CombineXenopusHomology = FALSE, CombineZebrafishHomology = TRUE)```
 
->```CompileGOList.FromQuickGOAnnotations(ExportTSVFilePath, ExistingGOList = list(), UniProtKBACColumnName = "GENE.PRODUCT.ID", To = "Ensembl", GOColumnName = "GO.TERM")```
+>```CompileGOList.FromQuickGOAnnotations(ExportedTSVFilePath, ExistingGOList = list(), UniProtKBACColumnName = "GENE.PRODUCT.ID", To = "Ensembl", GOColumnName = "GO.TERM")```
 
 >```merge.sets(set.a, set.b = c(), exception.set = c())```
 
