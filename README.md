@@ -56,7 +56,7 @@ MF <- BioMartGOFilter.Nfurzeri("GO:0003674")
 # as.character(openssl::sha1(file("custom.gmt")))
 ```
 
-```CompileGOList.FromQuickGOAnnotations``` compiles GO annotations from QuickGO ([example](https://www.ebi.ac.uk/QuickGO/annotations?taxonId=105023&qualifier=part_of,located_in,is_active_in,involved_in,enables,contributes_to,colocalizes_with,acts_upstream_of_or_within&proteome=gcrpCan,gcrpIso&geneProductType=protein)), which is more comprehensive than Ensembl BioMart. Note that exporting the TSV file of all GO annotations (using the example link above) from the QuickGO website may take ~ 1 hour.
+```CompileGOList.FromQuickGOAnnotations``` compiles GO annotations from QuickGO ([example](https://www.ebi.ac.uk/QuickGO/annotations?taxonId=105023&qualifier=part_of,located_in,is_active_in,involved_in,enables,contributes_to,colocalizes_with,acts_upstream_of_or_within&proteome=gcrpCan,gcrpIso&geneProductType=protein)), which is more comprehensive than Ensembl BioMart. Note that exporting the TSV file of all GO annotations (using the example link above) from the QuickGO website may take ~ 1 hour. ```CompileGOList.FromQuickGOAnnotations``` depends on ```UniProtKBAC2EnsemblID``` (```To``` should be set as ```"WormBase"``` instead of the default ```"Ensembl"``` when working with *C. elegans*).
 
 The output of both ```BioMartGOFilter.Nfurzeri``` and ```CompileGOList.FromQuickGOAnnotations``` is a list in which the name of each element is the Ensembl ID of a *N. furzeri* gene and within each element are the GO term annotations of that gene. This list can then be converted into a .gmt file (for the gene set enrichment analysis) with ```write.gmt```. 
 
