@@ -58,7 +58,13 @@ MF <- BioMartGOFilter.Nfurzeri("GO:0003674")
 
 ```CompileGOList.FromQuickGOAnnotations``` compiles GO annotations from QuickGO ([example](https://www.ebi.ac.uk/QuickGO/annotations?taxonId=105023&qualifier=part_of,located_in,is_active_in,involved_in,enables,contributes_to,colocalizes_with,acts_upstream_of_or_within&proteome=gcrpCan,gcrpIso&geneProductType=protein)), which is more comprehensive than Ensembl BioMart. Note that exporting the TSV file of all GO annotations (using the example link above) from the QuickGO website may take ~ 1 hour. ```CompileGOList.FromQuickGOAnnotations``` depends on ```UniProtKBAC2EnsemblID``` (```To``` should be set as ```"WormBase"``` instead of the default ```"Ensembl"``` when working with *C. elegans*). If annotations from InterPro2GO are to be ignored (due to a high occurrence rate of false positive annotations), the ```IgnoreInterPro2GO``` parameter should be set to ```TRUE```.
 
-The output of both ```BioMartGOFilter.Nfurzeri``` and ```CompileGOList.FromQuickGOAnnotations``` is a list in which the name of each element is the Ensembl ID of a *N. furzeri* gene and within each element are the GO term annotations of that gene. This list can then be converted into a .gmt file (for the gene set enrichment analysis) with ```write.gmt```. 
+The output of both ```BioMartGOFilter.Nfurzeri``` and ```CompileGOList.FromQuickGOAnnotations``` is a GO list in which the name of each element is the Ensembl ID of a *N. furzeri* gene and within each element are the GO term annotations of that gene. Note that the following Ensembl IDs are removed due to their ambiguous mapping to more than one gene according to the annotations of the reference genome on NCBI:
+
+| Ensembl ID         | Mapped NCBI gene #1 | Mapped NCBI gene #2  | Note |
+| :----------------: |:-------------------:| :-------------------:| :--: |
+[ENSNFUG00015001548](https://www.ensembl.org/Nothobranchius_furzeri/Gene/Summary?g=ENSNFUG00015001548) | [107379204](https://www.ncbi.nlm.nih.gov/gene/107379204)<br>(*gsr*: glutathione reductase) | [107379197](https://www.ncbi.nlm.nih.gov/gene/107379197)<br>(*slc30a9*: solute carrier family 30 member 9)
+
+A GO list can be converted into a .gmt file (for the gene set enrichment analysis) with ```write.gmt```. 
 
 Use ```merge.sets``` for data curation. Given ```set.a```$= A$, ```set.b```$= B$, and ```exception.set```$= E$, we have ```merge.sets(A, B, E)```$=(A \cup B)\backslash E$.
 
