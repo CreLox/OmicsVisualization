@@ -10,8 +10,10 @@ custom.gmt.GSEA <- function(custom.gmt,
   
   library(WebGestaltR)
   library(readxl)
+  load("AmbiguousEnsemblID2EntrezMapping.rdata")
   
   ID.log2FC <- as.data.frame(read_xlsx(LFQ.quantification.xlsx)[, c(ID.colname, log2FC.colname)])
+  ID.log2FC <- ID.log2FC[!(ID.log2FC[, 1] %in% names(CensoredEnsemblIDList)),]
   
   WebGestaltR(enrichMethod = "GSEA",
               organism = "others",

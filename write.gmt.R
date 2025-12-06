@@ -8,8 +8,10 @@ write.gmt <- function(GOList,
   suppressPackageStartupMessages(library("ribiosUtils"))
   suppressPackageStartupMessages(library("GO.db"))
   suppressPackageStartupMessages(library("ontologyIndex"))
+  load("AmbiguousEnsemblID2EntrezMapping.rdata")
   GOTermList <- as.list(GOTERM)
   
+  GOList <- GOList[!(names(GOList) %in% names(CensoredEnsemblIDList))]
   InvertedGOList <- invertList(GOList)
   for (i in 1 : length(InvertedGOList)) {
     InvertedGOList[[i]] <- unique(InvertedGOList[[i]])
