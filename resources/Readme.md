@@ -1,4 +1,5 @@
 ## Censored Ensembl IDs (*Nothobranchius furzeri*) mapped to more than one NCBI gene ID
+Generated using the R script FindAmbiguousMapping.R and stored as a list in AmbiguousEnsemblID2EntrezMapping.rdata in this `resources/` folder. Last run on Dec 6, 2025 (Ensembl release 115).
 
 | Ensembl ID | Mapped NCBI gene #1 | Mapped NCBI gene #2  | Mapped NCBI gene #3 |
 | :--------: |:-------------------:| :-------------------:| :-----------------: |
