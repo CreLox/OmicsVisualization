@@ -9,7 +9,7 @@ UniProtKBAC2EnsemblID <- function(UniProtKBAC.CSV,
                    encode = "form",
                    accept_json())
   # Id Mapping API is not supported for mapping results with "mapped to" IDs more than 500,000
-  jobId <- content(Response, as = "parsed", encoding = "UTF-8")$jobId
+  jobId <- get.jobId.from(Response)
     
   JobOngoing <- TRUE
   while (JobOngoing) {
@@ -26,6 +26,11 @@ UniProtKBAC2EnsemblID <- function(UniProtKBAC.CSV,
   SystemCommand <- paste("curl -s https://rest.uniprot.org/idmapping/stream/", jobId, sep = "")
   Result <- system(SystemCommand, intern = TRUE)
   return(ParseUniProtREST(Result))
+}
+
+get.jobId.from <- function(Response) {
+  DecodedString <- iconv(rawToChar(Response$content), from = "UTF-8", to = "")
+  return(unlist(str_split(DecodedString, pattern = "\\{\"jobId\":\"|\"\\}"))[2])
 }
 
 ParseUniProtREST <- function(Result) {
