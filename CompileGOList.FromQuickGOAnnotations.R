@@ -5,7 +5,7 @@ CompileGOList.FromQuickGOAnnotations <- function(ExportedTSVFilePath,
                                                  GOColumnName = "GO.TERM",
                                                  IgnoreUnreliableGOAnnotationPipelines = FALSE,
                                                  ReferenceColumnName = "REFERENCE",
-                                                 IgnoredReferenceCodes = c("GO_REF:0000002", "GO_REF:0000108", "GO_REF:0000118")) {
+                                                 IgnoredReferenceCodes = c("GO_REF:0000002", "GO_REF:0000090", "GO_REF:0000108", "GO_REF:0000118")) {
   
   QuickGOAnnotationsTable <- read.table(ExportedTSVFilePath, header = TRUE, sep = "\t", na.strings = "", quote = "")
   if (nrow(QuickGOAnnotationsTable) == 0) {
