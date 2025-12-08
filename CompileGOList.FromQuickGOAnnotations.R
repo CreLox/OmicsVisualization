@@ -3,15 +3,15 @@ CompileGOList.FromQuickGOAnnotations <- function(ExportedTSVFilePath,
                                                  UniProtKBACColumnName = "GENE.PRODUCT.ID",
                                                  To = "Ensembl",
                                                  GOColumnName = "GO.TERM",
-                                                 IgnoreTreeGrafterAndInterPro2GO = FALSE,
+                                                 IgnoreUnreliableGOAnnotationPipelines = FALSE,
                                                  ReferenceColumnName = "REFERENCE",
-                                                 IgnoredReferenceCodes = c("GO_REF:0000002", "GO_REF:0000118")) {
+                                                 IgnoredReferenceCodes = c("GO_REF:0000002", "GO_REF:0000108", "GO_REF:0000118")) {
   
   QuickGOAnnotationsTable <- read.table(ExportedTSVFilePath, header = TRUE, sep = "\t", na.strings = "", quote = "")
   if (nrow(QuickGOAnnotationsTable) == 0) {
     return(ExistingGOList)
   }
-  if (IgnoreTreeGrafterAndInterPro2GO) {
+  if (IgnoreUnreliableGOAnnotationPipelines) {
     QuickGOAnnotationsTable <- QuickGOAnnotationsTable[!(QuickGOAnnotationsTable[, ReferenceColumnName] %in% IgnoredReferenceCodes),]
   }
   
