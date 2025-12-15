@@ -1,5 +1,7 @@
 SRX2SRR <- function(SRXSheetFilePath, SRXColumnName = "SRX") {
+  
   suppressPackageStartupMessages(library("readxl"))
+  suppressPackageStartupMessages(library("stringr"))
   suppressPackageStartupMessages(library("rvest"))
   suppressPackageStartupMessages(library("pracma"))
   
@@ -17,8 +19,8 @@ SRX2SRR <- function(SRXSheetFilePath, SRXColumnName = "SRX") {
       fprintf(paste(SRXVector[i], "\t", sep = ""))
       
       RemoveAfterRunNumber <- sub("</a></td>\n<td align=\"right\">.*", "", SRXPage)
-      SRRNumber <- sub(".*\">SRR", "", RemoveAfterRunNumber)
-      fprintf(paste("SRR", SRRNumber, "\t", sep = ""))
+      SRRNumber <- sub(".*\">.RR", "", RemoveAfterRunNumber)
+      fprintf(paste0(str_extract(RemoveAfterRunNumber, paste0(".RR", SRRNumber)), "\t"))
       
       RemoveBeforeFormat <- sub(".*Layout: <span>", "", SRXPage)
       Format <- sub("</span>\n</div>\n.*", "", RemoveBeforeFormat)
