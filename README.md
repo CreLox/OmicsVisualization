@@ -62,7 +62,7 @@ The output of both ```BioMartGOFilter.Nfurzeri``` and ```CompileGOList.FromQuick
 
 A GO list can be converted into a .gmt file (for the gene set enrichment analysis) with ```write.gmt```. [These Ensembl IDs](https://github.com/CreLox/OmicsVisualization/tree/main/resources#censored-ensembl-ids-nothobranchius-furzeri-mapped-to-more-than-one-ncbi-gene-id) are censored (due to their ambiguous mapping to more than one gene according to the annotations of the reference genome on NCBI).
 
-Use ```merge.sets``` for data curation. Given ```set.a```$= A$, ```set.b```$= B$, and ```exception.set```$= E$, we have ```merge.sets(A, B, E)```$=(A \cup B)\backslash E$.
+Use ```merge.sets``` for data curation. Given ```set.a```$= A$, ```set.b```$= B$, ```boundary.set```$= O$, and ```exception.set```$= E$, we have ```merge.sets(A, B, O, E)```$=((A \cup B) \cap O)\backslash E$.
 
 ## CorrelateOmics
 >```CorrelateOmics(ProteomicsDataFilePath, UniProtIDColumnName = "Protein IDs", To = "Ensembl", GeneNameColumnName = "Gene name", ProteomicsColumnsToCalculateMean, TranscriptomicsDataFilePath, EnsemblIDColumnName = "ensembl_gene_id", TranscriptomicsColumnsToCalculateMean, RefreshGeneNames = TRUE)```
