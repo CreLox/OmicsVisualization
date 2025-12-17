@@ -1,5 +1,7 @@
 BioMartGOFilter.Nfurzeri <- function(GO.CSV,
                                      IncludeChildren = TRUE,
+                                     AllowedOrthologyConfidenceCodes = c("0", "1"),
+                                     SafeOrthologyTypes = c("ortholog_one2one", "ortholog_one2many"),
                                      CombineFruitFlyHomology = FALSE,
                                      CombineHumanHomology = TRUE,
                                      CombineMedakaHomology = FALSE,
@@ -91,7 +93,7 @@ BioMartGOFilter.Nfurzeri <- function(GO.CSV,
           }, when = ".*", silent = TRUE)
     row.names(ThisSpeciesHomologyTable) <- NULL
     
-    KillifishGOList <- TranslateGOList.Nfurzeri(ThisSpeciesHomologyTable, ThisSpeciesGOList, KillifishGOList)
+    KillifishGOList <- TranslateGOList.Nfurzeri(ThisSpeciesHomologyTable, ThisSpeciesGOList, KillifishGOList, AllowedOrthologyConfidenceCodes = AllowedOrthologyConfidenceCodes, SafeOrthologyTypes = SafeOrthologyTypes)
   }
   
   return(KillifishGOList)
@@ -122,8 +124,8 @@ TranslateGOList.Nfurzeri <- function(HomologyTable,
                                      OriginalEnsemblIDColumnName = "ensembl_gene_id",
                                      OrthologyTypeColumnName = "nfurzeri_homolog_orthology_type",
                                      OrthologyConfidenceColumnName = "nfurzeri_homolog_orthology_confidence",
-                                     AllowedOrthologyConfidenceCodes = c("0", "1"),
-                                     SafeOrthologyTypes = c("ortholog_one2one", "ortholog_one2many"),
+                                     AllowedOrthologyConfidenceCodes,
+                                     SafeOrthologyTypes,
                                      NfurzeriEnsemblIDColumnName = "nfurzeri_homolog_ensembl_gene") {
   
   for (i in 1 : length(OriginalGOList)) {
