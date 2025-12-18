@@ -1,5 +1,5 @@
 EnsemblID2Entrez <- function(EnsemblID,
-                             Output = "Accession") {
+                             Output = "Description") {
   
   suppressPackageStartupMessages(library("rentrez"))
   suppressPackageStartupMessages(library("retry"))
