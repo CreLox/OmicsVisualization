@@ -1,7 +1,7 @@
 FinalList <- list()
 for (i in (15000002 : 15025476)) {
   EnsemblID <- paste0("ENSNFUG000", i)
-  EntrezMapping <- EnsemblID2Entrez(EnsemblID)
+  EntrezMapping <- EnsemblID2Entrez(EnsemblID, "Accession")
   if (length(EntrezMapping) > 1) {
     AmbiguousMapping <- list(EntrezMapping)
     names(AmbiguousMapping) <- EnsemblID
