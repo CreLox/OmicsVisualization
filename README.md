@@ -143,7 +143,7 @@ Identifies genes of the ```TargetSpecies``` (returns a vector of their Ensembl I
 ## get.Ontology
 >```get.Ontology(URL = "https://current.geneontology.org/ontology/go-basic.obo", TempFilePath = "go-basic.obo")```
 
-A wrapper of the ```get_ontology``` function from the [ontologyIndex](https://cran.r-project.org/web/packages/ontologyIndex/index.html) package, which always builds the ontology from [the latest official go-basic file](https://geneontology.org/docs/download-ontology/). Note that **the go-basic file excludes relationships that cross the three GO aspects (BP, CC, and MF)**. Only ```is_a``` and ```part_of``` are considered as child–ancestor relationships, but not any of the ```regulates``` relationships (which have dedicated terms in many cases). Example:
+A wrapper of the ```get_ontology``` function from the [ontologyIndex](https://cran.r-project.org/web/packages/ontologyIndex/index.html) package, which always builds the ontology from [the latest official go-basic file](https://geneontology.org/docs/download-ontology/). Note that **the go-basic file excludes relationships that cross the three GO aspects (BP, CC, and MF)**. Only ```is_a``` and ```part_of``` are considered child–ancestor relationships, but not any of the ```regulates``` relationships (which have dedicated terms in many cases). Example:
 
 <p align="center">
 <img src="assets/GO-0098869.png" width="700">
