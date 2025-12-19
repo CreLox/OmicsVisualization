@@ -1,5 +1,5 @@
 EnsemblID2Entrez <- function(EnsemblID,
-                             Output = "Description") {
+                             Output = "Name+Description") {
   
   suppressPackageStartupMessages(library("rentrez"))
   suppressPackageStartupMessages(library("retry"))
@@ -42,6 +42,21 @@ EnsemblID2Entrez <- function(EnsemblID,
           }
         }, when = ".*", silent = TRUE)
         Result <- c(Result, GeneSummary$description)
+      }
+      return(paste(unique(Result), collapse = "; "))
+    }
+    if (Output == "Name+Description") {
+      Result <- c()
+      for (ID in EntrezSearchResult$ids) {
+        retry({
+          ConsoleOutput <- capture.output({
+                             GeneSummary <- entrez_summary(db = "gene", id = ID)
+                           });
+          if (length(ConsoleOutput) != 0) {
+            stop("Error")
+          }
+        }, when = ".*", silent = TRUE)
+        Result <- c(Result, paste0(GeneSummary$name, ": ", GeneSummary$description))
       }
       return(paste(unique(Result), collapse = "; "))
     }
