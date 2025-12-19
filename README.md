@@ -113,11 +113,11 @@ Performs a gene set enrichment analysis (GSEA) using customized gene sets (defin
 The other commonly used ranking metric is $\mathop{\text{sgn}}(\log{(\text{FC})}) \cdot (-\log_{10}{p_\text{raw}})$, which is NOT adopted here.
 
 ## EnsemblID2Entrez
->```EnsemblID2Entrez(EnsemblID, Output = c("Accession", "ID", "Description", "Name"))```
+>```EnsemblID2Entrez(EnsemblID, Output = c("Accession", "ID", "Description", "Name", "Name+Description")) # default Output = "Name+Description" ```
 
 >```BatchConvert2Entrez(EnsemblID.Xsv, X = "", Output)```
 
-```EnsemblID2Entrez``` converts a (set of) Ensembl ID(s) to corresponding NCBI Entrez accession(s)/ID(s)/description(s)/name(s) using the [rentrez](https://docs.ropensci.org/rentrez/) package. ```BatchConvert2Entrez``` batch converts a string (```EnsemblID.Xsv```) of Ensembl IDs delimited by ```X```. If the mapping does not exist, the output will be ```""```. This works better than using BioMart because the mapping is more complete. And unlike using ```org.*.eg.db```, this works for all species.
+```EnsemblID2Entrez``` converts a (set of) Ensembl ID(s) to info of the corresponding NCBI entry (entries) using the [rentrez](https://docs.ropensci.org/rentrez/) package. ```BatchConvert2Entrez``` batch converts a string (```EnsemblID.Xsv```) of Ensembl IDs delimited by ```X```. If the mapping does not exist, the output will be ```""```. This works better than using BioMart because the mapping is more complete. And unlike using ```org.*.eg.db```, this works for all species.
 
 Note: the default genome assembly of *Nothobranchius furzeri* on Ensembl is Nfu_20140520 while OrthoDB and the NCBI have opted for the newer UI_Nfuz_MZM_1.0 and NfurGRZ-RIMD1 genomes as their defaults, respectively (both NfurGRZ-RIMD1 and Nfu_20140520 are based on the commonly used GRZ-AD strain). This may cause differences in annotations. The UniProt reference proteome [UP000694548](https://www.uniprot.org/proteomes/UP000694548) is also based on Nfu_20140520, making it convenient to correlate omics.
 
