@@ -16,6 +16,7 @@
   * [plotlog2ReadDistribution](#plotlog2readdistribution)
   * [plotPCA](#plotpca)
   * [samples.beeswarm](#samplesbeeswarm)
+  * [TabulateHighConfidenceOneToOneOrthology.Nfurzeri](#transcriptlevelzebrafishdevstage)
   * [transcript.level.zebrafish.dev.stage](#transcriptlevelzebrafishdevstage)
   * [UniProtGOFilter](#uniprotgofilter)
   * [UniProtKBAC2EnsemblID](#uniprotkbac2ensemblid)
@@ -201,11 +202,15 @@ Converts a column (from an Excel sheet ```SRXSheetFilePath```) of experiment num
 ## transcript.level.zebrafish.dev.stage
 >```transcript.level.zebrafish.dev.stage(EnsemblID, DataFilePath = "zf-stages.GRCz11.e111.all-counts.csv", ..., PointSize, LineWidth, ErrorBarWidth, DataPointColor, YAxisTitle)```
 
+> ```TabulateHighConfidenceOneToOneOrthology.Nfurzeri(TargetSpecies = "drerio")```
+
 Plots the transcription level of a gene (specified by ```EmsemblID```) throughout the time course of zebrafish development. Requires the [data file](https://figshare.com/ndownloader/files/46453495) containing normalized counts reanalyzed from [White et al., 2017](https://elifesciences.org/articles/30860) ([PRJEB12982](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJEB12982); [metadata](https://figshare.com/ndownloader/files/46453492)). There are also other similar studies like [Yang et al., 2013](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0064058) and [Mathavan et al., 2005](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.0010029). An example plot of _myl7_ (_cmlc2_) is shown below.
 
 <p align="center">
 <img src="assets/cmlc2_zebrafish.png" width="700">
 </p>
+
+Use ```TabulateHighConfidenceOneToOneOrthology.Nfurzeri``` to find all high-confidence, one-to-one orthology between genes of *N. furzeri* and genes of the ```TargetSpecies```.
 
 ## UniProtGOFilter
 >```UniProtGOFilter(GO, organism_id, To = "Ensembl")```
