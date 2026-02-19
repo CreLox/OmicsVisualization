@@ -210,6 +210,12 @@ Plots the transcription level of a gene (specified by ```EmsemblID```) throughou
 <img src="assets/cmlc2_zebrafish.png" width="700">
 </p>
 
+Another example plot of _ubb_ is shown below.
+
+<p align="center">
+<img src="assets/ubb_zebrafish.png" width="700">
+</p>
+
 Use ```TabulateHighConfidenceOneToOneOrthology.Nfurzeri``` to find all high-confidence, one-to-one orthology between genes of *N. furzeri* and genes of the ```TargetSpecies```.
 
 ## UniProtGOFilter
