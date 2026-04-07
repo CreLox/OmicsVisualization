@@ -1,5 +1,5 @@
 volcano.ma <- function(Data, PlotType = "ma",
-                       HighlightGeneNameRegex = NA, HighlightIDs = NA, GeneNameColumnName = "gene_name", IDColumnName = "ensembl_gene_id",
+                       HighlightGeneNameRegex = NA, HighlightIDs = NULL, GeneNameColumnName = "gene_name", IDColumnName = "ensembl_gene_id",
                        log2FoldChangeColumnName = "log2FoldChange", Invertlog2FoldChange = FALSE, abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, log2FoldChangeLabel = bquote(log[2](Exit/DII)), log2FoldChangeTickDistance = 1,
                        baseMeanColumnName = "baseMean", log2baseMeanLowerLimit = 0, log2baseMeanUpperLimit = NA,
                        AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, log10AdjustedPValueTickDistance = 5,
