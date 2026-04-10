@@ -3,7 +3,7 @@ volcano.ma <- function(Data, PlotType = "ma",
                        log2FoldChangeColumnName = "log2FoldChange", Invertlog2FoldChange = FALSE, abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, log2FoldChangeLabel = bquote(log[2](Exit/DII)), log2FoldChangeTickDistance = 1,
                        baseMeanColumnName = "baseMean", log2baseMeanLowerLimit = 0, log2baseMeanUpperLimit = NA,
                        AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, log10AdjustedPValueTickDistance = 5,
-                       LineWidth = 0.25,
+                       LineWidth = 0.25, AxisTitleFontSize = 18, TickLabelFontSize = AxisTitleFontSize * 0.8,
                        Stroke = 0.1, Shape = 21, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5) {
   
   suppressPackageStartupMessages(library("stringr"))
@@ -89,7 +89,7 @@ volcano.ma <- function(Data, PlotType = "ma",
             xlab(log2FoldChangeLabel) +
             ylab(bquote(-log[10](italic(p)[adj]))) +
             theme_bw() +
-            theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major = element_blank()) +
+            theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major = element_blank(), axis.title = element_text(size = AxisTitleFontSize), axis.text = element_text(size = TickLabelFontSize)) +
             coord_cartesian(expand = FALSE, clip = "off") +
             scale_x_continuous(breaks = c(seq(from = -abslog2FoldChangeLimit, by = log2FoldChangeTickDistance, to = abslog2FoldChangeLimit), -abslog2FoldChangeThreshold, abslog2FoldChangeThreshold), limits = c(-abslog2FoldChangeLimit, abslog2FoldChangeLimit)) +
             scale_y_continuous(breaks = c(seq(from = 0, by = log10AdjustedPValueTickDistance, to = negativelog10AdjustedPValueLimit), -log10(SignificanceThreshold)), limits = c(0, negativelog10AdjustedPValueLimit))
@@ -105,7 +105,7 @@ volcano.ma <- function(Data, PlotType = "ma",
             ylab(log2FoldChangeLabel) +
             xlab(bquote(log[2](base~mean))) +
             theme_bw() +
-            theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major = element_blank()) +
+            theme(legend.position = "none", panel.grid.minor = element_blank(), panel.grid.major = element_blank(), axis.title = element_text(size = AxisTitleFontSize), axis.text = element_text(size = TickLabelFontSize)) +
             coord_cartesian(expand = FALSE, clip = "off") +
             scale_x_continuous(limits = c(log2baseMeanLowerLimit, log2baseMeanUpperLimit)) +
             scale_y_continuous(breaks = c(seq(from = -abslog2FoldChangeLimit, by = log2FoldChangeTickDistance, to = abslog2FoldChangeLimit), -abslog2FoldChangeThreshold, abslog2FoldChangeThreshold), limits = c(-abslog2FoldChangeLimit, abslog2FoldChangeLimit))
