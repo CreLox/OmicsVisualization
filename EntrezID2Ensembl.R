@@ -1,4 +1,4 @@
-EntrezID2Ensembl <- function(EntrezID) { #vibe-coded with GPT-5.5 Instant
+EntrezID2Ensembl <- function(EntrezIDs) { #vibe-coded with GPT-5.5 Instant
 
   get_one <- function(id) {
 
@@ -31,7 +31,7 @@ EntrezID2Ensembl <- function(EntrezID) { #vibe-coded with GPT-5.5 Instant
   }
 
   return(vapply(
-    EntrezID,
+    EntrezIDs,
     get_one,
     FUN.VALUE = character(1)
   ))
