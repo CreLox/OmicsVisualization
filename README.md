@@ -69,6 +69,11 @@ Use ```merge.sets``` for data curation. Given ```set.a```$= A$, ```set.b```$= B$
 
 ## copy2clipboard
 
+```R
+suppressPackageStartupMessages(library("clipr"))
+ClipBoardData <- read_clip()
+```
+
 ## CorrelateOmics
 >```CorrelateOmics(ProteomicsDataFilePath, UniProtIDColumnName = "Protein IDs", To = "Ensembl", GeneNameColumnName = "Gene name", ProteomicsColumnsToCalculateMean, TranscriptomicsDataFilePath, EnsemblIDColumnName = "ensembl_gene_id", TranscriptomicsColumnsToCalculateMean, RefreshGeneNames = TRUE)```
 
