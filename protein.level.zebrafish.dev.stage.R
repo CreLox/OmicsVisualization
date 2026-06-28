@@ -18,6 +18,10 @@ protein.level.zebrafish.dev.stage <- function(EnsemblID,
   
   AllData <- as.data.frame(read_xlsx(DataFilePath, skip = Skip, na = "NA"))
   AllData[is.na(AllData[, EnsemblIDColumnName]), EnsemblIDColumnName] <- ""
+  if (sum(AllData[, EnsemblIDColumnName] == EnsemblID) > 1) {
+    stop(paste0("Multiple protein entries with the same Ensembl gene ID (likely due to alternative splicing) in ", DataFilePath))
+  }
+  
   NormalizedCountDataForThisGene <- as.numeric(t(AllData[AllData[, EnsemblIDColumnName] == EnsemblID, StartColumn : ncol(AllData)]))
   GroupTag <- rep(Stages, each = SampleNumber)
   ggplotData <- data.frame(GroupTag, NormalizedCountDataForThisGene)
