@@ -19,7 +19,7 @@
   * [plotPCA](#plotpca)
   * [samples.beeswarm](#samplesbeeswarm)
   * [TabulateHighConfidenceOneToOneOrthology.Nfurzeri](#transcriptlevelzebrafishdevstage)
-  * [transcript.level.zebrafish.dev.stage](#transcriptlevelzebrafishdevstage)
+  * [transcript.level.zebrafish.dev.stage](#levelzebrafishdevstage)
   * [UniProtGOFilter](#uniprotgofilter)
   * [UniProtKBAC2EnsemblID](#uniprotkbac2ensemblid)
   * [volcano.ma](#volcanoma)
@@ -212,12 +212,20 @@ Converts a column (from an Excel sheet ```SRXSheetFilePath```) of experiment num
 <img src="assets/SRARunSelector_Example.png" width="700">
 </p>
 
-## transcript.level.zebrafish.dev.stage
+## level.zebrafish.dev.stage
+>```protein.level.zebrafish.dev.stage(EnsemblID, DataFilePath = "media-2.xlsx", ..., PointSize, LineWidth, ErrorBarWidth, DataPointColor, YAxisTitle)```
+
 >```transcript.level.zebrafish.dev.stage(EnsemblID, DataFilePath = "zf-stages.GRCz11.e111.all-counts.csv", ..., PointSize, LineWidth, ErrorBarWidth, DataPointColor, YAxisTitle)```
 
 > ```TabulateHighConfidenceOneToOneOrthology.Nfurzeri(TargetSpecies = "drerio")```
 
-Plots the transcription level of a gene (specified by ```EmsemblID```) throughout the time course of zebrafish development. Requires the [data file](https://figshare.com/ndownloader/files/46453495) containing normalized counts reanalyzed from [White et al., 2017](https://elifesciences.org/articles/30860) ([PRJEB12982](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJEB12982); [metadata](https://figshare.com/ndownloader/files/46453492)). There are also other similar studies like [Aponte-Santiago, Su, and Wagner, 2026](https://www.biorxiv.org/content/10.64898/2026.03.23.713599v1), [Yang et al., 2013](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0064058), and [Mathavan et al., 2005](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.0010029). An example plot of _myl7_ (_cmlc2_) is shown below.
+```protein.level.zebrafish.dev.stage``` plots the protein level of a gene (specified by ```EmsemblID```) throughout the course of zebrafish early embryonic development. Requires the [data file]( https://www.biorxiv.org/content/biorxiv/early/2026/03/26/2026.03.24.713983/DC2/embed/media-2.xlsx) containing normalized protein levels from [Fang et al., 2026]( https://www.biorxiv.org/content/10.64898/2026.03.24.713983v1.full). An example plot of Psmd1 is shown below.
+
+<p align="center">
+<img src="assets/Psmd1_zebrafish.png" width="700">
+</p>
+
+```transcript.level.zebrafish.dev.stage``` plots the transcription level of a gene (specified by ```EmsemblID```) throughout the course of zebrafish embryonic development. Requires the [data file](https://figshare.com/ndownloader/files/46453495) containing normalized counts reanalyzed from [White et al., 2017](https://elifesciences.org/articles/30860) ([PRJEB12982](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJEB12982); [metadata](https://figshare.com/ndownloader/files/46453492)). There are also other similar studies like [Aponte-Santiago, Su, and Wagner, 2026](https://www.biorxiv.org/content/10.64898/2026.03.23.713599v1), [Yang et al., 2013](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0064058), and [Mathavan et al., 2005](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.0010029). An example plot of _myl7_ (_cmlc2_) is shown below.
 
 <p align="center">
 <img src="assets/cmlc2_zebrafish.png" width="700">
