@@ -17,6 +17,7 @@
   * [plotCorrelateOmics](#correlateomics)
   * [plotlog2ReadDistribution](#plotlog2readdistribution)
   * [plotPCA](#plotpca)
+  * [protein.level.zebrafish.dev.stage](#levelzebrafishdevstage)
   * [samples.beeswarm](#samplesbeeswarm)
   * [TabulateHighConfidenceOneToOneOrthology.Nfurzeri](#transcriptlevelzebrafishdevstage)
   * [transcript.level.zebrafish.dev.stage](#levelzebrafishdevstage)
