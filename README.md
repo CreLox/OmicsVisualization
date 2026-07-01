@@ -69,6 +69,11 @@ A GO list can be converted into a .gmt file (for the gene set enrichment analysi
 Use ```merge.sets``` for data curation. Given ```set.a```$= A$, ```set.b```$= B$, ```boundary.set```$= O \neq \emptyset$, and ```exception.set```$= E$, we have ```merge.sets(A, B, O, E)```$=((A \cup B) \cap O)\backslash E$. If ```boundary.set``` is a null set, we have ```merge.sets(A, B, NULL, E)```$=(A \cup B) \backslash E$.
 
 ## copy2clipboard
+>```copy2clipboard(content, transpose = FALSE, row.names = FALSE, col.names = FALSE)```
+
+```copy2clipboard``` is a wrapper of ```clipr::write_clip```, which copies the variable (```content```) into the system clipboard. Values are tab-separated if they are in the same row. If ```content``` is a vector, the default (i.e., if ```!transpose```) behavior is to copy it as a column.
+
+To read from the system clipboard, use ```clipr::read_clip```:
 
 ```R
 suppressPackageStartupMessages(library("clipr"))
