@@ -225,7 +225,7 @@ Converts a column (from an Excel sheet ```SRXSheetFilePath```) of experiment num
 
 > ```TabulateHighConfidenceOneToOneOrthology.Nfurzeri(TargetSpecies = "drerio")```
 
-```protein.level.zebrafish.dev.stage``` plots the protein level of a gene (specified by ```EmsemblID```) throughout the course of zebrafish early embryonic development. Requires the [data file]( https://www.biorxiv.org/content/biorxiv/early/2026/03/26/2026.03.24.713983/DC2/embed/media-2.xlsx) containing normalized protein levels from [Fang et al., 2026]( https://www.biorxiv.org/content/10.64898/2026.03.24.713983v1.full). An example plot of Psmd1 is shown below.
+```protein.level.zebrafish.dev.stage``` plots the protein level of a gene (specified by ```EmsemblID```) throughout the course of zebrafish early embryonic development. Requires the [data file]( https://www.biorxiv.org/content/biorxiv/early/2026/03/26/2026.03.24.713983/DC2/embed/media-2.xlsx) containing normalized protein levels from [Fang et al., 2026]( https://www.biorxiv.org/content/10.64898/2026.03.24.713983v1.full). **Note that the authors failed to properly handle the missing values (but rather simply replaced them uniformly with 205.6776073) and certain extremely abundant yolk proteins.** An example plot of Psmd1 is shown below.
 
 <p align="center">
 <img src="assets/Psmd1_zebrafish.png" width="700">
