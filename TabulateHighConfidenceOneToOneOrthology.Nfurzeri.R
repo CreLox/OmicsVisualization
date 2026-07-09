@@ -1,4 +1,9 @@
 TabulateHighConfidenceOneToOneOrthology.Nfurzeri <- function(TargetSpecies = "drerio") {
+  
+  suppressPackageStartupMessages(library("biomaRt"))
+  suppressPackageStartupMessages(library("retry"))
+  biomartCacheClear()
+  
   ID <- 15000002 : 15025476
   Prefix <- "ENSNFUG000"
   ID.Prefixed.CSV <- paste0(paste(Prefix, ID, sep = ""), collapse = ",")
