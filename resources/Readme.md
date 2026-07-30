@@ -1,3 +1,6 @@
+## Human/mouse gene sets .gmt files
+Please refer to [https://baderlab.org/GeneSets#Summary](https://baderlab.org/GeneSets#Summary) and download the file you need from [https://download.baderlab.org/EM_Genesets/current_release/](https://download.baderlab.org/EM_Genesets/current_release/).
+
 ## Censored Ensembl IDs (*Nothobranchius furzeri*) mapped to more than one NCBI gene ID
 Generated using the R script FindAmbiguousMapping.R and stored as a list in AmbiguousEnsemblID2EntrezMapping.rdata in this `resources/` folder. Last run on Dec 6, 2025 (Ensembl release 115).
 
