@@ -29,6 +29,9 @@ UniProtKBAC2EnsemblID <- function(UniProtKBAC.CSV,
 }
 
 get.jobId.from <- function(Response) {
+  
+  suppressPackageStartupMessages(library("stringr"))
+  
   DecodedString <- iconv(rawToChar(Response$content), from = "UTF-8", to = "")
   return(unlist(str_split(DecodedString, pattern = "\\{\"jobId\":\"|\"\\}"))[2])
 }
