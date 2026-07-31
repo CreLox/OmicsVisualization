@@ -16,6 +16,7 @@
   * [merge.two.lists](#mergetwolists)
   * [plotCorrelateOmics](#correlateomics)
   * [plotlog2ReadDistribution](#plotlog2readdistribution)
+  * [plotly.this](#volcanoma)
   * [plotPCA](#plotpca)
   * [protein.level.zebrafish.dev.stage](#levelzebrafishdevstage)
   * [samples.beeswarm](#samplesbeeswarm)
@@ -258,6 +259,8 @@ Use ```TabulateHighConfidenceOneToOneOrthology.Nfurzeri``` to find all high-conf
 ## volcano.ma
 >```volcano.ma(Data, PlotType = "ma", HighlightGeneNameRegex = NA, HighlightIDs = NULL, GeneNameColumnName = "gene_name", IDColumnName = "ensembl_gene_id", log2FoldChangeColumnName = "log2FoldChange", Invertlog2FoldChange = FALSE, abslog2FoldChangeThreshold = 1, abslog2FoldChangeLimit = 3, log2FoldChangeLabel, log2FoldChangeTickDistance = 1, baseMeanColumnName = "baseMean", log2baseMeanLowerLimit = 0, log2baseMeanUpperLimit = NA, AdjustedPValueColumnName = "padj", SignificanceThreshold = 0.01, negativelog10AdjustedPValueLimit = 15, log10AdjustedPValueTickDistance = 5, LineWidth = 0.25, AxisTitleFontSize = 18, TickLabelFontSize = AxisTitleFontSize * 0.8, Stroke = 0.1, Shape = 21, Alpha = 1, NSAlpha = 0.1, UpColor = "#FFD300", DownColor = "#0087BD", HighlightColor = "#C40233", HighlightSize = 2.5)```
 
+>```plotly.this(GGPlot = .Last.value, RemoveAxisTitles = TRUE)```
+
 Plots a volcano plot (```PlotType = "volcano"```) or an MA plot (```PlotType = "ma"```) and highlight genes with an ID in ```HighlightIDs``` or with a name matching the ```HighlightGeneNameRegex``` pattern. Points beyond limits (defined by ±```abslog2FoldChangeLimit```, ```log2baseMeanLowerLimit```, ```log2baseMeanUpperLimit```, and ```negativelog10AdjustedPValueLimit```; ignored if ```NA```) will be coerced onto the border. The default ```AxisTitleFontSize``` in ```ggplot2``` is 11, which is too small for a publication-ready subfigure. Therefore, the default value of ```AxisTitleFontSize``` in this function is set as 18.
 
 Note while using [plotly](https://plotly.com/r/)::```ggplotly``` to view and interact with the graph: the axis titles should be adjusted to avoid an error. For the volcano plot, use
@@ -265,6 +268,8 @@ Note while using [plotly](https://plotly.com/r/)::```ggplotly``` to view and int
 ```R
 Plot <- Plot + xlab("log2(fold change)") + ylab("-log10(adjusted p)")
 ggplotly(Plot)
+## Or simply:
+# plotly.this(Plot)
 ```
 
 For the MA plot, use
@@ -272,6 +277,8 @@ For the MA plot, use
 ```R
 Plot <- Plot + xlab("log2(base mean)") + ylab("log2(fold change)")
 ggplotly(Plot)
+## Or simply:
+# plotly.this(Plot)
 ```
 
 ## who
