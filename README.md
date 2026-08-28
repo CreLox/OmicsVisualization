@@ -20,7 +20,7 @@
   * [plotPCA](#plotpca)
   * [protein.level.zebrafish.dev.stage](#levelzebrafishdevstage)
   * [samples.beeswarm](#samplesbeeswarm)
-  * [TabulateHighConfidenceOneToOneOrthology.Nfurzeri](#transcriptlevelzebrafishdevstage)
+  * [TabulateHighConfidenceOneToOneOrthology.Nfurzeri](#levelzebrafishdevstage)
   * [transcript.level.zebrafish.dev.stage](#levelzebrafishdevstage)
   * [UniProtGOFilter](#uniprotgofilter)
   * [UniProtKBAC2EnsemblID](#uniprotkbac2ensemblid)
