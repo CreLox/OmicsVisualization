@@ -67,7 +67,7 @@ The output of both ```BioMartGOFilter.Nfurzeri``` and ```CompileGOList.FromQuick
 
 A GO list can be converted into a .gmt file (for the gene set enrichment analysis) with ```write.gmt```. [These Ensembl IDs](https://github.com/CreLox/OmicsVisualization/tree/main/resources#censored-ensembl-ids-nothobranchius-furzeri-mapped-to-more-than-one-ncbi-gene-id) are censored (due to their ambiguous mapping to more than one gene according to the annotations of the reference genome on NCBI).
 
-Use ```merge.sets``` for data curation. Given ```set.a```$= A$, ```set.b```$= B$, ```boundary.set```$= O \neq \emptyset$, and ```exception.set```$= E$, we have ```merge.sets(A, B, O, E)```$=((A \cup B) \cap O)\backslash E$. If ```boundary.set``` is a null set, we have ```merge.sets(A, B, NULL, E)```$=(A \cup B) \backslash E$.
+Use ```merge.sets``` for data curation. Given ```set.a```$= A$, ```set.b```$= B$, ```boundary.set```$= O \neq \emptyset$, and ```exception.set```$= E$, we have ```merge.sets(A, B, O, E)```$=((A \cup B) \cap O)\backslash E$. If ```boundary.set``` is a null set, we have ```merge.sets(A, B, NULL, E)```$=(A \cup B) \backslash E$. Alternatively, ```setdiff(A, E)```$=A \backslash E$, ```intersect(A, O)```$=A \cap O$, ```union(A, B)```$=A \cup B$.
 
 ## copy2clipboard
 >```copy2clipboard(content, transpose = FALSE, row.names = FALSE, col.names = FALSE)```
