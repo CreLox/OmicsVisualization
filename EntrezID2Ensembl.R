@@ -1,38 +1,46 @@
-EntrezID2Ensembl <- function(EntrezIDs) { #vibe-coded with GPT-5.5 Instant
+EntrezID2Ensembl <- function(EntrezIDs,
+                             dataset = "nfurzeri_gene_ensembl") { # vibe-coded with Claude.ai Opus 5 High
 
-  get_one <- function(id) {
+  suppressPackageStartupMessages(library("biomaRt"))
+  suppressPackageStartupMessages(library("retry"))
+  biomartCacheClear()
 
-    Sys.sleep(0.1)
-
-    url <- paste0("https://www.ncbi.nlm.nih.gov/gene/", id)
-
-    html <- tryCatch(
-      paste(
-        readLines(url, warn = FALSE, encoding = "UTF-8"),
-        collapse = "\n"
-      ),
-      error = function(e) return("network_error")
-    )
-    if (identical(html, "network_error")) {
-      return("network_error")
-    }
-
-    pattern <- '<a href="http://www\\.ensembl\\.org/id/([^"]+)" data-gblink-text="Ensembl"'
-    hit <- regmatches(
-      html,
-      regexec(pattern, html, perl = TRUE)
-    )[[1]]
-
-    if (length(hit) < 2) {
-      return(NA_character_)
-    }
-
-    return(hit[2])
+  if ((length(EntrezIDs) == 0) || identical(EntrezIDs, NA) || identical(EntrezIDs, "")) {
+    return("")
   }
 
-  return(vapply(
-    EntrezIDs,
-    get_one,
-    FUN.VALUE = character(1)
-  ))
+  AllEntrezIDs <- as.character(EntrezIDs)
+  QueryEntrezIDs <- unique(AllEntrezIDs[!is.na(AllEntrezIDs) & (AllEntrezIDs != "")])
+
+  Mapping <- rep("", length(QueryEntrezIDs))
+  names(Mapping) <- QueryEntrezIDs
+
+  if (length(QueryEntrezIDs) > 0) {
+    retry({
+            ConsoleOutput <- capture.output({
+                               BioMartTable <-
+                               getBM(attributes = c("entrezgene_id", "ensembl_gene_id"),
+                                     filters = "entrezgene_id", values = QueryEntrezIDs,
+                                     mart = useEnsembl(biomart = "ensembl", dataset = dataset))
+                             });
+            if (length(ConsoleOutput) != 0) {
+              stop("Error")
+            }
+          }, when = ".*", silent = TRUE)
+    row.names(BioMartTable) <- NULL
+
+    for (i in 1 : length(QueryEntrezIDs)) {
+      EnsemblGeneIDs <- unique(BioMartTable[(as.character(BioMartTable[, "entrezgene_id"]) == QueryEntrezIDs[i]),
+                                            "ensembl_gene_id"])
+      Mapping[QueryEntrezIDs[i]] <- paste(EnsemblGeneIDs, collapse = "; ")
+    }
+  }
+
+  # One element per input element, in the order given (duplicates kept), so the
+  # result can be assigned straight into a column of the input table.
+  Out <- Mapping[AllEntrezIDs]
+  Out[is.na(Out)] <- ""
+  names(Out) <- AllEntrezIDs
+
+  return(Out)
 }
