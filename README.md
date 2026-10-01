@@ -7,6 +7,7 @@
   * [copy2clipboard](#copy2clipboard)
   * [CorrelateOmics](#correlateomics)
   * [custom.gmt.GSEA](#customgmtgsea)
+  * [custom.limma.2groups](#customlimma2groups)
   * [EnsemblIDFilter](#ensemblidfilter)
   * [EnsemblID2Entrez](#ensemblid2entrez)
   * [EntrezID2Ensembl](#ensemblid2entrez)
@@ -128,6 +129,9 @@ wherein if no permutation yields a more extreme statistic, ${-\log_{10}{p}}$ wil
 Performs a gene set enrichment analysis (GSEA) using customized gene sets (defined in ```custom.gmt```) along with a description file (```custom.des```) explaining the gene sets. Uses [WebGestalt](https://www.webgestalt.org/)'s implementation and the input of a pre-ranked list (with ranking metric $= \log_2{(\text{FC})}$ ) extracted from ```LFQ.quantification.xlsx```. [These Ensembl IDs](https://github.com/CreLox/OmicsVisualization/tree/main/resources#censored-ensembl-ids-nothobranchius-furzeri-mapped-to-more-than-one-ncbi-gene-id) are censored from the pre-ranked list (due to their ambiguous mapping to more than one gene according to the annotations of the reference genome on NCBI). See the [help page](https://cran.r-project.org/web/packages/WebGestaltR/refman/WebGestaltR.html#WebGestaltR) of the WebGestaltR package for explanations of parameters ```minNum```, ```maxNum```, and ```perNum```.
 
 The other commonly used ranking metric is $\mathop{\text{sgn}}(\log{(\text{FC})}) \cdot (-\log_{10}{p_\text{raw}})$, which is NOT adopted here.
+
+## custom.limma.2groups
+>```custom.limma.2groups(LFQ.intensities.Path, Output.Path, Group1.name, Group1.rep, Group2.name, Group2.rep, Sample.Columns, ProteinID.colname = "Protein IDs", EnsemblID.colname = "Ensembl_id", GeneName.colname = "Gene name", ProteinName.colname = "Protein names")```
 
 ## EnsemblID2Entrez
 >```EnsemblID2Entrez(EnsemblID, Output = c("Accession", "ID", "Description", "Name", "Name+Description")) # default Output = "Name+Description" ```
