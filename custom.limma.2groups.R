@@ -1,14 +1,14 @@
-custom.limma.2groups <- function(Output.Path = "LFQ_quantification_AGPS-IN-1_vs_DMSO.xlsx",
-                                 LFQ.intensities.Path = "LFQ_intensities_AGPS-IN-1.xlsx",
-                                 ProteinID.colname = "Protein IDs",
-                                 EnsemblID.colname = "Ensembl_id",
-                                 GeneName.colname = "Gene name",
-                                 ProteinName.colname = "Protein names",
+custom.limma.2groups <- function(LFQ.intensities.Path = "LFQ_intensities_AGPS-IN-1.xlsx",
+                                 Output.Path = "LFQ_quantification_AGPS-IN-1_vs_DMSO.xlsx",
                                  Group1.name = "AGPS-IN-1",
                                  Group1.rep = 7,
                                  Group2.name = "DMSO",
                                  Group2.rep = 7,
-                                 Sample.Columns = 2 : 15) { # vibe-coded with DeepSeek V4
+                                 Sample.Columns = 2 : 15,
+                                 ProteinID.colname = "Protein IDs",
+                                 EnsemblID.colname = "Ensembl_id",
+                                 GeneName.colname = "Gene name",
+                                 ProteinName.colname = "Protein names") { # vibe-coded with DeepSeek V4
   
   # ---- 1. Load packages ----
   suppressPackageStartupMessages(library(readxl))
@@ -82,9 +82,9 @@ custom.limma.2groups <- function(Output.Path = "LFQ_quantification_AGPS-IN-1_vs_
   results <- results %>%
     mutate(
       Significance = case_when(
-        adj.P.Val < 0.05 & log2FC > 0 ~ "Up",
-        adj.P.Val < 0.05 & log2FC < 0 ~ "Down",
-        TRUE                          ~ "NS"
+        adj.P.Val < 0.05 & log2FC > 0 ~ paste0("Significantly up (in the ", Group1.name, " group)"),
+        adj.P.Val < 0.05 & log2FC < 0 ~ paste0("Significantly down (in the ", Group1.name, " group)"),
+        TRUE                          ~ "n.s."
       )
     )
   
