@@ -203,7 +203,7 @@ Utility function which merges two lists(```x``` and ```y```). Components with th
 Plots the smoothed empirical distribution function of all normalized reads (compiled from columns whose IDs/names are in ```DataColumns```) to help determine a threshold to filter genes with valid expression. This step is helpful when picking genes for further functional studies but dispensable if only bioinformatic analyses (like a [gene set enrichment analysis](https://www.pnas.org/doi/10.1073/pnas.0506580102)) are to be done.
 
 ## plotPCA
->```plotPCA(OmicsExcelDataFilePath, SampleColumns, GroupTags, FillColorPalette, PointSize = 2.5, ExpandRatio = 0.1, HideAxis = TRUE)```
+>```plotPCA(OmicsExcelDataFilePath, SampleColumns, GroupTags, FillColorPalette, Dim1IsPC = 1, Dim2IsPC = 2, FlipDim2 = FALSE, PointSize = 2.5, ExpandRatio = 0.1, HideAxis = TRUE)```
 
 Normalization of each dimension (centered so that the mean $\mu= 0$ and scaled so that the variance $\sigma^2= 1$) is by default (see [this](https://stats.stackexchange.com/q/189902)).
 
