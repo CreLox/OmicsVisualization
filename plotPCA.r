@@ -1,7 +1,7 @@
 plotPCA <- function(OmicsExcelDataFilePath = "LFQ_intensities_Temperature.xlsx",
                     SampleColumns = 2 : 29,
                     GroupTags = c(rep("DII (arrested at 24 °C)", 6), rep("DII (persistent at 28.5 °C)", 11), rep("Development resumption", 11)),
-                    FillColorPalette = c("#FFD300", "#FFFFFF", "#0087BD"),
+                    FillColorPalette = c("#FFFFFF", "#0087BD", "#FFD300"),
                     Dim1IsPC = 1,
                     Dim2IsPC = 2,
                     FlipDim2 = FALSE,
@@ -19,7 +19,7 @@ plotPCA <- function(OmicsExcelDataFilePath = "LFQ_intensities_Temperature.xlsx",
   Dim2VarPercent <- (PCA$sdev[Dim2IsPC]) ^ 2 / sum((PCA$sdev) ^ 2)
   PCA.Results <- as.data.frame(PCA$x)
   
-  Plot <- ggplot(data = PCA.Results, aes(x = .data[[paste0("PC", Dim1IsPC)]], y = (1 - 2 * FlipDim2) * .data[[paste0("PC", Dim2IsPC)]], fill = GroupTags)) +
+  Plot <- ggplot(data = PCA.Results, aes(x = .data[[paste0("PC", Dim1IsPC)]], y = (1 - 2 * FlipDim2) * .data[[paste0("PC", Dim2IsPC)]], fill = factor(GroupTags, levels = unique(GroupTags)))) +
           geom_point(color = "black", pch = 21, size = PointSize) +
           theme_bw() + theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank(), legend.title = element_blank(), legend.position = "bottom", legend.box.spacing = unit(0, "pt"), legend.text = element_text(margin = margin(l = unit(0, "pt")))) +
           scale_fill_manual(values = FillColorPalette) +
