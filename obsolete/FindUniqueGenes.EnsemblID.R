@@ -11,7 +11,7 @@ FindUniqueGenes.EnsemblID <- function(TargetSpecies = "nfurzeri",
       Table <-
       getBM(attributes = c("ensembl_gene_id", "external_gene_name"),
             filters = paste("with", HomologySpecies, "homolog", sep = "_"), values = FALSE,
-            mart = useEnsembl(biomart = "ensembl", dataset = paste(TargetSpecies, "gene_ensembl", sep = "_")))
+            mart = useEnsembl(biomart = "ensembl", dataset = paste(TargetSpecies, "gene_ensembl", sep = "_"), host = "https://jun2026.archive.ensembl.org"))
     }, when = "Error", silent = TRUE)
     row.names(Table) <- NULL
     if (is.null(UniqueSet)) {
