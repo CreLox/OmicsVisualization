@@ -3,7 +3,7 @@ BioMartCrawler <- function() {
   suppressPackageStartupMessages(library("httr"))
   suppressPackageStartupMessages(library("stringr"))
   
-  URL <- "https://www.ensembl.org/biomart/martview"
+  URL <- "https://jun2026.archive.ensembl.org/biomart/martview"
   Start <- ",'default____Ensembl Genes "
   End <- "]\\}"
   Split <- "':{'datasetmenu_3':["
