@@ -16,7 +16,7 @@ TabulateHighConfidenceOneToOneOrthology.Nfurzeri <- function(TargetSpecies = "dr
                                                              paste0(TargetSpecies, "_homolog_orthology_confidence")),
                                               filters = c(paste0("with_", TargetSpecies, "_homolog"), "ensembl_gene_id"),
                                               values = list(TRUE, ID.Prefixed.CSV),
-                                              mart = useEnsembl(biomart = "ensembl", dataset = "nfurzeri_gene_ensembl"))
+                                              mart = useEnsembl(biomart = "ensembl", dataset = "nfurzeri_gene_ensembl", host = "https://jun2026.archive.ensembl.org"))
                      });
     if (length(ConsoleOutput) != 0) {
       stop("Error")

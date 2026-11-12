@@ -21,7 +21,7 @@ EntrezID2Ensembl <- function(EntrezIDs,
                                BioMartTable <-
                                getBM(attributes = c("entrezgene_id", "ensembl_gene_id"),
                                      filters = "entrezgene_id", values = QueryEntrezIDs,
-                                     mart = useEnsembl(biomart = "ensembl", dataset = dataset))
+                                     mart = useEnsembl(biomart = "ensembl", dataset = dataset, host = "https://jun2026.archive.ensembl.org"))
                              });
             if (length(ConsoleOutput) != 0) {
               stop("Error")

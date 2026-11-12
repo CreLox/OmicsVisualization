@@ -24,7 +24,7 @@ write.gmt.KEGG <- function(Species3Letters = "nfu",
                                  EnsemblIDs <-
                                  getBM(attributes = "ensembl_gene_id",
                                        filters = "entrezgene_id", values = paste(Genes, collapse = ","),
-                                       mart = useEnsembl(biomart = "ensembl", dataset = BioMartDataset))
+                                       mart = useEnsembl(biomart = "ensembl", dataset = BioMartDataset, host = "https://jun2026.archive.ensembl.org"))
                                });
               if (length(ConsoleOutput) != 0) {
                 stop("Error")

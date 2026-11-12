@@ -54,7 +54,7 @@ BioMartGOFilter.Nfurzeri <- function(GO.CSV,
                              KillifishTable <-
                              getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
                                    filters = "go_parent_term", values = GO.CSV,
-                                   mart = useEnsembl(biomart = "ensembl", dataset = "nfurzeri_gene_ensembl"))
+                                   mart = useEnsembl(biomart = "ensembl", dataset = "nfurzeri_gene_ensembl", host = "https://jun2026.archive.ensembl.org"))
                            });
           if (length(ConsoleOutput) != 0) {
             stop("Error")
@@ -69,7 +69,7 @@ BioMartGOFilter.Nfurzeri <- function(GO.CSV,
                                ThisSpeciesTable <-
                                getBM(attributes = c("ensembl_gene_id", "external_gene_name", "go_id"),
                                      filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-                                     mart = useEnsembl(biomart = "ensembl", dataset = SpeciesDatasetName))
+                                     mart = useEnsembl(biomart = "ensembl", dataset = SpeciesDatasetName, host = "https://jun2026.archive.ensembl.org"))
                              });
             if (length(ConsoleOutput) != 0) {
               stop("Error")
@@ -85,7 +85,7 @@ BioMartGOFilter.Nfurzeri <- function(GO.CSV,
                                                     "nfurzeri_homolog_ensembl_gene", "nfurzeri_homolog_associated_gene_name",
                                                     "nfurzeri_homolog_orthology_type", "nfurzeri_homolog_orthology_confidence"),
                                      filters = c("with_nfurzeri_homolog", "go_parent_term"), values = list(TRUE, GO.CSV),
-                                     mart = useEnsembl(biomart = "ensembl", dataset = SpeciesDatasetName))
+                                     mart = useEnsembl(biomart = "ensembl", dataset = SpeciesDatasetName, host = "https://jun2026.archive.ensembl.org"))
                              });
             if (length(ConsoleOutput) != 0) {
               stop("Error")
